@@ -14,12 +14,12 @@ function preload()
 	//Game specific asset(s)
 	game.load.image('box' , 'assets/images/driftME/displaybox_130_130.png');
 	//game.load.image('smile' , 'assets/images/driftU/smile_261_89.png');
-	game.load.image('happy' , 'assets/images/driftME/happy_100_100.png');
-	game.load.image('sad' , 'assets/images/driftME/sad_100_100.png');
+	game.load.image('happy' , 'assets/images/happy_100_100.png');
+	game.load.image('sad' , 'assets/images/sad_100_100.png');
 	game.load.image('correct' , 'assets/images/correct_60_60.png');
 	game.load.image('wrong' , 'assets/images/wrong_60_60.png');
-	game.load.image('living' , 'assets/images/driftME/living_30_30.png');
-	game.load.image('dead' , 'assets/images/driftME/dead_30_30.png');
+	game.load.image('living' , 'assets/images/living_30_30.png');
+	game.load.image('dead' , 'assets/images/dead_30_30.png');
 }
 // Global variables declared
 var block;
@@ -50,15 +50,16 @@ var life;
 var livingState;
 var lifeline = 3;
 var timeText;
-var playpause;
+var playPause;
+var isCorrect;
 
 // The predefined function to create the Gaming area
 function create()
 {
 	//Adding the background images
 	game.add.sprite(0 , 0 , 'background');
-	playpause = game.add.sprite(255 , 475 , 'pp_button');
-	playpause.inputEnabled = true;
+	playPause = game.add.sprite(255 , 475 , 'pp_button');
+	playPause.inputEnabled = true;
 	info_button = game.add.sprite(5, 430 , 'info');
 
 	livingState = game.add.group();
@@ -94,7 +95,7 @@ function renderBox()
 	{
 		boxNumber = 2;
 		x_initial = 150 ;
-	}	
+	}
 	else
 	{
 		boxNumber = 3;
@@ -105,11 +106,11 @@ function renderBox()
 			questionTwo.setText(' ');
 			//questionThree.setText(' ');
 			block.destroy();
-		}	
+		}
 	}
 
 	block = game.add.group();
-	
+
 	for(var i = 0 ; i < boxNumber ; i++)
 	{
 		item = block.create(x_initial + i*200 , 135 , 'box' );
@@ -134,8 +135,8 @@ function renderBox()
 
 // The predefined function to be called at the rate of 10 frames per second.
 function update()
-{	
-	updateTimer();	
+{
+	updateTimer();
 }
 
 // The userdefined function to update the timer.
@@ -143,7 +144,7 @@ function updateTimer()
 {
 	//To find and display the elapsed time.
 	if(pauseState === 0)
-	{	
+	{
 		if(timeUpdateFlag === 0)
 		{
 			timeUpdateFlag = 1;
@@ -154,26 +155,26 @@ function updateTimer()
 		gameSeconds = totalSeconds - timePaused;
 		var minutes = Math.floor(gameSeconds / 60);
 		var hours = Math.floor(minutes/60);
-		var modmin = minutes%60;	
-		if (modmin < 10) 
+		var modmin = minutes%60;
+		if (modmin < 10)
 		{
-			modmin = '0' + modmin;	
+			modmin = '0' + modmin;
 		}
 		var modsec = gameSeconds % 60;
-		if (modsec < 10) 
+		if (modsec < 10)
 		{
-			modsec = '0' + modsec;	
+			modsec = '0' + modsec;
 		}
 		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
-		timer.setText(timeText);	
+		timer.setText(timeText);
 	}
 	else
 	{
 		timeUpdateFlag = 0
 	}
-	
 
-	
+
+
 }
 
 //The user defined function to retrive the value to be displayed in the box.
@@ -182,12 +183,12 @@ function boxValue()
 	return getAlphabet()+getNumber();
 }
 
-//The userdefined function generating random alphabet 
-function getAlphabet() 
+//The userdefined function generating random alphabet
+function getAlphabet()
 {
 	var vowels =['A','E',' I','O','U'];
 	var constnants =['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','X','Y','Z'];
-	if ((game.rnd.integerInRange(1,100)%2)==0) 
+	if ((game.rnd.integerInRange(1,100)%2)==0)
 	{
 	isVowel=1;
 	return vowels[(game.rnd.integerInRange(1,100)% vowels.length)];
@@ -200,10 +201,10 @@ function getAlphabet()
 }
 
 //The userdefined function generating random number
-function getNumber() 
+function getNumber()
 {
 	var a = (game.rnd.integerInRange(1,100)%9)+1;
-	if (a%2 === 0) 
+	if (a%2 === 0)
 	{
 	isEven = 1;
 	}
@@ -219,7 +220,7 @@ function selectBox()
 {
 	if(boxNumber === 2)
 	{
-		if ((game.rnd.integerInRange(1,100)%2)==0) 
+		if ((game.rnd.integerInRange(1,100)%2)==0)
 		 {
 		 	xTextPos = 185;
 		 	yTextPos = 175;
@@ -265,7 +266,7 @@ function selectBox()
 		 	selectedBox = 3;
 		 	//boxText.reset(xTextPos , yTextPos);
 		 	boxText = game.add.text(xTextPos, yTextPos , '' , { font : '50px Arial' , fill : "white"} );
-		 }	
+		 }
 	}
 }
 
@@ -279,10 +280,10 @@ function initialize()
 	love = game.add.sprite(540, 370 , 'happy');
 }
 
-var lastchance;
+
 //The userdefined function that updates the box value everytime.
 function updateBox()
-{	
+{
 	if(pauseState === 0)
 	{
 		//var loosu = ' ';
@@ -315,7 +316,7 @@ function updateBox()
 				livingState.getAt(2).kill();
 				game.add.sprite(7,220,'dead');
 				pauseState = 1;
-				playpause.inputEnabled = false;
+				playPause.inputEnabled = false;
 				var destroy = game.add.text(272, 325 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 			}
 			/*else if (lifeline === -1)
@@ -329,7 +330,7 @@ function updateBox()
 
 //The predefined function to listen and trigger the Onanswered events.
 function render()
-{	
+{
 
 	yes.events.onInputDown.add(removeTextYes);
 	no.events.onInputDown.add(removeTextNo);
@@ -337,7 +338,7 @@ function render()
 	yes.events.onInputUp.add(updateBox);
 	no.events.onInputUp.add(updateBox);
 
-	playpause.events.onInputUp.add(pauseAndPlay);
+	playPause.events.onInputUp.add(pauseAndPlay);
 }
 
 //Helper functions : Refer render()
@@ -403,7 +404,7 @@ function updateScore()
 				{
 					isCorrect = 0;
 					lifeline--;
-				}		
+				}
 			}
 			else if(selectedBox === 3)
 			{
@@ -421,7 +422,7 @@ function updateScore()
 				{
 					isCorrect = 0;
 					lifeline--;
-				}		
+				}
 			}
 
 		}
@@ -461,7 +462,7 @@ function updateScore()
 				{
 					isCorrect = 0;
 					lifeline--;
-				}		
+				}
 			}
 			else if(selectedBox === 3)
 			{
@@ -479,13 +480,13 @@ function updateScore()
 				{
 					isCorrect = 0;
 					lifeline--;
-				}		
+				}
 			}
 		}
 	}
 	else
 	{
-		
+
 		if(selectedBox === 1)
 		{
 			if(isEven && answer)
@@ -520,7 +521,7 @@ function updateScore()
 			{
 				isCorrect = 0;
 				lifeline--;
-			}		
+			}
 		}
 		else if(selectedBox === 3)
 		{
@@ -538,10 +539,10 @@ function updateScore()
 			{
 				isCorrect = 0;
 				lifeline--;
-			}		
+			}
 		}
-		
-	}	
+
+	}
 
 	if (score < 100)
 	{
@@ -593,9 +594,9 @@ function updateLevel()
 		if(level===6 && flag === 0)
 		{
 			renderBox();
-			flag = 1	
-		}		
-	}	
+			flag = 1
+		}
+	}
 }
 
 function pauseAndPlay()
@@ -604,7 +605,7 @@ function pauseAndPlay()
 	{
 		pauseState = 1;
 		ppText.setText('     Paused   ');
-	}		
+	}
 	else
 	{
 		pauseState = 0;
