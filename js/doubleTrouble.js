@@ -26,7 +26,6 @@ var yes;
 var no;
 var myScore;
 var myLevel;
-var timer;
 var ppText;
 var timer;
 var totalSeconds = 0;
