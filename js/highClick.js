@@ -68,7 +68,7 @@ function create()
   myscore = game.add.text(80, 43 , '000' , {font : "15px Arial" , fill : "#eceff1"});
   mylevel = game.add.text(311, 43 , '01' , {font : "15px Arial" , fill : "#eceff1"});
   timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
-  createText();
+  //createText();
   love = game.add.sprite(535, 350 , 'happy');
 }
 function createText()
@@ -130,6 +130,8 @@ function equalsSelected ()
     boxTwoText.setText(' ');
   }
 }
+var deadOne;
+var deadTwo;
 var love;
 function updateBox()
 {
@@ -148,12 +150,12 @@ function updateBox()
     if(lifeline === 2)
       {
         livingState.getAt(0).kill();
-        game.add.sprite(27,180,'dead');
+        deadOne = game.add.sprite(27,180,'dead');
       }
       else if (lifeline === 1)
       {
         livingState.getAt(1).kill();
-        game.add.sprite(27,218,'dead');
+        deadTwo = game.add.sprite(27,218,'dead');
       }
       else if (lifeline === 0)
       {
@@ -245,6 +247,25 @@ function updateLevel()
 }
 function updateLife()
 {
+  if (lifeline === 3)
+  {
+    livingState.getAt(0).kill();
+    livingState.getAt(1).kill();
+    livingState.getAt(2).kill();
+  }
+  else if (lifeline === 2)
+  {
+    livingState.getAt(1).kill();
+    livingState.getAt(2).kill();
+    deadOne.kill();
+  }
+  else if(lifeline === 1)
+  {
+    livingState.getAt(2).kill();
+    deadOne.kill();
+    deadTwo.kill();
+  }
+  //Now update the lifelines and bring it back again. :)
   lifeline = 3;
   livingState = game.add.group();
   for(var p = 0 ; p < 3 ; p++)
@@ -489,12 +510,12 @@ function pauseAndPlay()
   if(pauseState  === 0)
   {
     pauseState = 1;
-    tempText.setText('Game Paused'); 
+    tempText.setText('Game Paused');
   }
   else
   {
     tempText.setText(' ');
-    pauseState = 0;    
+    pauseState = 0;
   }
 }
 // Thank you !
