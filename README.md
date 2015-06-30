@@ -3,6 +3,22 @@
 
 ***
 
+## :+1: Flash Back
+##### Improves you reaction speed and memory !
+
+***
+#### Purpose: 
+In the Flashback game, you need to make the right judgments in a very short period of time. It trains your reaction speed. The faster you react, the stronger your ability of accepting new things and adapting to new environment is. Therefore, it is a prerequisite to enhance all your intelligence.
+
+#### Game: 
+A design pattern appears in the screen. Following which other design patterns appear. The user should select Yes if the current pattern matches the previous one.
+![Flash Back SnapShot](https://c4.staticflickr.com/4/3838/19302934105_49b2a9c0ae_z.jpg)
+
+#### Implementation-Style:
+A design pattern appears from the set every time randomly. The user choice is evaluated in the real time.
+
+***
+
 ## :+1: High-Click
 ##### Improves your math ability :)
 
