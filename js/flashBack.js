@@ -139,6 +139,7 @@ function updateTimer()
 		{
 			modsec = '0' + modsec;
 		}
+		//Hour display in two digits ! will be like 002. 
 		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
 		timer.setText(timeText);
 	}

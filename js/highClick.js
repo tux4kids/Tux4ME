@@ -22,8 +22,8 @@ function preload()
   game.load.image('equals', 'assets/images/highClick/equal_130_90.png' );
   game.load.image('living' , 'assets/images/highClick/living_30_30.png');
   game.load.image('dead' , 'assets/images/highClick/dead_30_30.png');
-  game.load.image('happy' , 'assets/images/highClick/happy_75_75.png');
-  game.load.image('sad' , 'assets/images/highClick/sad_75_75.png');
+  //game.load.image('happy' , 'assets/images/highClick/happy_75_75.png');
+  //game.load.image('sad' , 'assets/images/highClick/sad_75_75.png');
   //Load the Google WebFont Loader script
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
@@ -45,6 +45,8 @@ var lifeline = 3;
 var play;
 var pause;
 var tempText;
+var mylevel;
+var myscore;
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -69,18 +71,18 @@ function create()
   mylevel = game.add.text(311, 43 , '01' , {font : "15px Arial" , fill : "#eceff1"});
   timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
   //createText();
-  love = game.add.sprite(535, 350 , 'happy');
+  //love = game.add.sprite(535, 350 , 'happy');
 }
 function createText()
 {
 
-  boxOneText = game.add.text(0, 0,'56 + 56',{ font: "20px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: block.getAt(0).width, align: "center" });
+  boxOneText = game.add.text(0, 0,'56 + 56',{ font: "20px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 120, align: "center" });
   boxOneText.x = Math.floor(block.getAt(0).x + block.getAt(0).width/2);
   boxOneText.y = Math.floor(block.getAt(0).y + block.getAt(0).height/2);
   boxOneText.anchor.set(0.45,0.3);
   boxOneText.font = 'Architects Daughter';
 
-  boxTwoText = game.add.text(400, 225,'56 + 56',{ font: "20px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: block.getAt(0).width, align: "center" });
+  boxTwoText = game.add.text(400, 225,'56 + 56',{ font: "20px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: 120, align: "center" });
   boxTwoText.x = Math.floor(block.getAt(1).x + block.getAt(1).width/2);
   boxTwoText.y = Math.floor(block.getAt(1).y + block.getAt(1).height/2);
   boxTwoText.anchor.set(0.45,0.3);
@@ -132,21 +134,21 @@ function equalsSelected ()
 }
 var deadOne;
 var deadTwo;
-var love;
+
 function updateBox()
 {
   if (pauseState === 0)
   {
-    love.kill();
+    //love.kill();
     updateScore();
     boxText();
     if(isCorrect)
     {
-      love = game.add.sprite(535, 350 , 'happy');
+      //love = game.add.sprite(535, 350 , 'happy');
     }
     else
     {
-    love = game.add.sprite(535, 350 , 'sad');
+      //love = game.add.sprite(535, 350 , 'sad');
     if(lifeline === 2)
       {
         livingState.getAt(0).kill();
@@ -159,12 +161,14 @@ function updateBox()
       }
       else if (lifeline === 0)
       {
+        
         livingState.getAt(2).kill();
         game.add.sprite(27,256,'dead');
         pauseState = 1;
         pause.inputEnabled = false;
         var destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
-        var TuxMathAd = game.add.text(246, 327 , '\"Try TuxMath :D  !\"', {font : "17px Arial" , fill : "#ffffff"})
+        var TuxMathAd = game.add.text(246, 327 , '\"Try TuxMath :D  !\"', {font : "17px Arial" , fill : "#ffffff"});
+
       }
     }
   }
@@ -282,35 +286,35 @@ var timeUpdateFlag = 1;
 // The userdefined function to update the timer.
 function updateTimer()
 {
-	//To find and display the elapsed time.
-	if(pauseState === 0)
-	{
-		if(timeUpdateFlag === 0)
-		{
-			timeUpdateFlag = 1;
-			timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
-		}
-		totalSeconds=Math.floor(game.time.totalElapsedSeconds());
-		gameSeconds = totalSeconds - timePaused;
-		var minutes = Math.floor(gameSeconds / 60);
-		var hours = Math.floor(minutes/60);
-		var modmin = minutes%60;
-		if (modmin < 10)
-		{
-			modmin = '0' + modmin;
-		}
-		var modsec = gameSeconds % 60;
-		if (modsec < 10)
-		{
-			modsec = '0' + modsec;
-		}
-		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
-		timer.setText(timeText);
-	}
-	else
-	{
-		timeUpdateFlag = 0
-	}
+  //To find and display the elapsed time.
+  if(pauseState === 0)
+  {
+    if(timeUpdateFlag === 0)
+    {
+      timeUpdateFlag = 1;
+      timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
+    }
+    totalSeconds=Math.floor(game.time.totalElapsedSeconds());
+    gameSeconds = totalSeconds - timePaused;
+    var minutes = Math.floor(gameSeconds / 60);
+    var hours = Math.floor(minutes/60);
+    var modmin = minutes%60;
+    if (modmin < 10)
+    {
+      modmin = '0' + modmin;
+    }
+    var modsec = gameSeconds % 60;
+    if (modsec < 10)
+    {
+      modsec = '0' + modsec;
+    }
+    timeText = '0'+hours+':'+modmin+ ':' + modsec ;
+    timer.setText(timeText);
+  }
+  else
+  {
+    timeUpdateFlag = 0
+  }
 }
 
 function createNumberTwo()
@@ -343,7 +347,7 @@ function createNumberTwo()
     num = numberOne - 2;
   }
 
-  console.log(num + 'num');
+  //console.log(num + 'num');
 
   var randomOperation = game.rnd.integerInRange(1,100)% 4;
   var tempOne;
@@ -453,7 +457,7 @@ function createNumberTwo()
 
 
   }
-  console.log(numberTwo + 'numberTwo');
+  //console.log(numberTwo + 'numberTwo');
 
 }
 var equalTo = null;
@@ -464,9 +468,9 @@ var selectedBox = null;
 function boxText()
 {
   numberOne = ((game.rnd.integerInRange(1,100)) % (level*10))+5 ;
-  console.log(numberOne + 'numberOne');
+  //console.log(numberOne + 'numberOne');
   createNumberTwo();
-  console.log(numberTwo + 'numberTwo');
+  //console.log(numberTwo + 'numberTwo');
   if(numberOne === numberTwo)
   {
     equalTo = 1;
@@ -488,20 +492,24 @@ function boxText()
   var randomBox = game.rnd.integerInRange(1,100)% 2;
   if(randomBox === 0)
   {
+    //numberOne = 46;
+    //numberTwoDisplay = '132 - 88';
     boxOneText.setText(numberOne);
     boxTwoText.setText(numberTwoDisplay);
     selectedBox = 1;
   }
   else
   {
+    //numberOne = 46;
+    //numberTwoDisplay = '132 - 88';
     boxOneText.setText(numberTwoDisplay);
     boxTwoText.setText(numberOne);
     selectedBox = 2;
   }
-  console.log('selectedBox' + selectedBox);
-  console.log(greaterThan);
-  console.log(lessThan);
-  console.log(equalTo);
+  //console.log('selectedBox' + selectedBox);
+  //console.log(greaterThan);
+  //console.log(lessThan);
+  //console.log(equalTo);
 
 }
 

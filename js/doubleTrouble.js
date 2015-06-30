@@ -15,8 +15,8 @@ function preload()
     game.load.image('wrong' , 'assets/images/wrong_60_60.png');
     game.load.image('living' , 'assets/images/living_30_30.png');
 	game.load.image('dead' , 'assets/images/dead_30_30.png');
-	game.load.image('happy' , 'assets/images/happy_100_100.png');
-	game.load.image('sad' , 'assets/images/sad_100_100.png');
+	//game.load.image('happy' , 'assets/images/happy_100_100.png');
+	//game.load.image('sad' , 'assets/images/sad_100_100.png');
 }
 
 //Global variables declared
@@ -86,7 +86,7 @@ function create()
 	//info.game.text.addColor('#b39ddb' , 34 );
 	info.setShadow(3,3, 'rgba(25,25,25,0.25)' , 8);
 	boxText();
-	love = game.add.sprite(540, 370 , 'happy');
+	//love = game.add.sprite(540, 370 , 'happy');
 	var block = game.add.group();
 	var item;
 	for(var i = 0 ; i < 2 ; i++)
@@ -161,21 +161,21 @@ function removeTextNo()
 		textInBoxTwo.destroy();
 	}
 }
-var love;
+
 function updateBox()
 {
 	if(pauseState === 0)
 	{
-		love.kill();
+		//love.kill();
 		updateScore();
 		boxText();
 		if(isCorrect)
 		{
-			love = game.add.sprite(540, 370 , 'happy');
+			//love = game.add.sprite(540, 370 , 'happy');
 		}
 		else
 		{
-		love = game.add.sprite(540, 370 , 'sad');
+		//love = game.add.sprite(540, 370 , 'sad');
 		if(lifeline === 2)
 			{
 				livingState.getAt(0).kill();
@@ -351,3 +351,6 @@ function pauseAndPlay()
 }
 
 // Thankyou!
+// A small unresolved error found! If the color of the word in the left box is equal to the meaning of the word in the right box and
+//if the color of the word in the right box is equal to meaning of the word in the left box, the condition evalutates to true ONLY. The 
+//probability of this to occur is more closer to 0.

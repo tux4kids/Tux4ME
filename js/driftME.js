@@ -2,7 +2,7 @@
 Transition : Pending
 */
 
-var game = new Phaser.Game(640, 520, Phaser.AUTO, '', { preload: preload, create: create, update: update, render : render });
+var game = new Phaser.Game(640, 520, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload()
 {
@@ -14,8 +14,8 @@ function preload()
 	//Game specific asset(s)
 	game.load.image('box' , 'assets/images/driftME/displaybox_130_130.png');
 	//game.load.image('smile' , 'assets/images/driftU/smile_261_89.png');
-	game.load.image('happy' , 'assets/images/happy_100_100.png');
-	game.load.image('sad' , 'assets/images/sad_100_100.png');
+	//game.load.image('happy' , 'assets/images/happy_100_100.png');
+	//game.load.image('sad' , 'assets/images/sad_100_100.png');
 	game.load.image('correct' , 'assets/images/correct_60_60.png');
 	game.load.image('wrong' , 'assets/images/wrong_60_60.png');
 	game.load.image('living' , 'assets/images/living_30_30.png');
@@ -25,11 +25,7 @@ function preload()
 var block;
 var score = 0;
 var level = 1;
-var timer;
-var totalSeconds = 0;
-var gameSeconds = 0;
-var timePaused = 0;
-var timeUpdateFlag = 1;
+
 var isVowel;
 var isEven;
 var boxNumber;
@@ -52,6 +48,8 @@ var lifeline = 3;
 var timeText;
 var playPause;
 var isCorrect;
+var mylevel;
+var myscore;
 
 // The predefined function to create the Gaming area
 function create()
@@ -137,7 +135,19 @@ function renderBox()
 function update()
 {
 	updateTimer();
+	yes.events.onInputDown.add(removeTextYes);
+	no.events.onInputDown.add(removeTextNo);
+
+	yes.events.onInputUp.add(updateBox);
+	no.events.onInputUp.add(updateBox);
+
+	playPause.events.onInputUp.add(pauseAndPlay);
 }
+var timer;
+var totalSeconds = 0;
+var gameSeconds = 0;
+var timePaused = 0;
+var timeUpdateFlag = 1;
 
 // The userdefined function to update the timer.
 function updateTimer()
@@ -270,14 +280,14 @@ function selectBox()
 	}
 }
 
-var love;
+
 //The user defined function to initialize.
 function initialize()
 {
 	var text = boxValue();
 	selectBox();
 	boxText.setText(text);
-	love = game.add.sprite(540, 370 , 'happy');
+	//love = game.add.sprite(540, 370 , 'happy');
 }
 
 
@@ -288,19 +298,19 @@ function updateBox()
 	{
 		//var loosu = ' ';
 		//boxText.setText(loosu);
-		love.kill();
+		//love.kill();
 		updateScore();
 		var text = boxValue();
 		selectBox();
 		boxText.setText(text);
 		if(isCorrect)
 		{
-			love = game.add.sprite(540, 370 , 'happy');
+			//love = game.add.sprite(540, 370 , 'happy');
 		}
 		else
 		{
 
-			love = game.add.sprite(540, 370 , 'sad');
+			//love = game.add.sprite(540, 370 , 'sad');
 			if(lifeline === 2)
 			{
 				livingState.getAt(0).kill();
@@ -328,19 +338,6 @@ function updateBox()
 	}
 }
 
-//The predefined function to listen and trigger the Onanswered events.
-function render()
-{
-
-	yes.events.onInputDown.add(removeTextYes);
-	no.events.onInputDown.add(removeTextNo);
-
-	yes.events.onInputUp.add(updateBox);
-	no.events.onInputUp.add(updateBox);
-
-	playPause.events.onInputUp.add(pauseAndPlay);
-}
-
 //Helper functions : Refer render()
 function removeTextYes()
 {
@@ -365,6 +362,7 @@ function removeTextNo()
 // The user defined function to update the score
 function updateScore()
 {
+	var displayScore;
 	if(level < 6)
 	{
 
