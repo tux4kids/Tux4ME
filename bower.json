@@ -1,0 +1,21 @@
+{
+  "name": "polymer-project",
+  "version": "0.0.0",
+  "authors": [
+    "Vignesh S <svignesh0308@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.0.6",
+    "iron-elements": "polymerelements/iron-elements#~1.0.2",
+    "paper-elements": "polymerelements/paper-elements#~1.0.1",
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#~1.0.3"
+  }
+}

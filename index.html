@@ -1,18 +1,48 @@
-<!doctype html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-  <title>Tux4ME Games</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <script src="script.js"></script>
+  <link rel="import" href="elements.html">
+  <link href="style.css" rel="stylesheet">
 </head>
-<body>
-<ul>
-	<li><a href="driftME.html">DriftME</a></li>
-	<li><a href="doubleTrouble.html">Double-Trouble</a></li>
-	<li><a href="highClick.html">High-Click</a></li>
-	<li><a href="flashBack.html">Flash-Back (Latest Game)</a></li>
-<br>
-<br>
-	<b>Currently I have started working on the Web App.</b>
-<ul>
+
+<body fullbleed layout vertical>
+  <paper-drawer-panel responsive-width="820px">
+  <paper-header-panel mode="waterfall-tall" tallClass = "medium-tall" shadow = "true" drawer class="paper_toolbar_drawer">
+
+    <paper-toolbar class = "drawer_toolbar">
+      <div id="logo"><img src = "app_assets/logo_100_100.png"></img></div>
+      <div class = "user_greeting"></div>
+    </paper-toolbar>
+<!--
+    <paper-menu>
+      <paper-icon-item>
+      <paper-button class = "my_drawer_buttons">
+        <iron-icon icon="home">Home</iron-icon>
+      </paper-button>
+      </paper-icon-item>
+    </paper-menu>
+-->
+  </paper-header-panel>
+  <paper-header-panel main mode="standard" class="paper_toolbar_main">
+    <paper-toolbar class = "main_toolbar">
+      <paper-icon-button icon="menu" alt="menu" class="white" paper-drawer-toggle></paper-icon-button>
+      <div class = "title"><img src="app_assets/Tux4Me_150_40.png" alt="Tux4ME"></img></div>
+      <paper-icon-button icon="av:volume-off" alt="mute" class="white"></paper-icon-button>
+      <paper-icon-button icon="more-vert" alt="more-horiz" class="white">
+      </paper-icon-button>
+
+      </paper-toolbar>
+    <div>Content Area</div>
+    <paper-material elevation="3">
+        Checking the responsiveness of the page in multiple devices/Screen Sizes.
+        To update the content one by one from today.
+      </paper-material>
+  </paper-header-panel>
+</paper-drawer-panel>
 </body>
-</html>
