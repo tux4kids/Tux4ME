@@ -2,36 +2,36 @@ var game = new Phaser.Game(640, 520, Phaser.AUTO, 'gamingArea', { preload: prelo
 
 function preload ()
 {
-	game.load.image('start_screen' , 'assets/images/startScreen_640_520.jpg');
-	game.load.image('start_button' , 'assets/images/start_50_50.png');
 	game.load.image('background' , 'assets/images/flashBack/background_640_520.png');
 	game.load.image('scroll' , 'assets/images/flashBack/scollShape_640_100.png');
+	game.load.image('start_screen' , 'assets/images/startScreen_640_520.jpg');
+	game.load.image('start_button' , 'assets/images/start_50_50.png');
 	game.load.image('topBar' , 'assets/images/flashBack/topBar_640_64.png');
-	game.load.image('box' , 'assets/images/flashBack/box_130_130.png');
-	game.load.image('start' , 'assets/images/flashBack/start_50_50.png');
-	game.load.spritesheet('shapes', 'assets/images/flashBack/shapes_780_260.png', 130, 130, 12);
 	game.load.image('correct' , 'assets/images/flashBack/correct_50_50.png');
 	game.load.image('wrong' , 'assets/images/flashBack/wrong_50_50.png');
+	game.load.image('pp_button' , 'assets/images/playpause4_120_35.png');
 	game.load.image('living' , 'assets/images/living_30_30.png');
 	game.load.image('dead' , 'assets/images/dead_30_30.png');
-	game.load.image('pp_button' , 'assets/images/playpause4_120_35.png');
+	game.load.spritesheet('back', 'assets/images/PassiveOn/back_650_130.png', 130, 130, 5);
+	game.load.spritesheet('front', 'assets/images/PassiveOn/front_420_60.png', 60,60, 7);
+
 }
-var startGame = 0;
+
+var livingState;
+var playpause;
+var timer;
 var myscore;
 var mylevel;
+var ppText;
 var yes;
 var no;
-var previous;
-var present;
-var start;
-var info,helpText;
+var backSprite;
+var frontSprite;
+var questionText;
+var lifeline = 3;
 var score = 0;
-var isCorrect = null;
 var level = 1;
 var life;
-var livingState;
-var lifeline = 3;
-var sprite;
 var startScreen;
 var startButton;
 
@@ -43,47 +43,50 @@ function create ()
 	{
 	var scrolling = game.add.tileSprite(0,(-50+(i*100)),640,100,'scroll');
 	scrolling.autoScroll(Math.pow(-1,i)*5,0);
-	scrolling.alpha = 0.14;
+	scrolling.alpha = 0.10;
 	}
 	livingState = game.add.group();
 	for(var p = 0 ; p < 3 ; p++)
 	{
-		life = livingState.create(7 , 130 + p*35 , 'living');
+		life = livingState.create(7 , 180 + p*35 , 'living');
 	}
 	playpause = game.add.sprite(255 , 475 , 'pp_button');
 	playpause.inputEnabled = true;
-
 	game.add.sprite(0,-3,'topBar');
+
 	timer = game.add.text(544, 19, '00:00:00' ,{font : "18px Arial" , fill : "#ffffff"});
 	myscore = game.add.text(80-34, 19 , '000' , {font : "18px Arial" , fill : "#ffffff"});
   	mylevel = game.add.text(311-10, 19 , '01' , {font : "18px Arial" , fill : "#ffffff"});
-  	start = game.add.sprite(285,300,'start');
-  	start.inputEnabled = true;
+  	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
 
-  	helpText = game.add.text(150,260,'              Remember this image !', {font : "18px Arial" , fill : "#01579b"});
-  	helpText.setShadow(3,3, 'rgba(25,25,25,0.5)' , 8);
-  	info = game.add.text(40,440,'Click to start :)', {font : "18px Arial" , fill : "#01579b"});
-	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
-
-
-	yes = game.add.sprite(235,350,'correct');
+  	yes = game.add.sprite(235,350,'correct');
 	yes.inputEnabled = true;
-	yes.alpha = 0;
+	//yes.alpha = 0;
 	no = game.add.sprite(335,350,'wrong');
 	no.inputEnabled = true;
-	no.alpha = 0;
+	//no.alpha = 0;
 
-	game.add.sprite(235,100,'box');
-	sprite = game.add.sprite(245, 110, 'shapes');
-	previous = game.rnd.integerInRange(1,100) % 6 ;
-	sprite.frame = previous;
+	backSprite = game.add.sprite(245, 170, 'back');
+	back = game.rnd.integerInRange(1,100) % 5 ;
+	if(back === 3)
+		back += 1;
+	backSprite.frame = back;
 
-    sprite.alpha = 0;
-    game.add.tween(sprite).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
-    //game.add.tween(sprite).to({ alpha : 0}, 5000, Phaser.Easing.Linear.easeInOut,true, 5000);
-    //initialize();
-    start.events.onInputUp.add(initialize);
-    startScreen=game.add.sprite(0,0,'start_screen');
+	frontSprite = game.add.sprite(280, 205, 'front');
+	front = game.rnd.integerInRange(1,100) % 7 ;
+	if(front === 3)
+		front += 1;
+	if(front === back)
+	{
+		front = front + 1;
+	}
+
+	frontSprite.frame = front;
+	questionText = game.add.text(150,130,'You will get the text here!', {font : "18px Arial" , fill : "#006064" , align: "center"});
+  	questionText.setShadow(3,3, 'rgba(25,25,25,0.5)' , 8);
+  	updateQuestion();
+  	var info = game.add.text(40,440,'Check the above statement and Click Yes or No', {font : "14px Arial" , fill : "#01579b"});
+  	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
     startButton.events.onInputUp.add(startingGame);
@@ -95,15 +98,16 @@ function startingGame()
 	startGame = 1;
 	game.time.reset();
 }
-function update ()
+
+function update()
 {
 	updateTimer();
 
 	yes.events.onInputDown.add(answeredYes);
 	no.events.onInputDown.add(answeredNo);
 
-	yes.events.onInputUp.add(updateBox);
-	no.events.onInputUp.add(updateBox);
+	yes.events.onInputUp.add(updateContent);
+	no.events.onInputUp.add(updateContent);
 
 	playpause.events.onInputUp.add(pauseAndPlay);
 }
@@ -130,9 +134,7 @@ var timeUpdateFlag = 1;
 var pauseState = 0;
 // The userdefined function to update the timer.
 function updateTimer()
-{	
-	if(startGame === 1)
-	{
+{
 	//To find and display the elapsed time.
 	if(pauseState === 0)
 	{
@@ -163,51 +165,32 @@ function updateTimer()
 	{
 		timeUpdateFlag = 0
 	}
-	}
-}
-function initialize()
-{
-	if(pauseState === 0)
-	{
-	helpText.setText('Does this image match the previous one ?');
-	helpText.alpha = 0;
-	game.add.tween(helpText).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
-	info.setText('Click Yes or No :)');
-	start.destroy();
-
-	game.add.tween(yes).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
-
-	game.add.tween(no).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
-	present = game.rnd.integerInRange(1,100) % 6 ;
-	sprite.frame = present;
-	sprite.alpha = 0;
-	game.add.tween(sprite).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
-	}
 }
 var deadOne;
 var deadTwo;
-function updateBox()
+var isCorrect;
+function updateContent()
 {
 	if(pauseState === 0)
 	{
 		updateScore();
-		displayShape();
+		displayShapes();
 		if(!isCorrect)
 	    {
 	    if(lifeline === 2)
 	      {
 	        livingState.getAt(0).kill();
-	        deadOne = game.add.sprite(7,130,'dead');
+	        deadOne = game.add.sprite(7,180,'dead');
 	      }
 	      else if (lifeline === 1)
 	      {
 	        livingState.getAt(1).kill();
-	        deadTwo = game.add.sprite(7,165,'dead');
+	        deadTwo = game.add.sprite(7,215,'dead');
 	      }
 	      else if (lifeline === 0)
 	      {
 	        livingState.getAt(2).kill();
-	        game.add.sprite(7,200,'dead');
+	        game.add.sprite(7,250,'dead');
 	        pauseState = 1;
 	        playpause.inputEnabled = false;
 	        var destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
@@ -215,16 +198,119 @@ function updateBox()
 	    }
 	}
 }
+var backgroundName;
+var foregroundName;
 
+function displayShapes()
+{
+
+
+	back = game.rnd.integerInRange(1,100) % 5 ;
+	if(back === 3)
+		back += 1;
+	backSprite.frame = back;
+
+
+	front = game.rnd.integerInRange(1,100) % 7 ;
+	if(front === 3)
+	{
+		front = 4;
+	}
+	if(front === back)
+	{
+		front = front + 1;
+	}
+	frontSprite.frame = front;
+
+	updateQuestion();
+}
+
+function updateQuestion()
+{
+	switch(back)
+	{
+		case 0:
+				backgroundName = "Square";
+				break;
+		case 1:
+				backgroundName = "Circle";
+				break;
+		case 2:
+				backgroundName = "Diamond";
+				break;
+		case 4:
+				backgroundName = "Hexagon";
+				break;
+	}
+	switch(front)
+	{
+		case 0:
+				foregroundName = "Square";
+				break;
+		case 1:
+				foregroundName = "Circle";
+				break;
+		case 2:
+				foregroundName = "Diamond";
+				break;
+		case 4:
+				foregroundName = "Hexagon";
+				break;
+		case 5:
+				foregroundName = "Star";
+				break;
+		case 6:
+				foregroundName = "Heart";
+				break;
+	}
+
+	var sentRandom = game.rnd.integerInRange(1,100) % 2 ;
+	var negateRandom;
+	var tempText;
+	if(sentRandom === 0)
+	{
+		negateRandom = game.rnd.integerInRange(1,100) % 2 ;
+		if(negateRandom === 0)
+		{
+			tempText = "The " + foregroundName + " is enclosed within the " + backgroundName;
+			isCorrectText = 1;
+		}
+		else
+		{
+			tempText = "The " + foregroundName + " is NOT enclosed within the " + backgroundName;
+			isCorrectText = 0;
+
+		}
+	}
+	else
+	{
+		negateRandom = game.rnd.integerInRange(1,100) % 2 ;
+		if(negateRandom === 0)
+		{
+			tempText = "The " + backgroundName + " is enclosed within the " + foregroundName;
+			isCorrectText = 0;
+
+		}
+		else
+		{
+			tempText = "The " + backgroundName + " is NOT enclosed within the " + foregroundName;
+			isCorrectText = 1;
+
+		}
+	}
+	questionText.setText(tempText);
+
+}
+var isCorrectText = null;
 function updateScore()
 {
 	var displayScore;
-	if (answer && (previous === present))
+	if (answer && isCorrectText)
 	{
 		score += 25;
 		isCorrect = 1;
 	}
-	else if(!answer && (previous !== present))
+	else if(!answer && !isCorrectText)
 	{
 		score += 25;
 		isCorrect = 1;
@@ -291,45 +377,8 @@ function updateLife()
   livingState = game.add.group();
   for(var p = 0 ; p < 3 ; p++)
 	{
-		life = livingState.create(7 , 130 + p*35 , 'living');
+		life = livingState.create(7 , 180 + p*35 , 'living');
 	}
-}
-function displayShape()
-{
-	previous = present;
-	var dispRandom = game.rnd.integerInRange(1,100) % 5;
-	if(dispRandom === 0)
-	{
-		//present = present;
-	}
-	else if(dispRandom === 1)
-	{
-		present = game.rnd.integerInRange(1,100) % 6;
-	}
-	else if(dispRandom === 2)
-	{
-		present = (game.rnd.integerInRange(1,100) % 6) + 6;
-	}
-	else if(dispRandom === 3)
-	{
-		//present = present;
-	}
-	else if (dispRandom === 4)
-	{
-		present = game.rnd.integerInRange(1,100) % 8;
-	}
-	animateSprite();
-	//animatingSprite.kill();
-	sprite.frame = present;
-	sprite.alpha = 0;
-	game.add.tween(sprite).to({ alpha : 1}, 1000, Phaser.Easing.Linear.None, true);
-}
-var animatingSprite;
-function animateSprite()
-{
-	animatingSprite = game.add.sprite(245, 110, 'shapes');
-	animatingSprite.animations.add('runThrough');
-	animatingSprite.animations.play('runThrough', 36, false,true);
 }
 function pauseAndPlay()
 {
@@ -337,13 +386,11 @@ function pauseAndPlay()
 	{
 		pauseState = 1;
 		ppText.setText('     Paused   ');
-		sprite.alpha = 0;
 	}
 	else
 	{
 		pauseState = 0;
 		ppText.setText('Click to Pause');
-		sprite.alpha = 1;
-
+		displayShapes();
 	}
 }

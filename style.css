@@ -6,20 +6,18 @@ paper-toolbar.main_toolbar{
   background-color:#ffffff;
 }
 
+paper-ripple{
+  color:#ffffff
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit;
+}
+
 .title{
   color: #ffffff;
   font-size: 20px;
-}
-
-.my_drawer_buttons{
-  color :  #3f51b5;
-  height = 30 px;width: 300px;
-  margin: auto;
-  padding: 2px;
-}
-
-#my_drawer_buttons::shadow paper-ripple {
-  color: #03a9f4;
 }
 
 .paper_toolbar_main{
@@ -35,7 +33,7 @@ paper-icon-button.white {
   padding-left: 55px;
   padding-top: 140px;
 }
-paper-material {
+/*paper-material {
         display: inline-block;
         background: white;
         box-sizing: border-box;
@@ -43,3 +41,66 @@ paper-material {
         padding: 16px;
         border-radius: 2px;
       }
+*/
+
+
+  .demo_heading {
+          display: inline-block;
+          background: white;
+          box-sizing: border-box;
+          margin: 16px;
+          padding: 16px;
+          border-radius: 2px;
+
+
+        }
+  .demo-cards {
+        /*height:225px;*/
+        width:280px;
+        display: inline-block;
+        background: white;
+        box-sizing: border-box;
+        margin: 16px;
+        border-radius: 2px;
+        font-weight: 300;
+        }
+
+  paper-material.iron-pages-demo-cards {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    display:block;
+    background: white;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-weight: 300;
+    width:600px;
+  }
+
+    paper-material.iron-pages-demo-cards-feedback {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    display:block;
+    background: white;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-weight: 300;
+    width:590px;
+  }
+  .demo_card_content{
+    font-size: 1.25em;
+  }
+  .demo_buttons{
+    margin-left:105px ;
+    margin-top: 45px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+  }
+  a {
+      text-decoration: none !important;
+      color: inherit;
+  }
+
+  

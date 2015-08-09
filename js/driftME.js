@@ -2,11 +2,13 @@
 Transition : Pending
 */
 
-var game = new Phaser.Game(640, 520, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(640, 520, Phaser.AUTO, 'gamingArea', { preload: preload, create: create, update: update });
 
 function preload()
 {
 	//Importing the asset(s) required for the game
+	game.load.image('start_screen' , 'assets/images/startScreen_640_520.jpg');
+	game.load.image('start_button' , 'assets/images/start_50_50.png');
 	game.load.image('background' , 'assets/images/background3_640_520.png');
 	game.load.image('pp_button' , 'assets/images/playpause_120_35.png');
 	game.load.image('info' , 'assets/images/info_35_35.png');
@@ -50,6 +52,9 @@ var playPause;
 var isCorrect;
 var mylevel;
 var myscore;
+var startScreen;
+var startButton;
+
 
 // The predefined function to create the Gaming area
 function create()
@@ -83,8 +88,19 @@ function create()
 	info.setShadow(3,3, 'rgba(25,25,25,0.25)' , 8);
 	boxText = game.add.text(xTextPos, yTextPos , '' ,{ font : '50px Arial' , fill : "black"}  );
 	initialize();
-
+	startScreen=game.add.sprite(0,0,'start_screen');
+    startButton=game.add.sprite(560,465,'start_button');
+    startButton.inputEnabled = true;
+    startButton.events.onInputUp.add(startingGame);
 }
+function startingGame()
+{
+	startScreen.destroy();
+	startButton.destroy();
+	//startGame = 1;
+	game.time.reset();
+}
+
 var item;
 //The user defined function that renders the box in the appropriate area as per the level.
 function renderBox()
@@ -603,11 +619,18 @@ function pauseAndPlay()
 	{
 		pauseState = 1;
 		ppText.setText('     Paused   ');
+		boxText.setText(' ');
+		
+
 	}
 	else
 	{
 		pauseState = 0;
 		ppText.setText('Click to Pause');
+		var text = boxValue();
+		selectBox();
+		boxText.setText(text);
+		
 	}
 }
 

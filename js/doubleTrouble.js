@@ -1,11 +1,13 @@
 /*
 pending : Transition between levels
 */
-var game = new Phaser.Game(640, 520, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(640, 520, Phaser.AUTO, 'gamingArea', { preload: preload, create: create, update: update });
 
 function preload()
 {
 	//Importing the asset(s) required for the game
+	game.load.image('start_screen' , 'assets/images/startScreen_640_520.jpg');
+	game.load.image('start_button' , 'assets/images/start_50_50.png');
 	game.load.image('background' , 'assets/images/background4_640_520.png');
 	game.load.image('pp_button' , 'assets/images/playpause4_120_35.png');
 
@@ -49,6 +51,8 @@ var displayScore;
 var lifeline = 3;
 var questionOne;
 var questionTwo;
+var startScreen;
+var startButton;
 
 function create()
 {
@@ -93,6 +97,17 @@ function create()
 	{
 		item = block.create(150 + i*200 , 135 , 'box' );
 	}
+	startScreen=game.add.sprite(0,0,'start_screen');
+    startButton=game.add.sprite(560,465,'start_button');
+    startButton.inputEnabled = true;
+    startButton.events.onInputUp.add(startingGame);
+}
+function startingGame()
+{
+	startScreen.destroy();
+	startButton.destroy();
+	startGame = 1;
+	game.time.reset();
 }
 
 // The userdefined function to update the timer.
@@ -338,19 +353,23 @@ function boxText()
 }
 function pauseAndPlay()
 {
+	
 	if(pauseState  === 0)
 	{
 		pauseState = 1;
 		ppText.setText('     Paused   ');
+		textInBoxOne.setText(' ');
+		textInBoxTwo.setText(' ');
 	}
 	else
 	{
 		pauseState = 0;
 		ppText.setText('Click to Pause');
+		boxText();
 	}
 }
 
 // Thankyou!
 // A small unresolved error found! If the color of the word in the left box is equal to the meaning of the word in the right box and
-//if the color of the word in the right box is equal to meaning of the word in the left box, the condition evalutates to true ONLY. The 
+//if the color of the word in the right box is equal to meaning of the word in the left box, the condition evalutates to true ONLY. The
 //probability of this to occur is more closer to 0.

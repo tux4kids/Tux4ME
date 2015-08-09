@@ -2,7 +2,7 @@
 Level transitions = under developmet
 */
 
-var game = new Phaser.Game(640, 520, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(640, 520, Phaser.AUTO, 'gamingArea', { preload: preload, create: create, update: update });
 //  The Google WebFont Loader will look for this object, so create it before loading the script.
 WebFontConfig = {
     //  'active' means all requested fonts have finished loading
@@ -17,6 +17,8 @@ function preload()
   //Importing the asset(s) required for the game
   game.load.image('background' , 'assets/images/highClick/background_640_520.jpg');
   game.load.image('play' , 'assets/images/highClick/play_30_30.png');
+  game.load.image('start_screen' , 'assets/images/startScreen_640_520.jpg');
+  game.load.image('start_button' , 'assets/images/start_50_50.png');
   game.load.image('pause' , 'assets/images/highClick/pause_30_30.png');
   game.load.image('box', 'assets/images/highClick/displaybox_130_130.png' );
   game.load.image('equals', 'assets/images/highClick/equal_130_90.png' );
@@ -47,6 +49,9 @@ var pause;
 var tempText;
 var mylevel;
 var myscore;
+var startScreen;
+var startButton;
+
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -72,6 +77,17 @@ function create()
   timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
   //createText();
   //love = game.add.sprite(535, 350 , 'happy');
+    startScreen=game.add.sprite(0,0,'start_screen');
+    startButton=game.add.sprite(560,465,'start_button');
+    startButton.inputEnabled = true;
+    startButton.events.onInputUp.add(startingGame);
+}
+function startingGame()
+{
+  startScreen.destroy();
+  startButton.destroy();
+  startGame = 1;
+  game.time.reset();
 }
 function createText()
 {
@@ -161,7 +177,7 @@ function updateBox()
       }
       else if (lifeline === 0)
       {
-        
+
         livingState.getAt(2).kill();
         game.add.sprite(27,256,'dead');
         pauseState = 1;
@@ -519,11 +535,14 @@ function pauseAndPlay()
   {
     pauseState = 1;
     tempText.setText('Game Paused');
+    boxTwoText.setText('');
+    boxOneText.setText(' ');
   }
   else
   {
     tempText.setText(' ');
     pauseState = 0;
+    boxText();
   }
 }
 // Thank you !

@@ -6,43 +6,374 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-  <script src="script.js"></script>
   <link rel="import" href="elements.html">
   <link href="style.css" rel="stylesheet">
 </head>
 
-<body fullbleed layout vertical>
+<body unresolved>
+  <template is="dom-bind" id="app">
   <paper-drawer-panel responsive-width="820px">
-  <paper-header-panel mode="waterfall-tall" tallClass = "medium-tall" shadow = "true" drawer class="paper_toolbar_drawer">
+  <paper-header-panel mode="waterfall-tall" tallClass = "medium-tall" class="paper_toolbar_drawer" shadow = "true" drawer>
 
     <paper-toolbar class = "drawer_toolbar">
       <div id="logo"><img src = "app_assets/logo_100_100.png"></img></div>
-      <div class = "user_greeting"></div>
     </paper-toolbar>
-<!--
-    <paper-menu>
-      <paper-icon-item>
-      <paper-button class = "my_drawer_buttons">
-        <iron-icon icon="home">Home</iron-icon>
-      </paper-button>
-      </paper-icon-item>
+
+    <paper-menu id="menu-items" selected="{{page}}" valueattr="data-category">
+
+        <paper-item data-category="home" label="Home">
+          <paper-icon-button icon="home">
+          </paper-icon-button>
+          <div>
+            Home
+          </div>
+
+        </paper-item>
+
+        
+
+        <paper-item data-category="games" label="Games">
+          <paper-icon-button icon="social:cake">
+          </paper-icon-button>
+            Games
+        </paper-item>
+
+        <paper-item data-category="tux4kids" label="Tux4Kids">
+          <paper-icon-button icon="hardware:toys">
+          </paper-icon-button>
+            Tux4Kids
+        </paper-item>
+
+        <paper-item data-category="feedback" label="Feedback">
+          <paper-icon-button icon="favorite">
+          </paper-icon-button>
+            Feedback
+        </paper-item>
+
+        <paper-item data-category="source" label="View Source">
+          <paper-icon-button icon="create">
+          </paper-icon-button>
+            View Source
+        </paper-item>
+
     </paper-menu>
--->
   </paper-header-panel>
+
   <paper-header-panel main mode="standard" class="paper_toolbar_main">
     <paper-toolbar class = "main_toolbar">
-      <paper-icon-button icon="menu" alt="menu" class="white" paper-drawer-toggle></paper-icon-button>
-      <div class = "title"><img src="app_assets/Tux4Me_150_40.png" alt="Tux4ME"></img></div>
-      <paper-icon-button icon="av:volume-off" alt="mute" class="white"></paper-icon-button>
-      <paper-icon-button icon="more-vert" alt="more-horiz" class="white">
+      <paper-icon-button icon="menu" alt="menu" class="white" paper-drawer-toggle>
       </paper-icon-button>
 
+      <div class = "title">
+        <img src="app_assets/Tux4Me_150_40.png" alt="Tux4ME"></img>
+      </div>
+      <div style="font-family:Georgia;font-style: italic;font-size: 15px;color:#009688">
+      Hi
+      <paper-icon-button icon="account-circle" alt="more-horiz" class="white">
+      </paper-icon-button>
+      </div>
       </paper-toolbar>
-    <div>Content Area</div>
-    <paper-material elevation="3">
-        Checking the responsiveness of the page in multiple devices/Screen Sizes.
-        To update the content one by one from today.
-      </paper-material>
-  </paper-header-panel>
-</paper-drawer-panel>
-</body>
+      <div id="content_header"></div>
+      <div class="container" fit layout vertical>
+
+          <iron-pages selected="{{page}}" valueattr="data-category" flex>
+            <section data-category="home">
+              <paper-material elevation="3" class="iron-pages-demo-cards">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Hi Kids, Welcome to Tux4Me</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <paper-menu flex>
+                    <paper-item><paper-fab style="background-color:teal" mini icon="av:play-circle-filled" ></paper-fab><span></span><div>Wear you Thinking Caps !</div></paper-item>
+                    <paper-item><paper-fab style="background-color:teal" mini icon="av:play-circle-filled" ></paper-fab><span></span><div>Use the Drawer menu to navigate to Games</div></paper-item>
+
+                    <paper-item><paper-fab style="background-color:teal" mini icon="av:play-circle-filled" ></paper-fab><span></span><div>Enjoy the games ! Thank you !</div></paper-item>
+
+                    <paper-item flex><div><img src="assets/images/penguin.jpg"></img></div><span flex></span><div><img src="assets/images/PenguinWords.png"></img></div></paper-item>
+                    </paper-menu>
+                  </div>
+              </paper-material>
+            </section>
+
+            
+
+            <section data-category="games">
+              <div>
+                  <div>
+                    <paper-material elevation="3" class="demo_heading" style="background-color:#eceff1">
+                      <div >Steps <iron-icon icon="chevron-right"></iron-icon> Choose your category <iron-icon icon="chevron-right"></iron-icon>Choose a game <iron-icon icon="chevron-right"></iron-icon> <iron-icon style="color:#c2185b" icon="social:mood"></iron-icon></div>
+                    </paper-material>
+                  </div>
+                  <div flex>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content">
+                        <paper-toolbar class="medium-tall" style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div class="bottom">Memory</div>
+                        </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+                        <paper-item flex>
+                        <paper-fab style="background-color:teal" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 01</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:teal" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 02</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:teal" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 03</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall"  style="background-color:#e91e63;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div class="bottom">Reasoning</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+                        <paper-item flex>
+                        <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="PassiveOn.html">Passive On</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="highClick.html">High Click</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 03</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#673ab7;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div class="bottom">Speed</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+                        <paper-item flex>
+                        <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="flashBack.html">Flash Back</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 02</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 03</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#e53935;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div class="bottom">Flexibilty</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+                        <paper-item flex>
+                        <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="doubleTrouble.html">Double Trouble</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="driftME.html">Drift Me</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 03</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    <paper-material elevation="3" class="demo-cards">
+                      <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#01579b;box-shadow: 0px 5px 0px #cfd8dc">
+                              <div class="bottom">Attention</div>
+                            </paper-toolbar>
+                      </div>
+                      <div>
+                        <paper-menu>
+                        <paper-item flex>
+                        <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 01</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 02</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+
+                        <paper-item flex>
+                        <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
+                        <span flex>
+                        </span>
+                        <a href="#">Game 03</a>
+                        <span flex>
+                        </span>
+                        </paper-item>
+                      </paper-menu>
+                      </div>
+                    </paper-material>
+                    </div>
+
+                </div>
+            </section>
+
+            <section data-category="tux4kids">
+              <paper-material elevation="3" class="iron-pages-demo-cards">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#03a9f4;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Kids</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <paper-menu flex>
+                    <paper-item><span></span><div style="font-family:Georgia;font-size:12px"><p>Tux4Kids develops high-quality software for kids, with the goal of combining fun and learning into an irresistable package. Our software is free: you can download it for use at home or onto hundreds of computers in a school. We support all major platforms, including Windows, Macintosh, and Linux/Unix. Our programs are used by people around the globe, and they have been translated into dozens of different languages. As open-source software, these programs can be freely extended or customized, and they are supported by active communities of volunteer developers.<break>Whether you're a parent, a teacher, or a kid, give Tux4Kids software a try!</p></div></paper-item>
+                    
+                    <paper-item><paper-fab style="background-color:#03a9f4" mini icon="hardware:toys" ></paper-fab><span></span><div>WebSite</div><iron-icon icon="chevron-right"></iron-icon><div><a href="http://tux4kids.alioth.debian.org/">http://tux4kids.alioth.debian.org/</a></div></paper-item>
+                    </paper-menu>
+                  </div>
+              </paper-material>
+            </section>
+
+            <section data-category="feedback">
+              <paper-material elevation="3" class="iron-pages-demo-cards-feedback">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#03a9f4;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Your valuable feedback or suggestions !</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <iframe src="https://docs.google.com/forms/d/159o0Gj8ixtiJCdWUdCM8Ey4fjKHfAvMsI-17RM368Ik/viewform?embedded=true" width="590" height="700" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                  </div>
+              </paper-material>
+            </section>
+
+            <section data-category="source">
+              <paper-material elevation="3" class="iron-pages-demo-cards">
+                  <div class="demo_card_content">
+                    <paper-toolbar style="background-color:#3f51b5;box-shadow: 0px 5px 0px #cfd8dc">
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me Developers</div>
+                    </paper-toolbar>
+                  </div>
+                  <div>
+                    <paper-menu flex>
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="social:person" ></paper-fab><span></span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Mentor</div><iron-icon icon="chevron-right"></iron-icon><div>Scott McCreary</div></paper-item>
+
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="face" ></paper-fab><span></span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Student</div><iron-icon icon="chevron-right"></iron-icon><div>Vignesh S</div></paper-item>
+
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="create" ></paper-fab><span></span><div>Source Code</div><iron-icon icon="chevron-right"></iron-icon><div><a href="https://github.com/Vigneshsekar/Tux4ME/">https://github.com/Vigneshsekar/Tux4ME/</a></div></paper-item>
+
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="hardware:toys" ></paper-fab><span></span><div>Developed With</div><iron-icon icon="favorite" style="color:#e91e63"></iron-icon><div>by Tux4kids Organization</div></paper-item>
+                    </paper-menu>
+                  </div>
+              </paper-material>
+            </section>
+
+          </iron-pages>
+      </div>
+
+    </paper-header-panel>
+  </paper-drawer-panel>
+
+  <script>
+  console.log("running this outside");
+$("#flashBack").on('click' ,function(){
+  console.log("running this inside");
+  //$.getScript("js/phaser.min.js");
+    $.getScript("js/flashBack.js");
+
+});
+/*
+$('a').on('click', function(e) {
+
+    e.preventDefault();
+    var url = this.href;
+    console.log(url);
+    //$('nav a.current').removeClass('current');
+    //$(this).addClass('current');
+    $('#content').remove();
+    console.log("content removed");
+    $('#content_header').load(url + "#content").hide().fadeIn(1333);
+});
+*/
+  </script>
+  </template>
+
+  <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
