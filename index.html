@@ -1,6 +1,7 @@
 <html lang="en">
 
 <head>
+  <title>Tux4Me</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,9 +20,10 @@
       <div id="logo"><img src = "app_assets/logo_100_100.png"></img></div>
     </paper-toolbar>
 
-    <paper-menu id="menu-items" selected="{{page}}" valueattr="data-category">
+    <paper-menu id="menu-items" selected="{{page}}">
 
-        <paper-item data-category="home" label="Home">
+        <paper-item label="Home" style="position:relative">
+          <paper-ripple style="color: #e91e63"></paper-ripple>
           <paper-icon-button icon="home">
           </paper-icon-button>
           <div>
@@ -32,28 +34,32 @@
 
         
 
-        <paper-item data-category="games" label="Games">
+        <paper-item label="Games"style="position:relative">
+          <paper-ripple style="color: #e91e63"></paper-ripple>
           <paper-icon-button icon="social:cake">
           </paper-icon-button>
-            Games
+            <div>Games</div>
         </paper-item>
 
-        <paper-item data-category="tux4kids" label="Tux4Kids">
+        <paper-item label="Tux4Kids" style="position:relative">
+          <paper-ripple style="color: #e91e63"></paper-ripple>
           <paper-icon-button icon="hardware:toys">
           </paper-icon-button>
-            Tux4Kids
+            <div>Tux4Kids</div>
         </paper-item>
 
-        <paper-item data-category="feedback" label="Feedback">
+        <paper-item  label="Feedback"style="position:relative">
+          <paper-ripple style="color: #e91e63"></paper-ripple>
           <paper-icon-button icon="favorite">
           </paper-icon-button>
-            Feedback
+            <div>Feedback</div>
         </paper-item>
 
-        <paper-item data-category="source" label="View Source">
+        <paper-item  label="View Source"style="position:relative">
+          <paper-ripple style="color: #e91e63"></paper-ripple>
           <paper-icon-button icon="create">
           </paper-icon-button>
-            View Source
+            <div>View Source</div>
         </paper-item>
 
     </paper-menu>
@@ -64,8 +70,8 @@
       <paper-icon-button icon="menu" alt="menu" class="white" paper-drawer-toggle>
       </paper-icon-button>
 
-      <div class = "title">
-        <img src="app_assets/Tux4Me_150_40.png" alt="Tux4ME"></img>
+      <div class = "title" style="font-family:Georgia;font-size: 20px;color:#009688">
+        Tux4Me
       </div>
       <div style="font-family:Georgia;font-style: italic;font-size: 15px;color:#009688">
       Hi
@@ -76,8 +82,8 @@
       <div id="content_header"></div>
       <div class="container" fit layout vertical>
 
-          <iron-pages selected="{{page}}" valueattr="data-category" flex>
-            <section data-category="home">
+          <iron-pages selected="{{page}}"  flex>
+            <section >
               <paper-material elevation="3" class="iron-pages-demo-cards">
                   <div class="demo_card_content">
                     <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
@@ -99,7 +105,7 @@
 
             
 
-            <section data-category="games">
+            <section >
               <div>
                   <div>
                     <paper-material elevation="3" class="demo_heading" style="background-color:#eceff1">
@@ -115,32 +121,38 @@
                       </div>
                       <div>
                         <paper-menu>
-                        <paper-item flex>
-                        <paper-fab style="background-color:teal" mini icon="chevron-right" ></paper-fab>
-                        <span flex>
-                        </span>
-                        <a href="#">Game 01</a>
-                        <span flex>
-                        </span>
-                        </paper-item>
 
-                        <paper-item flex>
-                        <paper-fab style="background-color:teal" mini icon="chevron-right" ></paper-fab>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #009688"></paper-ripple>
+                        <paper-fab style="background-color:#009688" mini icon="chevron-right" ></paper-fab>
+                        Game 01
                         <span flex>
-                        </span>
-                        <a href="#">Game 02</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
-                        <paper-fab style="background-color:teal" mini icon="chevron-right" ></paper-fab>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #009688"></paper-ripple>
+                        <paper-fab style="background-color:#009688" mini icon="chevron-right" ></paper-fab>
+                        Game 02
                         <span flex>
-                        </span>
-                        <a href="#">Game 03</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
+
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #009688"></paper-ripple>
+                        <paper-fab style="background-color:#009688" mini icon="chevron-right" ></paper-fab>
+                        Game 03
+                        <span flex>
+                        </span>                      
+                        </paper-item>
+                        </a>
+
+
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -151,68 +163,77 @@
                       </div>
                       <div>
                         <paper-menu>
-                        <paper-item flex>
-                        <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
-                        <span flex>
-                        </span>
-                        <a href="PassiveOn.html">Passive On</a>
-                        <span flex>
-                        </span>
-                        </paper-item>
 
-                        <paper-item flex>
+                        <a href="PassiveOn.html">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e91e63"></paper-ripple>
                         <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
+                        Passive On
                         <span flex>
-                        </span>
-                        <a href="highClick.html">High Click</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
+                        <a href="highClick.html">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e91e63"></paper-ripple>
                         <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
+                        High Click
                         <span flex>
-                        </span>
-                        <a href="#">Game 03</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
+
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e91e63"></paper-ripple>
+                        <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
+                        Game 03
+                        <span flex>
+                        </span>                      
+                        </paper-item>
+                        </a>
                       </paper-menu>
                       </div>
                     </paper-material>
+
                     <paper-material elevation="3" class="demo-cards">
                       <div class="demo_card_content"><paper-toolbar class="medium-tall" style="background-color:#673ab7;box-shadow: 0px 5px 0px #cfd8dc">
                               <div class="bottom">Speed</div>
                             </paper-toolbar>
                       </div>
                       <div>
+
                         <paper-menu>
-                        <paper-item flex>
+                        <a href="flashBack.html">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #673ab7"></paper-ripple>
                         <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
+                        Flash Back
                         <span flex>
-                        </span>
-                        <a href="flashBack.html">Flash Back</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #673ab7"></paper-ripple>
                         <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
+                        Game 02
                         <span flex>
-                        </span>
-                        <a href="#">Game 02</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #673ab7"></paper-ripple>
                         <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
+                        Game 03
                         <span flex>
-                        </span>
-                        <a href="#">Game 03</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -223,32 +244,36 @@
                       </div>
                       <div>
                         <paper-menu>
-                        <paper-item flex>
-                        <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
-                        <span flex>
-                        </span>
-                        <a href="doubleTrouble.html">Double Trouble</a>
-                        <span flex>
-                        </span>
-                        </paper-item>
 
-                        <paper-item flex>
+                        <a href="doubleTrouble.html">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e53935"></paper-ripple>
                         <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
+                        Double Trouble
                         <span flex>
-                        </span>
-                        <a href="driftME.html">Drift Me</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
+                        <a href="driftME.html">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e53935"></paper-ripple>
                         <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
+                        Drift Me
                         <span flex>
-                        </span>
-                        <a href="#">Game 03</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
+
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #e53935"></paper-ripple>
+                        <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
+                        Game 03
+                        <span flex>
+                        </span>                      
+                        </paper-item>
+                        </a>
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -259,32 +284,35 @@
                       </div>
                       <div>
                         <paper-menu>
-                        <paper-item flex>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #01579b"></paper-ripple>
                         <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
+                        Game 01
                         <span flex>
-                        </span>
-                        <a href="#">Game 01</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #01579b"></paper-ripple>
                         <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
+                        Game 02
                         <span flex>
-                        </span>
-                        <a href="#">Game 02</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
 
-                        <paper-item flex>
+                        <a href="#">
+                        <paper-item flex style="position: relative">
+                        <paper-ripple style="color: #01579b"></paper-ripple>
                         <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
+                        Game 03
                         <span flex>
-                        </span>
-                        <a href="#">Game 03</a>
-                        <span flex>
-                        </span>
+                        </span>                      
                         </paper-item>
+                        </a>
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -293,7 +321,7 @@
                 </div>
             </section>
 
-            <section data-category="tux4kids">
+            <section >
               <paper-material elevation="3" class="iron-pages-demo-cards">
                   <div class="demo_card_content">
                     <paper-toolbar style="background-color:#03a9f4;box-shadow: 0px 5px 0px #cfd8dc">
@@ -310,7 +338,7 @@
               </paper-material>
             </section>
 
-            <section data-category="feedback">
+            <section>
               <paper-material elevation="3" class="iron-pages-demo-cards-feedback">
                   <div class="demo_card_content">
                     <paper-toolbar style="background-color:#03a9f4;box-shadow: 0px 5px 0px #cfd8dc">
@@ -323,7 +351,7 @@
               </paper-material>
             </section>
 
-            <section data-category="source">
+            <section>
               <paper-material elevation="3" class="iron-pages-demo-cards">
                   <div class="demo_card_content">
                     <paper-toolbar style="background-color:#3f51b5;box-shadow: 0px 5px 0px #cfd8dc">
@@ -349,31 +377,7 @@
 
     </paper-header-panel>
   </paper-drawer-panel>
-
-  <script>
-  console.log("running this outside");
-$("#flashBack").on('click' ,function(){
-  console.log("running this inside");
-  //$.getScript("js/phaser.min.js");
-    $.getScript("js/flashBack.js");
-
-});
-/*
-$('a').on('click', function(e) {
-
-    e.preventDefault();
-    var url = this.href;
-    console.log(url);
-    //$('nav a.current').removeClass('current');
-    //$(this).addClass('current');
-    $('#content').remove();
-    console.log("content removed");
-    $('#content_header').load(url + "#content").hide().fadeIn(1333);
-});
-*/
-  </script>
   </template>
-
   <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
