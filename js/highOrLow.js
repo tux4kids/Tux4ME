@@ -89,8 +89,18 @@ function create()
 
   	start.events.onInputUp.add(initialize);
 
+    startScreen=game.add.sprite(0,0,'start_screen');
+    startButton=game.add.sprite(560,465,'start_button');
+    startButton.inputEnabled = true;
+    startButton.events.onInputUp.add(startingGame);
 }
-
+function startingGame()
+{
+  startScreen.destroy();
+  startButton.destroy();
+  startGame = 1;
+  game.time.reset();
+}
 function initialize()
 {
 	displayNumber();
@@ -105,7 +115,7 @@ function createText()
     boxText.x = Math.floor(block.x + block.width/2);
     boxText.y = Math.floor(block.y + block.height/2);
     boxText.anchor.set(0.5,0.35);
-    boxText.font = 'Architects Daughter';	
+    boxText.font = 'Architects Daughter';
 }
 
 function update()
@@ -294,14 +304,14 @@ function updateLife()
 var flag = 0;
 function displayNumber()
 {
-	
+
 	if(flag === 0)
 	{
 		flag = 1;
 	}
 	else
 	{
-		previous = present;		
+		previous = present;
 	}
 
 	present = game.rnd.integerInRange(1,1000) % 100*level;
@@ -321,13 +331,13 @@ function pauseAndPlay()
   {
     pauseState = 1;
     tempText.setText('Game Paused');
-    
+
     //block.scale.setTo(0.5,0.5);
   }
   else
   {
     tempText.setText(' ');
     pauseState = 0;
-    
+
   }
 }
