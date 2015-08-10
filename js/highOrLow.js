@@ -80,6 +80,7 @@ function create()
   	lesser.alpha = 0;
 
 
+    tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
   	pause = game.add.sprite(575,455,'pause');
   	pause.inputEnabled = true;
