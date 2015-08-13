@@ -242,10 +242,10 @@ function gameOver()
 
 function replayGame()
 {
-
-	pauseState = 0;
 	playpause.inputEnabled = true;
-	timeText = null;
+	pauseAndPlay();
+	//playpause.inputEnabled = true;
+	//timeText = null;
 	startGame = 1;
 	game.time.reset();
 	destroy.setText(" ");
@@ -253,7 +253,7 @@ function replayGame()
 	replay.inputEnabled = false;
 	replay.destroy();
 	updateLife();
-	displayBirds();
+	//displayBirds();
 	document.getElementById("heading").innerHTML = headingContent;
 	document.getElementById("scoreCard").innerHTML = instructionContent;
 
@@ -264,7 +264,7 @@ var displayScore;
 
 function updateScore()
 {
-	
+
 	if (answer && (previous === present))
 	{
 		score += 25;
