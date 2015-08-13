@@ -239,7 +239,7 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-	var cummulativeIndex = (score/gameSeconds) * (60/750) * 100;
+	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
 	if(cummulativeIndex > 100)
 		cummulativeIndex = 100;
 	headingContent = document.getElementById("heading").innerHTML;
