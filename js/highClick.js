@@ -26,6 +26,8 @@ function preload()
   game.load.image('dead' , 'assets/images/highClick/dead_30_30.png');
   //game.load.image('happy' , 'assets/images/highClick/happy_75_75.png');
   //game.load.image('sad' , 'assets/images/highClick/sad_75_75.png');
+  game.load.image('replay' , 'assets/images/replay_100_100.png');
+
   //Load the Google WebFont Loader script
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
@@ -182,13 +184,56 @@ function updateBox()
         game.add.sprite(27,256,'dead');
         pauseState = 1;
         pause.inputEnabled = false;
-        var destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
-        var TuxMathAd = game.add.text(246, 327 , '\"Try TuxMath :D  !\"', {font : "17px Arial" , fill : "#ffffff"});
+        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
+        gameOver();
+        //var TuxMathAd = game.add.text(246, 327 , '\"Try TuxMath :D  !\"', {font : "17px Arial" , fill : "#ffffff"});
 
       }
     }
   }
 }
+var destroy
+var replay;
+var headingContent;
+var instructionContent;
+function gameOver()
+{
+	var cummulativeIndex = (score/gameSeconds) * (60/500) * 100;
+	if(cummulativeIndex > 100)
+		cummulativeIndex = 100;
+	headingContent = document.getElementById("heading").innerHTML;
+	instructionContent = document.getElementById("scoreCard").innerHTML;
+	document.getElementById("heading").innerHTML = "<div flex><iron-icon style='color:white' icon='loyalty'></iron-icon><div flex>Score card</div></div>"
+	document.getElementById("scoreCard").innerHTML = "<paper-menu><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='flag'></iron-icon><span></span>Score<iron-icon icon='chevron-right'></iron-icon>" + displayScore + "</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='alarm-on'></iron-icon><span></span>Time Taken<iron-icon icon='chevron-right'></iron-icon>"+ timeText +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='thumb-up'></iron-icon><span></span>Game wise cummulative index<iron-icon icon='chevron-right'></iron-icon>"+ cummulativeIndex +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='redo'></iron-icon><span></span>Click on the Replay button to play again</paper-item><paper-item><img src='assets/images/penguin.jpg'></img><img src='assets/images/PenguinWords.png'></img></paper-item></paper-menu>" ;
+
+	replay = game.add.sprite(game.world.centerX, game.world.centerY, 'replay');
+	replay.anchor.set(0.5);
+    startGame = 0;
+	replay.inputEnabled = true;
+	replay.events.onInputUp.add(replayGame);
+}
+
+function replayGame()
+{
+
+	pauseState = 0;
+	playpause.inputEnabled = true;
+	timeText = null;
+	startGame = 1;
+	game.time.reset();
+	destroy.setText(" ");
+
+	replay.inputEnabled = false;
+	replay.destroy();
+	updateLife();
+	displayBirds();
+	document.getElementById("heading").innerHTML = headingContent;
+	document.getElementById("scoreCard").innerHTML = instructionContent;
+
+}
+
+var displayScore;
+
 function updateScore()
 {
 
@@ -238,7 +283,7 @@ function updateScore()
       lifeline--;
     }
   }
-  var displayScore;
+
   if (score < 100)
   {
     displayScore = '00' + score;
@@ -299,40 +344,45 @@ var totalSeconds = 0;
 var gameSeconds = 0;
 var timePaused = 0;
 var timeUpdateFlag = 1;
+var startGame = 0;
+var timeText;
 // The userdefined function to update the timer.
 function updateTimer()
 {
-  //To find and display the elapsed time.
-  if(pauseState === 0)
-  {
-    if(timeUpdateFlag === 0)
-    {
-      timeUpdateFlag = 1;
-      timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
-    }
-    totalSeconds=Math.floor(game.time.totalElapsedSeconds());
-    gameSeconds = totalSeconds - timePaused;
-    var minutes = Math.floor(gameSeconds / 60);
-    var hours = Math.floor(minutes/60);
-    var modmin = minutes%60;
-    if (modmin < 10)
-    {
-      modmin = '0' + modmin;
-    }
-    var modsec = gameSeconds % 60;
-    if (modsec < 10)
-    {
-      modsec = '0' + modsec;
-    }
-    timeText = '0'+hours+':'+modmin+ ':' + modsec ;
-    timer.setText(timeText);
-  }
-  else
-  {
-    timeUpdateFlag = 0
-  }
+	if(startGame === 1)
+	{
+	//To find and display the elapsed time.
+	if(pauseState === 0)
+	{
+		if(timeUpdateFlag === 0)
+		{
+			timeUpdateFlag = 1;
+			timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
+		}
+		totalSeconds=Math.floor(game.time.totalElapsedSeconds());
+		gameSeconds = totalSeconds - timePaused;
+		var minutes = Math.floor(gameSeconds / 60);
+		var hours = Math.floor(minutes/60);
+		var modmin = minutes%60;
+		if (modmin < 10)
+		{
+			modmin = '0' + modmin;
+		}
+		var modsec = gameSeconds % 60;
+		if (modsec < 10)
+		{
+			modsec = '0' + modsec;
+		}
+		//Hour display in two digits ! will be like 002.
+		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
+		timer.setText(timeText);
+	}
+	else
+	{
+		timeUpdateFlag = 0
+	}
+	}
 }
-
 function createNumberTwo()
 {
   var num;
