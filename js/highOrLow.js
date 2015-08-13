@@ -55,41 +55,41 @@ var start;
 
 function create()
 {
-	game.add.sprite(0 , 0 , 'background');
+  game.add.sprite(0 , 0 , 'background');
     livingState = game.add.group();
     for(var p = 0 ; p < 3 ; p++)
     {
-    	life = livingState.create(27 , 180 + p*38 , 'living');
+      life = livingState.create(27 , 180 + p*38 , 'living');
     }
 
     block = game.add.sprite(255,165,'box');
 
     greater = game.add.sprite(220,360,'greater');
-  	greater.inputEnabled = true;
-  	greater.scale.setTo(0.5,0.5);
-  	greater.alpha = 0;
+    greater.inputEnabled = true;
+    greater.scale.setTo(0.5,0.5);
+    greater.alpha = 0;
 
-  	start = game.add.sprite(295,360,'start');
-  	start.inputEnabled = true;
-
-
+    start = game.add.sprite(295,360,'start');
+    start.inputEnabled = true;
 
 
-  	lesser = game.add.sprite(360,360,'lesser');
-  	lesser.inputEnabled = true;
-  	lesser.scale.setTo(0.5,0.5);
-  	lesser.alpha = 0;
+
+
+    lesser = game.add.sprite(360,360,'lesser');
+    lesser.inputEnabled = true;
+    lesser.scale.setTo(0.5,0.5);
+    lesser.alpha = 0;
 
 
     tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
-  	pause = game.add.sprite(575,455,'pause');
-  	pause.inputEnabled = true;
-  	myscore = game.add.text(80, 43 , '000' , {font : "15px Arial" , fill : "#eceff1"});
-  	mylevel = game.add.text(311, 43 , '01' , {font : "15px Arial" , fill : "#eceff1"});
-  	timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
+    pause = game.add.sprite(575,455,'pause');
+    pause.inputEnabled = true;
+    myscore = game.add.text(80, 43 , '000' , {font : "15px Arial" , fill : "#eceff1"});
+    mylevel = game.add.text(311, 43 , '01' , {font : "15px Arial" , fill : "#eceff1"});
+    timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
 
-  	start.events.onInputUp.add(initialize);
+    start.events.onInputUp.add(initialize);
 
     startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
@@ -105,11 +105,11 @@ function startingGame()
 }
 function initialize()
 {
-	displayNumber();
-	start.destroy();
-	game.add.tween(greater).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
+  displayNumber();
+  start.destroy();
+  game.add.tween(greater).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
 
-	game.add.tween(lesser).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
+  game.add.tween(lesser).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
 }
 function createText()
 {
@@ -122,30 +122,30 @@ function createText()
 
 function update()
 {
-	updateTimer();
+  updateTimer();
 
-	greater.events.onInputDown.add(answeredUp);
-	lesser.events.onInputDown.add(answeredDown);
+  greater.events.onInputDown.add(answeredUp);
+  lesser.events.onInputDown.add(answeredDown);
 
-	greater.events.onInputUp.add(updateBox);
-	lesser.events.onInputUp.add(updateBox);
+  greater.events.onInputUp.add(updateBox);
+  lesser.events.onInputUp.add(updateBox);
 
-	pause.events.onInputUp.add(pauseAndPlay);
+  pause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
 function answeredUp()
 {
-	if(pauseState === 0)
-	{
-		answer = 1;
-	}
+  if(pauseState === 0)
+  {
+    answer = 1;
+  }
 }
 function answeredDown()
 {
-	if(pauseState === 0)
-	{
-		answer = 0;
-	}
+  if(pauseState === 0)
+  {
+    answer = 0;
+  }
 }
 var timer;
 var totalSeconds = 0;
@@ -157,39 +157,39 @@ var timeText;
 // The userdefined function to update the timer.
 function updateTimer()
 {
-	if(startGame === 1)
-	{
-	//To find and display the elapsed time.
-	if(pauseState === 0)
-	{
-		if(timeUpdateFlag === 0)
-		{
-			timeUpdateFlag = 1;
-			timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
-		}
-		totalSeconds=Math.floor(game.time.totalElapsedSeconds());
-		gameSeconds = totalSeconds - timePaused;
-		var minutes = Math.floor(gameSeconds / 60);
-		var hours = Math.floor(minutes/60);
-		var modmin = minutes%60;
-		if (modmin < 10)
-		{
-			modmin = '0' + modmin;
-		}
-		var modsec = gameSeconds % 60;
-		if (modsec < 10)
-		{
-			modsec = '0' + modsec;
-		}
-		//Hour display in two digits ! will be like 002.
-		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
-		timer.setText(timeText);
-	}
-	else
-	{
-		timeUpdateFlag = 0
-	}
-	}
+  if(startGame === 1)
+  {
+  //To find and display the elapsed time.
+  if(pauseState === 0)
+  {
+    if(timeUpdateFlag === 0)
+    {
+      timeUpdateFlag = 1;
+      timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
+    }
+    totalSeconds=Math.floor(game.time.totalElapsedSeconds());
+    gameSeconds = totalSeconds - timePaused;
+    var minutes = Math.floor(gameSeconds / 60);
+    var hours = Math.floor(minutes/60);
+    var modmin = minutes%60;
+    if (modmin < 10)
+    {
+      modmin = '0' + modmin;
+    }
+    var modsec = gameSeconds % 60;
+    if (modsec < 10)
+    {
+      modsec = '0' + modsec;
+    }
+    //Hour display in two digits ! will be like 002.
+    timeText = '0'+hours+':'+modmin+ ':' + modsec ;
+    timer.setText(timeText);
+  }
+  else
+  {
+    timeUpdateFlag = 0
+  }
+  }
 }
 var deadOne;
 var deadTwo;
@@ -238,45 +238,49 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-	var cummulativeIndex = (score/gameSeconds) * (60/750) * 100;
-	if(cummulativeIndex > 100)
-		cummulativeIndex = 100;
-	headingContent = document.getElementById("heading").innerHTML;
-	instructionContent = document.getElementById("scoreCard").innerHTML;
-	document.getElementById("heading").innerHTML = "<div flex><iron-icon style='color:white' icon='loyalty'></iron-icon><div flex>Score card</div></div>"
-	document.getElementById("scoreCard").innerHTML = "<paper-menu><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='flag'></iron-icon><span></span>Score<iron-icon icon='chevron-right'></iron-icon>" + displayScore + "</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='alarm-on'></iron-icon><span></span>Time Taken<iron-icon icon='chevron-right'></iron-icon>"+ timeText +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='thumb-up'></iron-icon><span></span>Game wise cummulative index<iron-icon icon='chevron-right'></iron-icon>"+ cummulativeIndex +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='redo'></iron-icon><span></span>Click on the Replay button to play again</paper-item><paper-item><img src='assets/images/penguin.jpg'></img><img src='assets/images/PenguinWords.png'></img></paper-item></paper-menu>" ;
+  var cummulativeIndex = (score/gameSeconds) * (60/750) * 100;
+  if(cummulativeIndex > 100)
+    cummulativeIndex = 100;
+  headingContent = document.getElementById("heading").innerHTML;
+  instructionContent = document.getElementById("scoreCard").innerHTML;
+  document.getElementById("heading").innerHTML = "<div flex><iron-icon style='color:white' icon='loyalty'></iron-icon><div flex>Score card</div></div>"
+  document.getElementById("scoreCard").innerHTML = "<paper-menu><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='flag'></iron-icon><span></span>Score<iron-icon icon='chevron-right'></iron-icon>" + displayScore + "</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='alarm-on'></iron-icon><span></span>Time Taken<iron-icon icon='chevron-right'></iron-icon>"+ timeText +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='thumb-up'></iron-icon><span></span>Game wise cummulative index<iron-icon icon='chevron-right'></iron-icon>"+ cummulativeIndex +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='redo'></iron-icon><span></span>Click on the Replay button to play again</paper-item><paper-item><img src='assets/images/penguin.jpg'></img><img src='assets/images/PenguinWords.png'></img></paper-item></paper-menu>" ;
 
-	replay = game.add.sprite(game.world.centerX, game.world.centerY, 'replay');
-	replay.anchor.set(0.5);
+  replay = game.add.sprite(game.world.centerX, game.world.centerY, 'replay');
+  replay.anchor.set(0.5);
     startGame = 0;
-	replay.inputEnabled = true;
-	replay.events.onInputUp.add(replayGame);
+  replay.inputEnabled = true;
+  replay.events.onInputUp.add(replayGame);
 }
 
 function replayGame()
 {
-	playpause = game.add.sprite(255 , 475 , 'pp_button');
-	playpause.inputEnabled = true;
-	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
+  pause.destroy();
+  pause = game.add.sprite(575,455,'pause');
+  pause.inputEnabled = true;
+  tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
+  pauseState = 1;
+  pauseAndPlay();
+  score = 0;
+  displayScore = 0;
+  myscore.setText('000');
+  timer.setText('00:00:00');
+  totalSeconds = 0;
+  gameSeconds = 0;
+  timePaused = 0;
 
-	pauseState = 1;
-	pauseAndPlay();
-	score = 0;
-	displayScore = 0;
-	myscore.setText('000');
-	timer.setText('00:00:00');
-	//playpause.inputEnabled = true;
-	//timeText = null;
-	startGame = 1;
-	game.time.reset();
-	destroy.setText(" ");
+  //playpause.inputEnabled = true;
+  //timeText = null;
+  startGame = 1;
+  game.time.reset();
+  destroy.setText(" ");
 
-	replay.inputEnabled = false;
-	replay.destroy();
-	updateLife();
-	//displayBirds();
-	document.getElementById("heading").innerHTML = headingContent;
-	document.getElementById("scoreCard").innerHTML = instructionContent;
+  replay.inputEnabled = false;
+  replay.destroy();
+  updateLife();
+  //displayBirds();
+  document.getElementById("heading").innerHTML = headingContent;
+  document.getElementById("scoreCard").innerHTML = instructionContent;
 
 }
 
@@ -285,51 +289,51 @@ var displayScore;
 function updateScore()
 {
 
-	if (answer && (previous < present))
-	{
-		score += 25;
-		isCorrect = 1;
-	}
-	else if(!answer && (previous > present))
-	{
-		score += 25;
-		isCorrect = 1;
-	}
-	else
-	{
-		isCorrect = 0;
-		lifeline--;
-	}
+  if (answer && (previous < present))
+  {
+    score += 25;
+    isCorrect = 1;
+  }
+  else if(!answer && (previous > present))
+  {
+    score += 25;
+    isCorrect = 1;
+  }
+  else
+  {
+    isCorrect = 0;
+    lifeline--;
+  }
 
-	if (score < 100)
-	{
-		displayScore = '00' + score;
-	}
-	else if (score < 1000)
-	{
-		displayScore = '0' + score;
-	}
-	else
-	{
-		displayScore = score;
-	}
-	myscore.setText(displayScore);
-	updateLevel();
+  if (score < 100)
+  {
+    displayScore = '00' + score;
+  }
+  else if (score < 1000)
+  {
+    displayScore = '0' + score;
+  }
+  else
+  {
+    displayScore = score;
+  }
+  myscore.setText(displayScore);
+  updateLevel();
 }
 function updateLevel()
 {
-	var levelFlag = level;
-	level = Math.floor(score/250) + 1;
-	if(level < 10)
-	{
-		mylevel.setText('0'+level);
-	}
-	else
-	{
-		mylevel.setText(level);
-	}
-	if (levelFlag != level)
-	updateLife();
+  var levelFlag = level;
+  level = Math.floor(score/250) + 1;
+  if(level < 10)
+  {
+    mylevel.setText('0'+level);
+  }
+  else
+  {
+    mylevel.setText(level);
+  }
+  if (levelFlag != level)
+  updateLife();
 }
 function updateLife()
 {
@@ -356,31 +360,31 @@ function updateLife()
   lifeline = 3;
   livingState = game.add.group();
   for(var p = 0 ; p < 3 ; p++)
-	{
-		life = livingState.create(7 , 130 + p*35 , 'living');
-	}
+    {
+      life = livingState.create(27 , 180 + p*38 , 'living');
+    }
 }
 var flag = 0;
 function displayNumber()
 {
 
-	if(flag === 0)
-	{
-		flag = 1;
-	}
-	else
-	{
-		previous = present;
-	}
+  if(flag === 0)
+  {
+    flag = 1;
+  }
+  else
+  {
+    previous = present;
+  }
 
-	present = game.rnd.integerInRange(1,1000) % 100*level;
-	if(present === previous)
-	{
-		present++;
-	}
-	boxText.setText(present);
-	boxText.alpha = 0;
-	game.add.tween(boxText).to({ alpha : 1},200, Phaser.Easing.Linear.easeInOut, true);
+  present = game.rnd.integerInRange(1,1000) % 100*level;
+  if(present === previous)
+  {
+    present++;
+  }
+  boxText.setText(present);
+  boxText.alpha = 0;
+  game.add.tween(boxText).to({ alpha : 1},200, Phaser.Easing.Linear.easeInOut, true);
 
 
 }
