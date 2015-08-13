@@ -381,10 +381,18 @@ function gameOver()
 
 function replayGame()
 {
-
-	pauseState = 0;
+	playpause = game.add.sprite(255 , 475 , 'pp_button');
 	playpause.inputEnabled = true;
-	timeText = null;
+	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
+
+	pauseState = 1;
+	pauseAndPlay();
+	score = 0;
+	displayScore = 0;
+	myscore.setText('000');
+	timer.setText('00:00:00');
+	//playpause.inputEnabled = true;
+	//timeText = null;
 	startGame = 1;
 	game.time.reset();
 	destroy.setText(" ");
@@ -392,7 +400,7 @@ function replayGame()
 	replay.inputEnabled = false;
 	replay.destroy();
 	updateLife();
-	displayBirds();
+	//displayBirds();
 	document.getElementById("heading").innerHTML = headingContent;
 	document.getElementById("scoreCard").innerHTML = instructionContent;
 
@@ -425,7 +433,7 @@ function removeTextNo()
 // The user defined function to update the score
 function updateScore()
 {
-	
+
 	if(level < 6)
 	{
 
