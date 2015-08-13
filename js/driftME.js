@@ -99,7 +99,7 @@ function startingGame()
 {
 	startScreen.destroy();
 	startButton.destroy();
-	//startGame = 1;
+	startGame = 1;
 	game.time.reset();
 }
 
@@ -381,7 +381,7 @@ function gameOver()
 
 function replayGame()
 {
-	playpause.destroy();
+	playPause.destroy();
 	playPause = game.add.sprite(255 , 475 , 'pp_button');
 	playPause.inputEnabled = true;
 	ppText = game.add.text(275,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
@@ -686,6 +686,7 @@ function pauseAndPlay()
 	{
 		pauseState = 0;
 		ppText.setText('Click to Pause');
+		boxText.setText(' ');
 		var text = boxValue();
 		selectBox();
 		boxText.setText(text);
