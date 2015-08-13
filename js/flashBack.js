@@ -213,6 +213,7 @@ function updateBox()
 	        game.add.sprite(7,200,'dead');
 	        pauseState = 1;
 	        playpause.inputEnabled = false;
+	        //playpause.destroy();
 	        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 					gameOver();
 	      }
@@ -242,8 +243,16 @@ function gameOver()
 
 function replayGame()
 {
+	playpause = game.add.sprite(255 , 475 , 'pp_button');
 	playpause.inputEnabled = true;
+	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
+
+	pauseState = 1;
 	pauseAndPlay();
+	score = 0;
+	displayScore = 0;
+	myscore.setText('000');
+	timer.setText('00:00:00');
 	//playpause.inputEnabled = true;
 	//timeText = null;
 	startGame = 1;
