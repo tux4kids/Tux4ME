@@ -242,11 +242,10 @@ function gameOver()
 
 function replayGame()
 {
-	playpause.destroy();
-	playpause = game.add.sprite(255 , 475 , 'pp_button');
-	playpause.inputEnabled = true;
-	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
-
+	playPause = game.add.sprite(255 , 476 , 'pp_button');
+	playPause.inputEnabled = true;
+	playPause.inputEnabled = true;
+	ppText = game.add.text(272,490,'Click to Pause', {font : "13px Arial" , fill : "white"});
 	pauseState = 1;
 	pauseAndPlay();
 	score = 0;
