@@ -242,6 +242,7 @@ function gameOver()
 
 function replayGame()
 {
+	playpause.destroy();
 	playpause = game.add.sprite(255 , 475 , 'pp_button');
 	playpause.inputEnabled = true;
 	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
@@ -252,6 +253,9 @@ function replayGame()
 	displayScore = 0;
 	myscore.setText('000');
 	timer.setText('00:00:00');
+	totalSeconds = 0;
+	gameSeconds = 0;
+	timePaused = 0;
 	//playpause.inputEnabled = true;
 	//timeText = null;
 	startGame = 1;
