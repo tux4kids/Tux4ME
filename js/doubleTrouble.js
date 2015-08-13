@@ -425,6 +425,8 @@ function pauseAndPlay()
 	{
 		pauseState = 0;
 		ppText.setText('Click to Pause');
+		textInBoxOne.setText(' ');
+		textInBoxTwo.setText(' ');
 		boxText();
 	}
 }
