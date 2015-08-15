@@ -1,3 +1,4 @@
+
 paper-toolbar.drawer_toolbar{
   background-color:#263238;
 }
@@ -65,28 +66,44 @@ paper-icon-button.white {
         font-weight: 300;
         }
 
+.main_content_area{
+  position: relative;
+}
+
   paper-material.iron-pages-demo-cards {
-    margin-left: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    /*margin-left: auto;
     margin-right: auto;
     margin-top: 150px;
-    display:block;
+    display:block;*/
     background: white;
     box-sizing: border-box;
     border-radius: 10px;
     font-weight: 300;
-    width:600px;
+    /*width:600px;*/
   }
 
     paper-material.iron-pages-demo-cards-feedback {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
     display:block;
+    */
     background: white;
     box-sizing: border-box;
     border-radius: 10px;
     font-weight: 300;
-    width:590px;
+    /*width:100%;*/
   }
   .demo_card_content{
     font-size: 1.25em;
@@ -102,5 +119,3 @@ paper-icon-button.white {
       text-decoration: none !important;
       color: inherit;
   }
-
-  
