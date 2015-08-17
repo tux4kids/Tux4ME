@@ -81,7 +81,7 @@ function create()
   multiply.inputEnabled = true;
   divide.inputEnabled = true;
 
-  start.events.onInputUp.add(initialize);
+  
   startScreen=game.add.sprite(0,0,'start_screen');
   startButton=game.add.sprite(560,465,'start_button');
   startButton.inputEnabled = true;
