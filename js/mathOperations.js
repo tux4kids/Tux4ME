@@ -81,7 +81,19 @@ function create()
   multiply.inputEnabled = true;
   divide.inputEnabled = true;
 
- }
+  start.events.onInputUp.add(initialize);
+  startScreen=game.add.sprite(0,0,'start_screen');
+  startButton=game.add.sprite(560,465,'start_button');
+  startButton.inputEnabled = true;
+  startButton.events.onInputUp.add(startingGame);
+}
+function startingGame()
+{
+  startScreen.destroy();
+  startButton.destroy();
+  startGame = 1;
+  game.time.reset();
+}
 
  function createText()
 {
@@ -346,7 +358,7 @@ var totalSeconds = 0;
 var gameSeconds = 0;
 var timePaused = 0;
 var timeUpdateFlag = 1;
-var startGame = 1;
+var startGame = 0;
 var timeText;
 // The userdefined function to update the timer.
 function updateTimer()
