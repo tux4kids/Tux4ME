@@ -9,6 +9,9 @@
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
   <link rel="import" href="elements.html">
   <link href="style.css" rel="stylesheet">
+  <link rel="icon" 
+      type="image/png" 
+      href="http://tux4me.azurewebsites.net/bluePenguin_16_16.png">
   <style>
 
    .sk-folding-cube {
@@ -113,7 +116,7 @@
 
  <div unresolved>
   <template is="dom-bind" id="app">
-  <paper-drawer-panel responsive-width="820px">
+  <paper-drawer-panel id="drawerPanel" responsive-width="820px" >
   <paper-header-panel mode="waterfall-tall" tallClass = "medium-tall" class="paper_toolbar_drawer" shadow = "true" drawer>
 
     <paper-toolbar class = "drawer_toolbar">
@@ -166,7 +169,8 @@
   </paper-header-panel>
 
   <paper-header-panel main mode="standard" class="paper_toolbar_main main_content_area">
-    <paper-toolbar class = "main_toolbar">
+  
+    <paper-toolbar class = "main_toolbar" id="toolBar_content">
       <paper-icon-button icon="menu" alt="menu" class="white" paper-drawer-toggle>
       </paper-icon-button>
 
@@ -174,11 +178,15 @@
         Tux4Me
       </div>
       <div style="font-family:Georgia;font-style: italic;font-size: 15px;color:#009688">
-      Hi
+      Hi kids!
+      <!--
       <paper-icon-button icon="account-circle" alt="more-horiz" class="white">
       </paper-icon-button>
+    -->
+      <img src="assets/images/bluePenguin_16_16.png"></img>
       </div>
       </paper-toolbar>
+    
       <div id="content_header"></div>
       <div class="container" fit layout vertical>
 
@@ -208,7 +216,7 @@
 
             <section >
 
-              <div>
+              <div id="GamesPage">
                   <div flex>
                     <paper-material elevation="3" class="demo_heading" style="background-color:#eceff1">
                       <div >Steps <iron-icon icon="chevron-right"></iron-icon> Choose your category <iron-icon icon="chevron-right"></iron-icon>Choose a game <iron-icon icon="chevron-right"></iron-icon> <iron-icon style="color:#c2185b" icon="social:mood"></iron-icon></div>
@@ -227,27 +235,28 @@
                       </div>
                       <div>
                         <paper-menu>
-                        <a href="migratingFlocks.html">
-                        <paper-item flex style="position: relative">
+
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(1)">
                         <paper-ripple style="color: #01579b"></paper-ripple>
                         <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
                         Migrating Flocks
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="catchTheFlow.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(2)">
                         <paper-ripple style="color: #01579b"></paper-ripple>
                         <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
                         Catch the flow
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="#">
+                        
                         <paper-item flex style="position: relative">
                         <paper-ripple style="color: #01579b"></paper-ripple>
                         <paper-fab style="background-color:#01579b" mini icon="chevron-right" ></paper-fab>
@@ -255,7 +264,7 @@
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -263,42 +272,42 @@
 
                     <paper-material elevation="3" class="demo-cards">
                       <div class="demo_card_content">
-                        <paper-toolbar class="medium-tall" style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+                        <paper-toolbar class="medium-tall" style="background-color:#00796b;box-shadow: 0px 5px 0px #cfd8dc">
                               <div class="bottom">Memory</div>
                         </paper-toolbar>
                       </div>
                       <div>
                         <paper-menu>
 
-                        <a href="highOrLow.html">
-                        <paper-item flex style="position: relative">
-                        <paper-ripple style="color: #009688"></paper-ripple>
-                        <paper-fab style="background-color:#009688" mini icon="chevron-right" ></paper-fab>
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(3)">
+                        <paper-ripple style="color: #00796b"></paper-ripple>
+                        <paper-fab style="background-color:#00796b" mini icon="chevron-right" ></paper-fab>
                         High or Low
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="mindMath.html">
-                        <paper-item flex style="position: relative">
-                        <paper-ripple style="color: #009688"></paper-ripple>
-                        <paper-fab style="background-color:#009688" mini icon="chevron-right" ></paper-fab>
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(4)">
+                        <paper-ripple style="color: #00796b"></paper-ripple>
+                        <paper-fab style="background-color:#00796b" mini icon="chevron-right" ></paper-fab>
                         Mind math
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="#">
+                        
                         <paper-item flex style="position: relative">
-                        <paper-ripple style="color: #009688"></paper-ripple>
-                        <paper-fab style="background-color:#009688" mini icon="chevron-right" ></paper-fab>
+                        <paper-ripple style="color: #00796b"></paper-ripple>
+                        <paper-fab style="background-color:#00796b" mini icon="chevron-right" ></paper-fab>
                         More games coming soon!
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
 
                       </paper-menu>
@@ -312,35 +321,35 @@
                       <div>
                         <paper-menu>
 
-                        <a href="PassiveOn.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(5)">
                         <paper-ripple style="color: #e91e63"></paper-ripple>
                         <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
                         Passive On
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="highClick.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(6)">
                         <paper-ripple style="color: #e91e63"></paper-ripple>
                         <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
                         High Click
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="#">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" >
                         <paper-ripple style="color: #e91e63"></paper-ripple>
                         <paper-fab style="background-color:#e91e63" mini icon="chevron-right" ></paper-fab>
                         More games coming soon!
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -353,27 +362,27 @@
                       <div>
 
                         <paper-menu>
-                        <a href="flashBack.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(7)">
                         <paper-ripple style="color: #673ab7"></paper-ripple>
                         <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
                         Flash Back
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="mathOperations.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(8)">
                         <paper-ripple style="color: #673ab7"></paper-ripple>
                         <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
                         Math operations
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="#">
+                        
                         <paper-item flex style="position: relative">
                         <paper-ripple style="color: #673ab7"></paper-ripple>
                         <paper-fab style="background-color:#673ab7" mini icon="chevron-right" ></paper-fab>
@@ -381,7 +390,7 @@
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -393,27 +402,27 @@
                       <div>
                         <paper-menu>
 
-                        <a href="doubleTrouble.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(9)">
                         <paper-ripple style="color: #e53935"></paper-ripple>
                         <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
                         Double Trouble
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="driftME.html">
-                        <paper-item flex style="position: relative">
+                        
+                        <paper-item flex style="position: relative" onclick="gameLoader(10)">
                         <paper-ripple style="color: #e53935"></paper-ripple>
                         <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
                         Drift Me
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
 
-                        <a href="#">
+                        
                         <paper-item flex style="position: relative">
                         <paper-ripple style="color: #e53935"></paper-ripple>
                         <paper-fab style="background-color:#e53935" mini icon="chevron-right" ></paper-fab>
@@ -421,7 +430,7 @@
                         <span flex>
                         </span>
                         </paper-item>
-                        </a>
+                        
                       </paper-menu>
                       </div>
                     </paper-material>
@@ -479,7 +488,7 @@
 
                     <paper-item><paper-fab style="background-color:#3f51b5" mini icon="create" ></paper-fab><span></span><div>Source Code</div><iron-icon icon="chevron-right"></iron-icon><div><a href="https://github.com/Vigneshsekar/Tux4ME/">https://github.com/Vigneshsekar/Tux4ME/</a></div></paper-item>
 
-                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="hardware:toys" ></paper-fab><span></span><div>Developed With</div><iron-icon icon="favorite" style="color:#e91e63"></iron-icon><div>by Tux4kids Organization</div></paper-item>
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="hardware:toys" ></paper-fab><span></span><div>Developed With</div><iron-icon icon="favorite" style="color:#e91e63"></iron-icon><div>by Tux4kids Organization <br> under Google summer of code - 2015</div></paper-item>
                     </paper-menu>
                   </div>
               </paper-material>

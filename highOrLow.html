@@ -63,9 +63,10 @@ paper-material {
 </style>
 
 <body unresolved>
-  <paper-drawer-panel responsive-width="1820px">
+  <paper-drawer-panel force-narrow="true">
   </paper-header-panel>
   <paper-header-panel main mode="standard" class="paper_toolbar_main" flex>
+  <!--
     <paper-toolbar class = "main_toolbar">
       <iron-icon icon="face"></iron-icon>
       <div></div>
@@ -80,25 +81,26 @@ paper-material {
       <div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div>
       </paper-toolbar>
       <div flex>
+      -->
     <paper-material elevation="3" id="gamingArea">
         <script type="text/javascript" src="js/highOrLow.js"></script>
     </paper-material>
 
     <paper-material elevation="3" class="demo-cards">
       <div class="demo_card_content">
-        <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+        <paper-toolbar style="background-color:#00796b;box-shadow: 0px 5px 0px #cfd8dc">
           <div id="heading">Instructions</div>
         </paper-toolbar>
       </div>
       <div id="scoreCard">
         <paper-menu flex>
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Memorize the displayed number and start the game</div></paper-item>
+        <paper-item><iron-icon style="color:#00796b" icon="av:play-circle-filled"></iron-icon><span></span><div>Memorize the displayed number and start the game</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>If the current number is : </div></paper-item>
+        <paper-item><iron-icon style="color:#00796b" icon="av:play-circle-filled"></iron-icon><span></span><div>If the current number is : </div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Greater than the previous one : Press Up</div></paper-item>
+        <paper-item><iron-icon style="color:#00796b" icon="av:play-circle-filled"></iron-icon><span></span><div>Greater than the previous one : Press Up</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Lesser than the previous one : Press Down</div></paper-item>
+        <paper-item><iron-icon style="color:#00796b" icon="av:play-circle-filled"></iron-icon><span></span><div>Lesser than the previous one : Press Down</div></paper-item>
 
         <paper-item><img src="assets/images/penguin.jpg"></img><img src="assets/images/PenguinWords.png"></img></paper-item>
       </paper-menu>

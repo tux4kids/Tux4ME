@@ -12,7 +12,7 @@
 </head>
 <style>
   paper-toolbar.main_toolbar{
-  background-color:#00796b;
+   
 }
 
 .paper_toolbar_main{
@@ -64,10 +64,11 @@ paper-material {
 </style>
 
 <body unresolved>
-  <paper-drawer-panel responsive-width="1820px">
+  <paper-drawer-panel force-narrow="true">
   </paper-header-panel>
   <paper-header-panel main mode="standard" class="paper_toolbar_main" flex>
-    <paper-toolbar class = "main_toolbar">
+  <!--
+    <paper-toolbar class = "main_toolbar" style="background-color:#00796b">
       <iron-icon icon="face"></iron-icon>
       <div></div>
       <iron-icon icon="chevron-right"></iron-icon>
@@ -81,23 +82,24 @@ paper-material {
       <div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div>
       </paper-toolbar>
       <div flex>
+  -->
     <paper-material elevation="3" id="gamingArea">
         <script type="text/javascript" src="js/doubleTrouble.js"></script>
     </paper-material>
 
     <paper-material elevation="3" class="demo-cards">
       <div class="demo_card_content">
-        <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+        <paper-toolbar style="background-color:#e53935;box-shadow: 0px 5px 0px #cfd8dc">
           <div id="heading">Instructions</div>
         </paper-toolbar>
       </div>
       <div id="scoreCard">
         <paper-menu flex>
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Start the Game</div></paper-item>
+        <paper-item><iron-icon style="color:#e53935" icon="av:play-circle-filled"></iron-icon><span></span><div>Start the Game</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Check whether the color of the text in one box <br> matches the meaning of the text in the other box</div></paper-item>
+        <paper-item><iron-icon style="color:#e53935" icon="av:play-circle-filled"></iron-icon><span></span><div>Check whether the color of the text in one box <br> matches the meaning of the text in the other box</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><p>Example : <b style="color:red"> Green</b> and <b style="color:blue"> Red</b> <br> Color of one text matches the meaning of the other. </p></paper-item>
+        <paper-item><iron-icon style="color:#e53935" icon="av:play-circle-filled"></iron-icon><span></span><p>Example : <b style="color:red"> Green</b> and <b style="color:blue"> Red</b> <br> Color of one text matches the meaning of the other. </p></paper-item>
 
         <paper-item><img src="assets/images/penguin.jpg"></img><img src="assets/images/PenguinWords.png"></img></paper-item>
       </paper-menu>

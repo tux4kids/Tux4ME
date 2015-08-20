@@ -8,7 +8,6 @@
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
   <script type="text/javascript" src="js/phaser.min.js"></script>
   <link rel="import" href="elements.html">
-
 </head>
 <style>
   paper-toolbar.main_toolbar{
@@ -64,10 +63,9 @@ paper-material {
 </style>
 
 <body unresolved>
-  <paper-drawer-panel force-narrow="true">
+  <paper-drawer-panel responsive-width="1820px">
   </paper-header-panel>
   <paper-header-panel main mode="standard" class="paper_toolbar_main" flex>
-  <!--
     <paper-toolbar class = "main_toolbar">
       <iron-icon icon="face"></iron-icon>
       <div></div>
@@ -75,31 +73,30 @@ paper-material {
       <span></span>
       <div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div>
       <iron-icon icon="chevron-right"></iron-icon>
-      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Reasoning</div>
+      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Memory</div>
       <iron-icon icon="chevron-right"></iron-icon>
-      <div style="font-family:Georgia;font-style: italic;font-size: 15px">PassiveOn</div>
+      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Flip me</div>
       <iron-icon icon="chevron-right"></iron-icon>
       <div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div>
       </paper-toolbar>
       <div flex>
-      -->
     <paper-material elevation="3" id="gamingArea">
-        <script type="text/javascript" src="js/PassiveOn.js"></script>
+        <script type="text/javascript" src="js/flipMe.js"></script>
     </paper-material>
 
     <paper-material elevation="3" class="demo-cards">
       <div class="demo_card_content">
-        <paper-toolbar style="background-color:#e91e63;box-shadow: 0px 5px 0px #cfd8dc">
-        <div id="heading">Instructions</div>
+        <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+          <div id="heading">Instructions</div>
         </paper-toolbar>
       </div>
       <div id="scoreCard">
         <paper-menu flex>
-        <paper-item><iron-icon style="color:#e91e63" icon="av:play-circle-filled"></iron-icon><span></span><div>Start the game</div></paper-item>
+        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Start the game</div></paper-item>
 
-        <paper-item><iron-icon style="color:#e91e63" icon="av:play-circle-filled"></iron-icon><span></span><div>Validate the statement above the image</div></paper-item>
+        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Memorize the flipping boxes</div></paper-item>
 
-        <paper-item><iron-icon style="color:#e91e63" icon="av:play-circle-filled"></iron-icon><span></span><div>Answer 'True' or 'False' accordingly.</div></paper-item>
+        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Click on the same and flip it back</div></paper-item>
 
         <paper-item><img src="assets/images/penguin.jpg"></img><img src="assets/images/PenguinWords.png"></img></paper-item>
       </paper-menu>
@@ -107,6 +104,7 @@ paper-material {
 
       </paper-material>
     </div>
+
   </paper-header-panel>
 </paper-drawer-panel>
 </body>

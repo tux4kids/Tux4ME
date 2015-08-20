@@ -63,9 +63,10 @@ paper-material {
 </style>
 
 <body unresolved>
-  <paper-drawer-panel responsive-width="1820px">
-  </paper-header-panel>
+  <paper-drawer-panel force-narrow="true">
+  
   <paper-header-panel main mode="standard" class="paper_toolbar_main" flex>
+  <!--
     <paper-toolbar class = "main_toolbar">
       <iron-icon icon="face"></iron-icon>
       <div></div>
@@ -80,6 +81,7 @@ paper-material {
       <div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div>
       </paper-toolbar>
       <div flex>
+  -->
     <paper-material elevation="3" id="gamingArea">
         <script type="text/javascript" src="js/migratingFlocks.js"></script>
     </paper-material>
@@ -88,21 +90,21 @@ paper-material {
     <paper-material elevation="3" class="demo-cards">
       <div class="demo_card_content">
 
-        <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
+        <paper-toolbar style="background-color:#01579b;box-shadow: 0px 5px 0px #cfd8dc">
           <div id="heading">Instructions</div>
         </paper-toolbar>
       </div>
       <div id="scoreCard">
         <paper-menu flex>
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Start the game</div></paper-item>
+        <paper-item><iron-icon style="color:#01579b" icon="av:play-circle-filled"></iron-icon><span></span><div>Start the game</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Among the birds, find the one <br> flying in an odd direction</div></paper-item>
+        <paper-item><iron-icon style="color:#01579b" icon="av:play-circle-filled"></iron-icon><span></span><div>Among the birds, find the one <br> flying in an odd direction</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Click the arrow corresponding to that direction</div></paper-item>
+        <paper-item><iron-icon style="color:#01579b" icon="av:play-circle-filled"></iron-icon><span></span><div>Click the arrow corresponding to that direction</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>If all the birds fly in the same direction,<br> then click that corresponding arrow</div></paper-item>
+        <paper-item><iron-icon style="color:#01579b" icon="av:play-circle-filled"></iron-icon><span></span><div>If all the birds fly in the same direction,<br> then click that corresponding arrow</div></paper-item>
 
-        <paper-item><iron-icon style="color:#c51162" icon="av:play-circle-filled"></iron-icon><span></span><div>Be attentive and react fast!</div></paper-item>
+        <paper-item><iron-icon style="color:#01579b" icon="av:play-circle-filled"></iron-icon><span></span><div>Be attentive and react fast!</div></paper-item>
 
         <paper-item><img src="assets/images/penguin.jpg"></img><img src="assets/images/PenguinWords.png"></img></paper-item>
       </paper-menu>
