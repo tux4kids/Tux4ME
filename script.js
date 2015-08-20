@@ -22,7 +22,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/migratingFlocks.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#01579b"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#01579b" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Attention</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Migrating flocks</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -30,7 +30,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/catchTheFlow.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#01579b"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#01579b" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Attention</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Catch the flow</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -38,7 +38,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/highOrLow.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#00796b"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#00796b" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Memory</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">High or Low</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -46,7 +46,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/mindMath.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#00796b"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#00796b" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Memory</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Mind math</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -54,7 +54,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/passiveOn.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#e91e63"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#e91e63" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Reasoning</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Passive On</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -62,7 +62,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/highClick.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#e91e63"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#e91e63" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Reasoning</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">High click</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -70,7 +70,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/flashBack.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#673ab7"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#673ab7" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Speed</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Flash back</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -78,7 +78,7 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/mathOperations.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
+
 	var puttoolbarContent = '<paper-toolbar style="background-color:#673ab7"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#673ab7" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Speed</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Math operations</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
@@ -86,16 +86,16 @@ function gameLoader(number)
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/doubleTrouble.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
-	var puttoolbarContent = '<paper-toolbar style="background-color:#e53935"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#e53935" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Flexibiltiy</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Double trouble</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
+
+	var puttoolbarContent = '<paper-toolbar style="background-color:#00c853"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#00c853" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Flexibiltiy</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Double trouble</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
 	else
 	{
 	var putContent = '<iframe src="http://tux4me.azurewebsites.net/driftME.html" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading Please wait</iframe> ';
 	document.getElementById('GamesPage').innerHTML = putContent;
-	
-	var puttoolbarContent = '<paper-toolbar style="background-color:#e53935"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#e53935" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Flexibiltiy</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Drift ME</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
+
+	var puttoolbarContent = '<paper-toolbar style="background-color:#00c853"><paper-fab onclick="goBack()"  style="background-color:#ffffff; color:#00c853" icon="arrow-back" mini></paper-fab><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Flexibiltiy</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Drift ME</div><iron-icon icon="chevron-right"></iron-icon><div style="font-family:Georgia;font-style: italic;font-size: 15px">Play</div></paper-toolbar>'
 	document.getElementById('toolBar_content').innerHTML = puttoolbarContent;
 	}
 
