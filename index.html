@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-  <title>Tux4Me</title>
+  <title>Tux4ME</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -9,9 +9,6 @@
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
   <link rel="import" href="elements.html">
   <link href="style.css" rel="stylesheet">
-  <link rel="icon"
-      type="image/png"
-      href="http://tux4me.azurewebsites.net/bluePenguin_16_16.png">
   <style>
 
    .sk-folding-cube {
@@ -126,8 +123,8 @@
     <paper-menu id="menu-items" selected="{{page}}">
 
         <paper-item label="Home" style="position:relative">
-          <paper-ripple style="color: #e91e63"></paper-ripple>
-          <paper-icon-button icon="home">
+          <paper-ripple style="color: #3e2723"></paper-ripple>
+          <paper-icon-button icon="home" style="color: #3e2723">
           </paper-icon-button>
           <div>
             Home
@@ -138,29 +135,36 @@
 
 
         <paper-item label="Games"style="position:relative">
-          <paper-ripple style="color: #e91e63"></paper-ripple>
-          <paper-icon-button icon="social:cake">
+          <paper-ripple style="color: #ff5722"></paper-ripple>
+          <paper-icon-button icon="social:cake" style="color: #ff5722">
           </paper-icon-button>
             <div>Games</div>
         </paper-item>
 
+        <paper-item label="Games"style="position:relative">
+          <paper-ripple style="color: #3f51b5"></paper-ripple>
+          <paper-icon-button icon="social:pages" style="color: #3f51b5">
+          </paper-icon-button>
+            <div>About</div>
+        </paper-item>
+
         <paper-item label="Tux4Kids" style="position:relative">
-          <paper-ripple style="color: #e91e63"></paper-ripple>
-          <paper-icon-button icon="hardware:toys">
+          <paper-ripple style="color: #00bfa5"></paper-ripple>
+          <paper-icon-button icon="hardware:toys" style="color: #00bfa5">
           </paper-icon-button>
             <div>Tux4Kids</div>
         </paper-item>
 
         <paper-item  label="Feedback"style="position:relative">
           <paper-ripple style="color: #e91e63"></paper-ripple>
-          <paper-icon-button icon="favorite">
+          <paper-icon-button icon="favorite" style="color: #e91e63">
           </paper-icon-button>
             <div>Feedback</div>
         </paper-item>
 
         <paper-item  label="View Source"style="position:relative">
-          <paper-ripple style="color: #e91e63"></paper-ripple>
-          <paper-icon-button icon="create">
+          <paper-ripple style="color: #795548"></paper-ripple>
+          <paper-icon-button icon="create" style="color: #795548">
           </paper-icon-button>
             <div>View Source</div>
         </paper-item>
@@ -175,7 +179,7 @@
       </paper-icon-button>
 
       <div class = "title" style="font-family:Georgia;font-size: 20px;color:#009688">
-        Tux4Me
+        Tux4ME
       </div>
       <div style="font-family:Georgia;font-style: italic;font-size: 15px;color:#009688">
       Hi kids!
@@ -196,7 +200,7 @@
               <paper-material elevation="3" class="iron-pages-demo-cards">
                   <div class="demo_card_content">
                     <paper-toolbar style="background-color:#009688;box-shadow: 0px 5px 0px #cfd8dc">
-                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Hi Kids, Welcome to Tux4Me</div>
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Hi Kids, Welcome to Tux4ME</div>
                     </paper-toolbar>
                   </div>
                   <div>
@@ -449,6 +453,32 @@
                 </div>
             </section>
 
+            <section>
+               <paper-ripple style="color: #03a9f4"></paper-ripple>
+              <paper-material elevation="3" class="iron-pages-demo-cards">
+                  <div class="demo_card_content">
+                    <paper-header-panel  shadow = "true" >
+                    <paper-toolbar class="medium-tall">
+                    <paper-icon-button icon="social:pages"></paper-icon-button>
+                    <div>Tux Mind Exercise (Tux4ME) </div>
+                    <div class="bottom title" style="font-size:12px;color:white">Simple games to enhance your mental ability</div>
+                    
+                    </paper-toolbar>
+                    </paper-header-panel>
+                  </div>
+                  <div>
+                    <paper-menu flex>
+                    <paper-item><span></span><div style="font-family:Georgia;font-size:15px">Tux4ME is designed to develop and enhance mental power. It include a series of game, each testing and improving player’s
+                      Reasoning capabilities, Speed, Attention, Flexibility, Memory power.
+                      There will be simple games, which you can play daily. This will help you to exercise your brain to make it active and healthy. It is a web app for fun and self improvement</div></paper-item>
+                    <paper-item flex><div style="position: relative;margin:auto"><img src="assets/images/tuxMindExcercise_250_125.png"></img><span></span></div></paper-item>
+                    </paper-menu>
+                  </div>
+              </paper-material>
+              
+
+            </section>
+
             <section >
               <paper-ripple style="color: #03a9f4"></paper-ripple>
               <paper-material elevation="3" class="iron-pages-demo-cards">
@@ -486,18 +516,25 @@
               <paper-material elevation="3" class="iron-pages-demo-cards">
                   <div class="demo_card_content">
                     <paper-toolbar style="background-color:#3f51b5;box-shadow: 0px 5px 0px #cfd8dc">
-                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4Me developers</div>
+                      <div style="font-family:Georgia;font-style: italic;font-size: 15px">Tux4ME developers</div>
                     </paper-toolbar>
                   </div>
                   <div>
                     <paper-menu flex>
+
+                    <a href="https://www.linkedin.com/in/sekarvignesh">
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="face" ></paper-fab><span></span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Student (Author)</div><iron-icon icon="chevron-right"></iron-icon><div>Vignesh S</div></paper-item>
+                    </a>
+
                     <paper-item><paper-fab style="background-color:#3f51b5" mini icon="social:person" ></paper-fab><span></span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Mentor</div><iron-icon icon="chevron-right"></iron-icon><div>Scott McCreary</div></paper-item>
 
-                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="face" ></paper-fab><span></span><div style="font-family:Georgia;font-style: italic;font-size: 15px">Student</div><iron-icon icon="chevron-right"></iron-icon><div>Vignesh S</div></paper-item>
+                    <a href="https://github.com/Vigneshsekar/Tux4ME/">
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="create" ></paper-fab><span></span><div>Source Code</div><iron-icon icon="chevron-right"></iron-icon><div>GitHub<iron-icon icon="chevron-right"></iron-icon>Vigneshsekar<iron-icon icon="chevron-right"></iron-icon>Tux4ME</div></paper-item>
+                    </a>
 
-                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="create" ></paper-fab><span></span><div>Source Code</div><iron-icon icon="chevron-right"></iron-icon><div><a href="https://github.com/Vigneshsekar/Tux4ME/">https://github.com/Vigneshsekar/Tux4ME/</a></div></paper-item>
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="hardware:toys" ></paper-fab><span></span><div>Developed With</div><iron-icon icon="favorite" style="color:#e91e63"></iron-icon><div>by Tux4kids Organization</div></paper-item>
 
-                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="hardware:toys" ></paper-fab><span></span><div>Developed With</div><iron-icon icon="favorite" style="color:#e91e63"></iron-icon><div>by Tux4kids Organization <br> under Google summer of code - 2015</div></paper-item>
+                    <paper-item><paper-fab style="background-color:#3f51b5" mini icon="flag" ></paper-fab><span></span><div>Developed under Google summer of code - 2015</div></paper-item>
                     </paper-menu>
                   </div>
               </paper-material>

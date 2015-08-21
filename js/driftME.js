@@ -204,6 +204,11 @@ function updateTimer()
 	{
 		timeUpdateFlag = 0
 	}
+	if(gameSeconds > 59)
+    {
+      console.log("inside 59");
+      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
+    }
 	}
 }
 
@@ -345,9 +350,6 @@ function updateBox()
 			{
 				livingState.getAt(2).kill();
 				game.add.sprite(7,220,'dead');
-				pauseState = 1;
-				playPause.inputEnabled = false;
-				destroy = game.add.text(272, 325 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 				gameOver();
 			}
 			/*else if (lifeline === -1)
@@ -364,6 +366,10 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
+	pauseState = 1;
+	playPause.inputEnabled = false;
+	destroy = game.add.text(272, 325 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
+
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
 	if(cummulativeIndex > 100)
 		cummulativeIndex = 100;

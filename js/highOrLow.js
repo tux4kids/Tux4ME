@@ -189,6 +189,11 @@ function updateTimer()
   {
     timeUpdateFlag = 0
   }
+  if(gameSeconds > 59)
+    {
+      console.log("inside 59");
+      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
+    }
   }
 }
 var deadOne;
@@ -222,9 +227,6 @@ function updateBox()
 
         livingState.getAt(2).kill();
         game.add.sprite(27,256,'dead');
-        pauseState = 1;
-        pause.inputEnabled = false;
-        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
         gameOver();
         //var TuxMathAd = game.add.text(246, 327 , '\"Try TuxMath :D  !\"', {font : "17px Arial" , fill : "#ffffff"});
 
@@ -238,6 +240,10 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
+        pauseState = 1;
+        pause.inputEnabled = false;
+        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
+        
   var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
   if(cummulativeIndex > 100)
     cummulativeIndex = 100;
