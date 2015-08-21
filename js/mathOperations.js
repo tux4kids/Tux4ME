@@ -81,7 +81,7 @@ function create()
   multiply.inputEnabled = true;
   divide.inputEnabled = true;
 
-  
+
   startScreen=game.add.sprite(0,0,'start_screen');
   startButton=game.add.sprite(560,465,'start_button');
   startButton.inputEnabled = true;
@@ -120,7 +120,7 @@ function startingGame()
   boxThreeText.fontSize = '50px';
 
   displayNumbers();
-  
+
 }
 
 function update()
@@ -221,7 +221,7 @@ function gameOver()
           pauseState = 1;
         pause.inputEnabled = false;
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
-       
+
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
 	if(cummulativeIndex > 100)
 		cummulativeIndex = 100;
@@ -297,7 +297,7 @@ function updateScore()
       isCorrect = 0;
       lifeline--;
     }
- 
+
 
   if (score < 100)
   {
@@ -398,7 +398,7 @@ function updateTimer()
 	}
   if(gameSeconds > 59)
     {
-      console.log("inside 59");
+      //console.log("inside 59");
       document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
     }
 	}
@@ -420,7 +420,7 @@ function displayNumbers()
 			tempOne = Math.floor(num/2);
 	      	tempTwo = num - tempOne;
 	      	boxOneText.setText(tempOne);
-	      	boxTwoText.setText(tempTwo);			
+	      	boxTwoText.setText(tempTwo);
 		}
 		else if(randomAdd === 1) //in terms of num/3 + (num - num/3)
     	{

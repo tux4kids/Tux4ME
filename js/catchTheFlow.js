@@ -82,7 +82,7 @@ function create()
   	//leftGreen = game.add.tileSprite(100,100,440,200,'leftGreen');
   	//leftGreen.autoScroll(-40,0);
   	displayLeaves();
-  	
+
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -190,7 +190,7 @@ function updateTimer()
 	}
 	if(gameSeconds > 59)
     {
-      console.log("inside 59");
+      //console.log("inside 59");
       document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
     }
 	}
@@ -235,7 +235,7 @@ function gameOver()
 	 pauseState = 1;
 	 playpause.inputEnabled = false;
 	 destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
-	       	
+
 	leaf.destroy();
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
 	if(cummulativeIndex > 100)
@@ -344,7 +344,7 @@ function updateScore()
 			lifeline--;
 		}
 	}
-	
+
 
 	if (score < 100)
 	{
@@ -413,12 +413,12 @@ var randomChoice;
 
 function displayLeaves()
 {
-	
+
 	randomChoice = game.rnd.integerInRange(1,100) % 2;
 	randomSprite = game.rnd.integerInRange(1,100) % 4;
 	randomDirection = game.rnd.integerInRange(1,100) % 4;
 	if(randomChoice === 0)
-	{	
+	{
 		if(randomSprite === 0)
 		{
 			leaf = game.add.tileSprite(100,100,440,200,'leftGreen');
@@ -583,9 +583,9 @@ function displayLeaves()
 			}
 		}
 	}
-	console.log("randomChoice" + randomChoice);
-		console.log("randomSprite" + randomSprite);
-			console.log("randomDirection" + randomDirection);
+	//console.log("randomChoice" + randomChoice);
+		//console.log("randomSprite" + randomSprite);
+			//console.log("randomDirection" + randomDirection);
 
 
 }
@@ -598,7 +598,7 @@ function pauseAndPlay()
 		ppText.setText(' ');
 		ppText.setText('Game Paused');
 		leaf.alpha = 0;
-		
+
 	}
 	else
 	{

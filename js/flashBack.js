@@ -168,7 +168,7 @@ function updateTimer()
 	}
 	if(gameSeconds > 59)
     {
-      console.log("inside 59");
+      //console.log("inside 59");
       document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
     }
 	}
@@ -231,7 +231,7 @@ function gameOver()
 	        playpause.inputEnabled = false;
 	        //playpause.destroy();
 	        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
-			
+
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
 	if(cummulativeIndex > 100)
 		cummulativeIndex = 100;

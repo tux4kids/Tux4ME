@@ -1,7 +1,3 @@
-/*
-Level transitions = under developmet
-*/
-
 var game = new Phaser.Game(640, 520, Phaser.AUTO, 'gamingArea', { preload: preload, create: create, update: update });
 //  The Google WebFont Loader will look for this object, so create it before loading the script.
 WebFontConfig = {
@@ -187,8 +183,8 @@ function updateBox()
 
       }
     }
-    
-    
+
+
   }
 }
 var destroy
@@ -397,7 +393,7 @@ function updateTimer()
 	}
   if(gameSeconds > 59)
     {
-      console.log("inside 59");
+      //console.log("inside 59");
       document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
     }
 	}

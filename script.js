@@ -100,7 +100,6 @@ function gameLoader(number)
 	}
 
 }
-
 function goBack()
 {
 	//console.log("Go Back clicked");

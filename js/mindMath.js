@@ -56,9 +56,9 @@ function create() {
 	myscore = game.add.text(80, 43, '000', { font: "15px Arial", fill: "#eceff1" });
 	mylevel = game.add.text(311, 43, '01', { font: "15px Arial", fill: "#eceff1" });
 	timer = game.add.text(515, 43, '00:00:00', { font: "15px Arial", fill: "#eceff1" });
-	
-	
-	
+
+
+
 	var tempBox;
 	answerBox = game.add.group();
 	for (j = 0; j < 4; j++) {
@@ -74,17 +74,17 @@ function create() {
 			tempBox.inputEnabled = true;
 		}
 	}
-	
-	
-	
+
+
+
 	createText();
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
     startButton.events.onInputUp.add(startingGame);
-	
-	
-	
+
+
+
 }
 
 function startingGame()
@@ -131,34 +131,34 @@ function update() {
 	updateTimer();
 	updateBox();
 	pause.events.onInputDown.add(pauseAndPlay);
-	
+
 	//console.log(questionBoxActive[0]);
 	//console.log(questionBox.getAt(questionBoxActive[0]).inputEnabled);
 }
 
 function render()
 {
-	
-	
-		
-		
+
+
+
+
 			//questionBox.getAt(questionBoxActive[0]).inputEnabled = true;
 			//console.log(' '+questionBoxActive[0]+questionBoxActive[1]+questionBoxActive[2]+' - q1 in update\n'+ questionBoxValue[0]);
 			questionBox.getAt(questionBoxActive[0]).events.onInputDown.add(questionBoxOne);
 			//console.log('\nend of q1 if');
-		
+
 			//console.log(questionBoxActive[1]+' - q2 input\n');
 			questionBox.getAt(questionBoxActive[1]).events.onInputUp.add(questionBoxTwo);
-		
+
 			//console.log(questionBoxActive[2]+' - q3 input\n');
 			questionBox.getAt(questionBoxActive[2]).events.onInputUp.add(questionBoxThree);
-		
-	
-	
+
+
+
 		answerBox.getAt(1).events.onInputUp.add(answerBoxOne);
 		answerBox.getAt(2).events.onInputUp.add(answerBoxTwo);
 		answerBox.getAt(3).events.onInputUp.add(answerBoxThree);
-	
+
 }
 
 function makeQuestion() {
@@ -356,9 +356,9 @@ function clearAnswer() {
 }
 
 function displayQuestion() {
-	
+
 	answerBox.destroy();
-	questionBox.destroy();	
+	questionBox.destroy();
 	var tempBox;
 	answerBox = game.add.group();
 	for (j = 0; j < 4; j++) {
@@ -390,7 +390,7 @@ function displayQuestion() {
 function displayAnswer() {
 	clueActive = 0;
 	answerBox.destroy();
-	questionBox.destroy();	
+	questionBox.destroy();
 	var tempBox;
 	questionBox = game.add.group();
 	for (p = 0; p < 3; p++) {
@@ -400,14 +400,14 @@ function displayAnswer() {
 			tempBox.inputEnabled = true;
 		}
 	}
-	
+
 	answerBox = game.add.group();
 	for (j = 0; j < 4; j++) {
 		tempBox = answerBox.create(170, 110 + (j * 75), 'answerBox');
 		tempBox.alpha = 0;
 		tempBox.inputEnabled = true;
 	}
-	
+
 	instructionText.setText('Click the calculated sum from the given options');
 	gamePhase = 2;
 	clearAll();
@@ -444,8 +444,8 @@ function updateBox()
   {
     //love.kill();
     updateScore();
-  
-   
+
+
       //love = game.add.sprite(535, 350 , 'sad');
     if(lifeline === 2)
       {
@@ -466,7 +466,7 @@ function updateBox()
         //var TuxMathAd = game.add.text(246, 327 , '\"Try TuxMath :D  !\"', {font : "17px Arial" , fill : "#ffffff"});
 
       }
-    
+
   }
 }
 var destroy
@@ -478,7 +478,7 @@ function gameOver()
 	        pauseState = 1;
         pause.inputEnabled = false;
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
-       
+
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
 	if(cummulativeIndex > 100)
 		cummulativeIndex = 100;
@@ -611,7 +611,7 @@ function updateTimer() {
 		}
 		if(gameSeconds > 59)
     {
-      console.log("inside 59");
+      //console.log("inside 59");
       document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
     }
 	}
@@ -642,7 +642,7 @@ function pauseAndPlay() {
 		{
 			answerText[i].alpha =1;
 		}
-		makeQuestion();	
+		makeQuestion();
 		pauseState = 0;
 	}
 }
