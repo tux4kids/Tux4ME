@@ -175,7 +175,7 @@ function updateTimer()
 	if(gameSeconds > 59)
     {
       //console.log("inside 59");
-      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
+      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="finishGame()">Click here to finish the game</paper-button>';
     }
 	}
 }
@@ -463,4 +463,8 @@ function pauseAndPlay()
 		ppText.setText('Click to Pause');
 		displayShapes();
 	}
+}
+function finishGame()
+{
+	gameOver();
 }

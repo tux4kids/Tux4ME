@@ -16,7 +16,7 @@ function preload()
 	game.load.image('background' , 'assets/images/background4_640_520.png');
 	game.load.image('pp_button' , 'assets/images/playpause4_120_35.png');
 	game.load.image('flipper' , 'assets/images/flipMe/flipper_70_70.png');
-	
+
 
 
 	game.load.image('living' , 'assets/images/living_30_30.png');
@@ -64,14 +64,14 @@ function update()
     updateTimer();
 
    	block.getAt(0).events.onInputDown.add(blockOneClicked);
-	
+
 
 	//playPause.events.onInputUp.add(pauseAndPlay);
 }
 var tween;
 function blockOneClicked()
 {
-	
+
 	//tween = game.add.tween(block.getAt(0)).to( { x: -1, y: 1 }, 200, Phaser.Easing.Linear.None, true);
 	//var tween = game.add.tween(block.getAt(0).scale).to( { x: -1, y: 1 }, 200, Phaser.Easing.Linear.None, true, 20, 20, true).loop(true);
 	//tween.repeat(20);
@@ -263,5 +263,9 @@ function updateLife()
 	{
 		life = livingState.create(7 , 150 + p*35 , 'living');
 	}
+}
+function finishGame()
+{
+	gameOver();
 }
 */

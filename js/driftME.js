@@ -203,7 +203,7 @@ function updateTimer()
 	if(gameSeconds > 59)
     {
       //console.log("inside 59");
-      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="gameOver()">Click here to finish the game</paper-button>';
+      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="finishGame()">Click here to finish the game</paper-button>';
     }
 	}
 }
@@ -704,5 +704,10 @@ function updateLife()
 	{
 		life = livingState.create(7 , 150 + p*35 , 'living');
 	}
+}
+
+function finishGame()
+{
+	gameOver();
 }
 //If u find any bugs, please send us a pull request. Thankyou ! :)
