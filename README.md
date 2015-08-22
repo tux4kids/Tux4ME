@@ -3,6 +3,87 @@
 
 ***
 
+## :+1: Passive on
+##### Improves your complex reasoning abilities.
+
+***
+#### Purpose: 
+This test measures how well your brain can reason about the relationships among different letters based on deductions from grammatical statements. The difficulty of each problem depends on the grammatical statement presented; those with simple active sentences (A follows B) are more easily understood than those with passive or negative statements (A does not precede B), which require complex reasoning to solve. 
+
+#### Game: 
+Two geometrical shapes will be given one enclosing the other. And an English statement will be stating the structure either in active or passive form. User select True or False.
+![Passive on SnapShot](https://raw.githubusercontent.com/Vigneshsekar/Tux4ME/master/assets/images/Screenshots/passiveOn.png)
+
+#### Implementation-Style:
+Set A = {Outer Shapes} Set B = {Inner shapes} Set C = {Four possible random statements about the shapes}. Now it is the random function that selects shapes and corresponding statement  from  C.
+
+***
+
+## :+1: Mind math
+##### Improves your memory and addition skills.
+
+***
+#### Purpose: 
+Train your memory by remembering the displayed numbers in ascending order and adding them simultaneously. 
+
+#### Game: 
+Click on the displayed numbers in ascending order and add them simultaneously.
+![Mind math SnapShot](https://raw.githubusercontent.com/Vigneshsekar/Tux4ME/master/assets/images/Screenshots/mindMath.png)
+
+#### Implementation-Style:
+Three random numbers are chosen and displayed. Other calculations are done during the run time.
+
+***
+
+## :+1: Catch the flow
+##### Improves your task-switching ability
+
+***
+#### Purpose: 
+Train your task-switching ability by shifting focus between where the leaves point and how they move. 
+
+#### Game: 
+Users can see leaves moving on the screen. If they moving leaves are green, make a note of the point and if the moving leaves are brown, make a note of the direction of movement.
+![Catch the flow SnapShot](https://raw.githubusercontent.com/Vigneshsekar/Tux4ME/master/assets/images/Screenshots/catchTheFlow.png)
+
+#### Implementation-Style:
+A random functionw will decide the color of the leaves. And then another random function will decide its direction of motion and direction of point based on the color. These random variables are cross-checked to score the user.
+
+***
+
+## :+1: Math operations
+##### Improves your cognitive speed and math skills.
+
+***
+#### Purpose: 
+Train yourself to calculate faster.  
+
+#### Game: 
+Find a suitable operator to equate the expression.
+![Mind math SnapShot](https://raw.githubusercontent.com/Vigneshsekar/Tux4ME/master/assets/images/Screenshots/mathOperations.png)
+
+#### Implementation-Style:
+The operator of the expression is hidden and the users are prompted to find them.
+
+
+***
+
+## :+1: Migrating Flocks
+##### Be attentive and react faster.
+
+***
+#### Purpose: 
+This game is based on the Odd One Out concept that was developed by Dr Hampshire as a modern variant on classical tests of fluid intelligence such as Raven's Progressive Matrices and the Cattell's Culture Fair Intelligence Test.
+
+#### Game: 
+A flock of birds will be displayed with one among them pointing to a different direction from the rest. The user should identify the odd bird out of the picture and swipe the screen in that particular direction to score.
+![Migrating Flocks SnapShot](https://raw.githubusercontent.com/Vigneshsekar/Tux4ME/master/assets/images/Screenshots/migratingFlocks.png)
+
+#### Implementation-Style:
+From a set of birds only one is made to fly in an odd direction and its index is stored in a variable.In this game the cognitive speed of identifying the bird matters. Not the complexity.
+
+***
+
 ## :+1: Flash Back
 ##### Improves you reaction speed and memory !
 
@@ -49,6 +130,24 @@ Two words will appear on the screen. User should choose yes if the color of the 
 
 #### Implementation-Style:
 Everything is chosen using random functions and indexed to yield the answer. Refer function colorName, textColor and boxText [line: 275 - 339 , Commit: Second Game ] for the core implementation part.
+
+
+***
+
+## :+1: High or Low
+##### Improves your memory and reasoning by comparision abilities.
+
+***
+#### Purpose: 
+Comparing the current value with the stored value happens multiple times in a real day scenario. This game will help to do that better.  
+
+#### Game: 
+Compare the current number with the number displayed before it.
+![High or Low SnapShot](https://raw.githubusercontent.com/Vigneshsekar/Tux4ME/master/assets/images/Screenshots/highOrLow.png)
+
+#### Implementation-Style:
+a random number is chosen everytime to display and the comparision is done during the run time.
+
 
 ***
 
