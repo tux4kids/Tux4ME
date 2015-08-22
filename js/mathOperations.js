@@ -538,3 +538,9 @@ function pauseAndPlay()
     displayNumbers();
   }
 }
+/*
+* Tux4ME is developed under Google summer of code - 2015.
+* 10 games using Phaser and a Web app using Polymer has been completed by August,21 2015.
+* Any changes made to this project after this period is by self-interest and the same will
+NOT be included in the submission to Google summer of code team.
+*/

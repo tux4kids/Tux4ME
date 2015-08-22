@@ -6,7 +6,6 @@ document.addEventListener('WebComponentsReady', function () {
 //Following functions are used to load game using iframe within the <id="gamesPage">
 //This is done to make the navigation easy and work like ajax request
 //And also to save the new loading time of the page form pressing the back button
-
 var gamesPage;
 var toolBarContent;
 function gameLoader(number)
