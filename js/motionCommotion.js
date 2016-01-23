@@ -72,7 +72,8 @@ function create()
 		life = livingState.create(7 , 200 + p*35 , 'living');
 	}
 
-	playpause = game.add.sprite(585 , 465 , 'playPause');
+	playpause = game.add.sprite(585 , 480 , 'playPause');
+	playpause.scale.setTo(0.7,0.7);
 	playpause.inputEnabled = true;
 
 	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#0097a7"});
