@@ -53,6 +53,10 @@ var questionTwo;
 var startScreen;
 var startButton;
 
+var inputcheck;
+var inputcross;
+var pause;
+
 function create()
 {
   //Adding the background images
@@ -96,6 +100,12 @@ function create()
 	{
 		item = block.create(150 + i*200 , 135 , 'box' );
 	}
+	
+	 inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.X);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
+
+	
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -157,15 +167,25 @@ function updateTimer()
 }
 var finishFlag = 0;
 function update()
-{
+{  
     updateTimer();
-	yes.events.onInputDown.add(removeTextYes);
+       
+        game.input.enabled=true; 
+   	
+        inputcheck.onDown.add(removeTextYes,this);
+        inputcheck.onUp.add(updateBox);
+
+        inputcross.onDown.add(removeTextNo,this);
+        inputcross.onUp.add(updateBox);
+
+        yes.events.onInputDown.add(removeTextYes);
 	no.events.onInputDown.add(removeTextNo);
 
 	yes.events.onInputUp.add(updateBox);
 	no.events.onInputUp.add(updateBox);
 
 	playPause.events.onInputUp.add(pauseAndPlay);
+        pause.onUp.add(pauseAndPlay,this);
 }
 
 //Helper functions : Refer update()

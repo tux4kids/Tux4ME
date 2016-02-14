@@ -53,7 +53,9 @@ var myscore;
 var startScreen;
 var startButton;
 
-
+var inputcheck;
+var inputcross;
+var pause;
 // The predefined function to create the Gaming area
 function create()
 {
@@ -86,6 +88,11 @@ function create()
 	info.setShadow(3,3, 'rgba(25,25,25,0.25)' , 8);
 	boxText = game.add.text(xTextPos, yTextPos , '' ,{ font : '50px Arial' , fill : "black"}  );
 	initialize();
+	  
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.X);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
+    
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -148,14 +155,22 @@ function renderBox()
 // The predefined function to be called at the rate of 10 frames per second.
 function update()
 {
-	updateTimer();
-	yes.events.onInputDown.add(removeTextYes);
+game.input.enabled=true; 
+   	
+        inputcheck.onDown.add(removeTextYes,this);
+        inputcheck.onUp.add(updateBox);
+
+        inputcross.onDown.add(removeTextNo,this);
+        inputcross.onUp.add(updateBox);
+
+        yes.events.onInputDown.add(removeTextYes);
 	no.events.onInputDown.add(removeTextNo);
 
 	yes.events.onInputUp.add(updateBox);
 	no.events.onInputUp.add(updateBox);
 
 	playPause.events.onInputUp.add(pauseAndPlay);
+        pause.onDown.add(pauseAndPlay,this);
 }
 var timer;
 var totalSeconds = 0;

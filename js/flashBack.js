@@ -37,6 +37,11 @@ var sprite;
 var startScreen;
 var startButton;
 
+var startkey;
+var inputcheck;
+var inputcross;
+var pause;
+
 function create ()
 {
 
@@ -84,6 +89,13 @@ function create ()
     game.add.tween(sprite).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
     //game.add.tween(sprite).to({ alpha : 0}, 5000, Phaser.Easing.Linear.easeInOut,true, 5000);
     //initialize();
+    
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.X);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
+    startkey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    startkey.onUp.add(startingGame,this);
+    
     start.events.onInputUp.add(initialize);
     startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
@@ -99,7 +111,15 @@ function startingGame()
 }
 function update ()
 {
-	updateTimer();
+updateTimer();
+         
+         game.input.enabled=true; 
+
+        inputcheck.onDown.add(answeredYes,this);
+        inputcheck.onUp.add(updateBox);
+
+        inputcross.onDown.add(answeredNo,this);
+        inputcross.onUp.add(updateBox);
 
 	yes.events.onInputDown.add(answeredYes);
 	no.events.onInputDown.add(answeredNo);
@@ -107,6 +127,7 @@ function update ()
 	yes.events.onInputUp.add(updateBox);
 	no.events.onInputUp.add(updateBox);
 
+        pause.onDown.add(pauseAndPlay,this);
 	playpause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
