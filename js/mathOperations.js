@@ -6,6 +6,8 @@ WebFontConfig = {
     active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
     //  The Google Fonts we want to load.
     google: { families: [ 'Architects+Daughter::latin' ] }
+
+	
 };
 
 function preload()
