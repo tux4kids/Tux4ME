@@ -106,6 +106,7 @@ function create ()
 }
 function startingGame()
 {
+	
 	startScreen.destroy();
 	startButton.destroy();
 	startGame = 1;
