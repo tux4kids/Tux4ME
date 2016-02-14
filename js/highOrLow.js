@@ -53,6 +53,11 @@ var previous = 0;
 var present;
 var start;
 
+var startkey;
+var keyup;
+var keydown;
+var pausekey;
+
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -91,9 +96,15 @@ function create()
 
     start.events.onInputUp.add(initialize);
 
+    startkey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    keyup = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    keydown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    
+    pausekey=game.input.keyboard.addKey(Phaser.Keyboard.P);
     startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
+     startkey.onUp.add(initialize,this);
     startButton.events.onInputUp.add(startingGame);
 }
 function startingGame()
@@ -122,7 +133,16 @@ function createText()
 
 function update()
 {
+ 
   updateTimer();
+  
+   game.input.enabled=true; 
+
+   keyup.onDown.add(answeredUp,this);
+   keyup.onUp.add(updateBox);
+
+   keydown.onDown.add(answeredDown,this);
+   keydown.onUp.add(updateBox);
 
   greater.events.onInputDown.add(answeredUp);
   lesser.events.onInputDown.add(answeredDown);
@@ -130,6 +150,7 @@ function update()
   greater.events.onInputUp.add(updateBox);
   lesser.events.onInputUp.add(updateBox);
 
+   pausekey.onUp.add(pauseAndPlay,this);
   pause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
