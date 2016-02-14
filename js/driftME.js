@@ -403,6 +403,7 @@ function replayGame()
 	//playpause.inputEnabled = true;
 	//timeText = null;
 	startGame = 1;
+	finishFlag = 0;
 	game.time.reset();
 	destroy.setText(" ");
 
@@ -712,5 +713,6 @@ function updateLife()
 function finishGame()
 {
 	gameOver();
+	document.getElementById("finishButtonArea").innerHTML = '';
 }
 //If u find any bugs, please send us a pull request. Thankyou ! :)
