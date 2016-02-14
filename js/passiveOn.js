@@ -37,6 +37,11 @@ var life;
 var startScreen;
 var startButton;
 
+
+var inputcheck;
+var inputcross;
+var pause;
+
 function create ()
 {
 
@@ -88,6 +93,12 @@ function create ()
   	questionText.setShadow(3,3, 'rgba(25,25,25,0.5)' , 8);
   	updateQuestion();
   	var info = game.add.text(40,440,'Check the above statement and Click Yes or No', {font : "14px Arial" , fill : "#01579b"});
+  
+    
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.X);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
+   
   	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -103,14 +114,23 @@ function startingGame()
 
 function update()
 {
-	updateTimer();
+updateTimer();
+              
+        game.input.enabled=true; 
+          
+        inputcheck.onDown.add(answeredYes,this);
+          inputcheck.onUp.add(updateContent);
+
+         inputcross.onDown.add(answeredNo,this);
+        inputcross.onUp.add(updateContent);
 
 	yes.events.onInputDown.add(answeredYes);
 	no.events.onInputDown.add(answeredNo);
 
 	yes.events.onInputUp.add(updateContent);
 	no.events.onInputUp.add(updateContent);
-
+       
+        pause.onDown.add(pauseAndPlay,this);
 	playpause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
