@@ -18,7 +18,6 @@ function preload ()
 
 
 }
-
 var livingState;
 var playpause;
 var timer;
