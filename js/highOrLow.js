@@ -282,6 +282,7 @@ function replayGame()
   //playpause.inputEnabled = true;
   //timeText = null;
   startGame = 1;
+  finishFlag = 0;
   game.time.reset();
   destroy.setText(" ");
 
@@ -417,4 +418,5 @@ function pauseAndPlay()
 function finishGame()
 {
 	gameOver();
+	document.getElementById("finishButtonArea").innerHTML = '';
 }
