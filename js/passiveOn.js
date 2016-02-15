@@ -37,6 +37,10 @@ var life;
 var startScreen;
 var startButton;
 
+
+var inputcheck;
+var inputcross;
+var pause;
 function create ()
 {
 
@@ -88,6 +92,11 @@ function create ()
   	questionText.setShadow(3,3, 'rgba(25,25,25,0.5)' , 8);
   	updateQuestion();
   	var info = game.add.text(40,440,'Check the above statement and Click Yes or No', {font : "14px Arial" , fill : "#01579b"});
+          
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.X);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
+   
   	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -103,27 +112,36 @@ function startingGame()
 
 function update()
 {
-	updateTimer();
+updateTimer();
+              
+        game.input.enabled=true; 
+          
+        inputcheck.onDown.add(answeredYes,this);
+          inputcheck.onUp.add(updateContent);
+
+         inputcross.onDown.add(answeredNo,this);
+        inputcross.onUp.add(updateContent);
 
 	yes.events.onInputDown.add(answeredYes);
 	no.events.onInputDown.add(answeredNo);
 
 	yes.events.onInputUp.add(updateContent);
 	no.events.onInputUp.add(updateContent);
-
+       
+        pause.onDown.add(pauseAndPlay,this);
 	playpause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
 function answeredYes()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 1;
 	}
 }
 function answeredNo()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 0;
 	}
@@ -143,7 +161,7 @@ function updateTimer()
 	if(startGame === 1)
 	{
 	//To find and display the elapsed time.
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		if(timeUpdateFlag === 0)
 		{
@@ -188,7 +206,7 @@ var deadTwo;
 var isCorrect;
 function updateContent()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		updateScore();
 		displayShapes();
@@ -219,8 +237,9 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-		        pauseState = 1;
+		        game.paused = true;
 	        playpause.inputEnabled = false;
+	               game.input.keyboard.removeKey(Phaser.Keyboard.P); 
 	        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
@@ -243,9 +262,10 @@ function replayGame()
 	playpause.destroy();
 	playpause = game.add.sprite(255 , 475 , 'pp_button');
 	playpause.inputEnabled = true;
+	    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(269,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
 
-	pauseState = 1;
+	game.paused = true;
 	pauseAndPlay();
 	score = 0;
 	displayScore = 0;
@@ -456,14 +476,14 @@ function updateLife()
 }
 function pauseAndPlay()
 {
-	if(pauseState  === 0)
+	if(game.paused === false)
 	{
-		pauseState = 1;
+		game.paused = true;
 		ppText.setText('     Paused   ');
 	}
 	else
 	{
-		pauseState = 0;
+		game.paused === false;
 		ppText.setText('Click to Pause');
 		displayShapes();
 	}
