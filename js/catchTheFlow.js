@@ -1,3 +1,4 @@
+
 var game = new Phaser.Game(640, 520, Phaser.AUTO, 'gamingArea', { preload: preload, create: create, update: update });
 
 function preload ()
@@ -49,13 +50,11 @@ var lifeline = 3;
 
 var startScreen;
 var startButton;
-
+var keyup;
 var keyleft;
 var keyright;
-var keyup;
 var keydown;
 var pause;
-
 function create()
 {
 	game.add.sprite(0 , 0 , 'background');
@@ -83,22 +82,26 @@ function create()
 	timer = game.add.text(550, 19, '00:00:00' ,{font : "18px Arial" , fill : "#ffffff"});
 	myscore = game.add.text(80-34, 19 , '000' , {font : "18px Arial" , fill : "#ffffff"});
   	mylevel = game.add.text(308, 19 , '01' , {font : "18px Arial" , fill : "#ffffff"});
-
-        
+     
      keyleft = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-     
      keyright = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-     
      keyup = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-     
      keydown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-     
      pause= game.input.keyboard.addKey(Phaser.Keyboard.P);
-  	//leftGreen = game.add.tileSprite(100,100,440,200,'leftGreen');
+
+   //  Option 2 - Alternatively, Remove captures so they flood up to the browser too
+  /*  game.input.keyboard.removeKeyCapture(Phaser.Keyboard.LEFT);
+      //  Option 2 - Alternatively, Remove captures so they flood up to the browser too
+    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.RIGHT);
+   //  Option 2 - Alternatively, Remove captures so they flood up to the browser too
+    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.UP);
+   //  Option 2 - Alternatively, Remove captures so they flood up to the browser too
+    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.DOWN);
+
+  */	//leftGreen = game.add.tileSprite(100,100,440,200,'leftGreen');
   	//leftGreen.autoScroll(-40,0);
   	displayLeaves();
-
-	startScreen=game.add.sprite(0,0,'start_screen');
+    startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
     startButton.events.onInputUp.add(startingGame);
@@ -131,6 +134,7 @@ function update()
         keydown.onUp.add(updateBox);  
        
         pause.onUp.add(pauseAndPlay);
+          
         
 	up.events.onInputDown.add(answeredUp);
 	up.events.onInputUp.add(updateBox);
@@ -150,28 +154,28 @@ function update()
 var answer = null;
 function answeredUp()
 {
-	if(pauseState === 0)
+	if( game.paused === false)
 	{
 		answer = 3; //up = 3
 	}
 }
 function answeredDown()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 1; //Down = 1
 	}
 }
 function answeredLeft()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 0; //left = 0
 	}
 }
 function answeredRight()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 2; //Right = 2
 	}
@@ -190,7 +194,7 @@ function updateTimer()
 	if(startGame === 1)
 	{
 	//To find and display the elapsed time.
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		if(timeUpdateFlag === 0)
 		{
@@ -221,20 +225,17 @@ function updateTimer()
 	}
 	if(gameSeconds > 59)
     {
-			if(finishFlag === 0)
-	    	{
-	    		document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="finishGame()">Click here to finish the game</paper-button>';
-	    		finishFlag = 1;
-	    	}
-	  }
+      //console.log("inside 59");
+      document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="finishGame()">Click here to finish the game</paper-button>';
+    }
 	}
 }
-var finishFlag = 0;
+
 var deadOne;
 var deadTwo;
 function updateBox()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		updateScore();
 		leaf.destroy();
@@ -266,8 +267,9 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-	 pauseState = 1;
+	 game.paused = true;
 	 playpause.inputEnabled = false;
+              game.input.keyboard.removeKey(Phaser.Keyboard.P); 
 	 destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	leaf.destroy();
@@ -292,9 +294,10 @@ function replayGame()
 	playpause.destroy();
 	playpause = game.add.sprite(585 , 465 , 'playPause');
 	playpause.inputEnabled = true;
+          pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
-	pauseState = 1;
+	game.paused = true;
 	pauseAndPlay();
 	score = 0;
 	displayScore = 0;
@@ -307,7 +310,6 @@ function replayGame()
 	//playpause.inputEnabled = true;
 	//timeText = null;
 	startGame = 1;
-	finishFlag = 0;
 	game.time.reset();
 	destroy.setText(" ");
 
@@ -625,11 +627,13 @@ function displayLeaves()
 
 }
 
+
+
 function pauseAndPlay()
 {
-	if(pauseState  === 0)
+	if(game.paused === false)
 	{
-		pauseState = 1;
+		game.paused = true;
 		ppText.setText(' ');
 		ppText.setText('Game Paused');
 		leaf.alpha = 0;
@@ -637,7 +641,7 @@ function pauseAndPlay()
 	}
 	else
 	{
-		pauseState = 0;
+		game.paused = false;
 		ppText.setText(' ');
 		ppText.setText('Pause game ');
 		leaf.alpha = 1;
@@ -647,5 +651,4 @@ function pauseAndPlay()
 function finishGame()
 {
 	gameOver();
-	document.getElementById("finishButtonArea").innerHTML = '';
 }
