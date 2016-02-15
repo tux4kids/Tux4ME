@@ -466,5 +466,4 @@ function pauseAndPlay()
 function finishGame()
 {
 	gameOver();
-	document.getElementById("finishButtonArea").innerHTML = '';
 }
