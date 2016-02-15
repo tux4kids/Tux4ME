@@ -50,6 +50,12 @@ var myscore;
 var startScreen;
 var startButton;
 
+
+var leftbox;
+var rightbox;
+var equal;
+var pausekey;
+
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -75,6 +81,10 @@ function create()
   timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
   //createText();
   //love = game.add.sprite(535, 350 , 'happy');
+  leftbox = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    rightbox = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    equal =  game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    pausekey =  game.input.keyboard.addKey(Phaser.Keyboard.P);
     startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -104,24 +114,38 @@ function createText()
   boxText();
 }
 function update()
-{
-  updateTimer();
+{ updateTimer();
+  
+  game.input.enabled=true; 
+  
+  leftbox.onDown.add(boxOneSelected,this);
+  leftbox.onUp.add(updateBox);
+  
+  rightbox.onDown.add(boxTwoSelected,this);
+  rightbox.onUp.add(updateBox);
+  
   block.getAt(0).events.onInputDown.add(boxOneSelected);
   block.getAt(1).events.onInputDown.add(boxTwoSelected);
+  
   equals.events.onInputUp.add(equalsSelected);
-
-
+   
+   equal.onUp.add(equalsSelected);
+   equal.onUp.add(updateBox);
+  
   block.getAt(0).events.onInputUp.add(updateBox);
   block.getAt(1).events.onInputUp.add(updateBox);
+  
   equals.events.onInputUp.add(updateBox);
-
+  
+  pausekey.onUp.add(pauseAndPlay);
   pause.events.onInputUp.add(pauseAndPlay);
+  
 
 }
 var userSelection;
 function boxOneSelected ()
 {
-  if(pauseState === 0)
+  if(game.paused === false)
   {
     userSelection = 1;
     boxOneText.setText(' ');
@@ -130,7 +154,7 @@ function boxOneSelected ()
 }
 function boxTwoSelected ()
 {
-  if(pauseState === 0)
+  if(game.paused === false)
   {
     userSelection = 2;
     boxOneText.setText(' ');
@@ -139,7 +163,7 @@ function boxTwoSelected ()
 }
 function equalsSelected ()
 {
-  if(pauseState === 0)
+  if(game.paused === false)
   {
     userSelection = 3;
     boxOneText.setText(' ');
@@ -151,7 +175,7 @@ var deadTwo;
 
 function updateBox()
 {
-  if (pauseState === 0)
+  if (game.paused === false)
   {
     //love.kill();
     updateScore();
@@ -193,8 +217,9 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-  pauseState = 1;
+  game.paused = true;
   pause.inputEnabled = false;
+  game.input.keyboard.removeKey(Phaser.Keyboard.P); 
   destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
@@ -217,8 +242,9 @@ function replayGame()
   pause.destroy();
   pause = game.add.sprite(575,455,'pause');
   pause.inputEnabled = true;
+         pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
   tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
-	pauseState = 1;
+	game.paused = true;
 	pauseAndPlay();
 	score = 0;
 	displayScore = 0;
@@ -363,7 +389,7 @@ function updateTimer()
 	if(startGame === 1)
 	{
 	//To find and display the elapsed time.
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		if(timeUpdateFlag === 0)
 		{
@@ -601,9 +627,9 @@ function boxText()
 
 function pauseAndPlay()
 {
-  if(pauseState  === 0)
+  if(game.paused === false)
   {
-    pauseState = 1;
+    game.paused = true;
     tempText.setText('Game Paused');
     boxTwoText.setText('');
     boxOneText.setText(' ');
@@ -611,7 +637,7 @@ function pauseAndPlay()
   else
   {
     tempText.setText(' ');
-    pauseState = 0;
+    game.paused = false;
     boxText();
   }
 }

@@ -50,6 +50,12 @@ var birdThree;
 var birdFour;
 var birdFive;
 
+var keyup;
+var keyleft;
+var keyright;
+var keydown;
+var pause;
+
 function create()
 {
 	game.add.sprite(0 , 0 , 'background');
@@ -93,6 +99,13 @@ function create()
   	mylevel = game.add.text(311, 19 , '01' , {font : "18px Arial" , fill : "#00bfa5"});
 
   	displayBirds();
+  	   keyleft = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+     keyright = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+     keyup = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+     keydown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+     pause= game.input.keyboard.addKey(Phaser.Keyboard.P);
+
+
 
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
@@ -109,8 +122,23 @@ function startingGame()
 }
 
 function update ()
-{
-	updateTimer();
+{updateTimer();
+
+           game.input.enabled=true; 
+   
+        keyleft.onDown.add(answeredLeft,this);
+        keyleft.onUp.add(updateBox);
+
+        keyright.onDown.add(answeredRight,this);
+        keyright.onUp.add(updateBox);
+
+        keyup.onDown.add(answeredUp,this);
+        keyup.onUp.add(updateBox); 
+
+        keydown.onDown.add(answeredDown,this);
+        keydown.onUp.add(updateBox);  
+       
+        pause.onUp.add(pauseAndPlay);
 
 	up.events.onInputDown.add(answeredUp);
 	up.events.onInputUp.add(updateBox);
@@ -129,28 +157,28 @@ function update ()
 var answer = null;
 function answeredUp()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 3; //up = 3
 	}
 }
 function answeredDown()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 1; //Down = 1
 	}
 }
 function answeredLeft()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 0; //left = 0
 	}
 }
 function answeredRight()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 2; //Right = 2
 	}
@@ -169,7 +197,7 @@ function updateTimer()
 	if(startGame === 1)
 	{
 	//To find and display the elapsed time.
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		if(timeUpdateFlag === 0)
 		{
@@ -213,7 +241,7 @@ var deadOne;
 var deadTwo;
 function updateBox()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		updateScore();
 		displayBirds();
@@ -244,8 +272,9 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-		        pauseState = 1;
+		       game.paused = true;
 	        playpause.inputEnabled = false;
+	         game.input.keyboard.removeKey(Phaser.Keyboard.P);
 	        destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
@@ -268,9 +297,10 @@ function replayGame()
 	playpause.destroy();
 	playpause = game.add.sprite(595 , 475 , 'playPause');
 	playpause.inputEnabled = true;
+	      pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(460, 485 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
-	pauseState = 1;
+	game.paused = true;
 	pauseAndPlay();
 	score = 0;
 	displayScore = 0;
@@ -439,9 +469,9 @@ function displayBirds()
 
 function pauseAndPlay()
 {
-	if(pauseState  === 0)
+	if(game.paused === false)
 	{
-		pauseState = 1;
+		game.paused = true;
 		ppText.setText('Game Paused');
 		birdOne.alpha = 0;
 		birdTwo.alpha = 0;
@@ -452,7 +482,7 @@ function pauseAndPlay()
 	}
 	else
 	{
-		pauseState = 0;
+		game.paused = false;
 		ppText.setText('Click here to Pause');
 		birdOne.alpha = 1;
 		birdTwo.alpha = 1;

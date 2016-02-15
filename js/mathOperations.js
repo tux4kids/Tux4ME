@@ -55,6 +55,12 @@ var minus;
 var multiply;
 var divide;
 
+var pluskey;
+var minuskey;
+var multiplykey;
+var dividekey;
+var pausekey;
+
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -80,7 +86,11 @@ function create()
   minus.inputEnabled = true;
   multiply.inputEnabled = true;
   divide.inputEnabled = true;
-
+ minuskey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+ pluskey =  game.input.keyboard.addKey(Phaser.Keyboard.A);
+  dividekey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+  multiplykey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+  pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
   startScreen=game.add.sprite(0,0,'start_screen');
   startButton=game.add.sprite(560,465,'start_button');
@@ -125,8 +135,23 @@ function startingGame()
 
 function update()
 {
-  	updateTimer();
+  updateTimer();
 
+         game.input.enabled=true; 
+
+        pluskey.onDown.add(answeredPlus,this);
+        pluskey.onUp.add(updateBox);
+
+        minuskey.onDown.add(answeredMinus,this);
+        minuskey.onUp.add(updateBox);
+
+
+        dividekey.onDown.add(answeredDivide,this);
+        dividekey.onUp.add(updateBox);
+
+        multiplykey.onDown.add(answeredMultiply,this);
+        multiplykey.onUp.add(updateBox);
+ 
   	plus.events.onInputDown.add(answeredPlus);
 	plus.events.onInputUp.add(updateBox);
 
@@ -139,20 +164,21 @@ function update()
 	divide.events.onInputDown.add(answeredDivide);
 	divide.events.onInputUp.add(updateBox);
 
+        pausekey.onUp.add(pauseAndPlay,this);   
   	pause.events.onInputUp.add(pauseAndPlay);
 
 }
 var answer = null;
 function answeredPlus()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 0;
 	}
 }
 function answeredMinus()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 1;
 	}
@@ -160,14 +186,14 @@ function answeredMinus()
 
 function answeredMultiply()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 2;
 	}
 }
 function answeredDivide()
 {
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		answer = 3;
 	}
@@ -178,7 +204,7 @@ var deadTwo;
 
 function updateBox()
 {
-  if (pauseState === 0)
+  if (game.paused === false)
   {
     //love.kill();
     updateScore();
@@ -218,8 +244,9 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-          pauseState = 1;
+          game.paused = true;
         pause.inputEnabled = false;
+              game.input.keyboard.removeKey(Phaser.Keyboard.P);   
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
@@ -242,8 +269,9 @@ function replayGame()
   pause.destroy();
   pause = game.add.sprite(575,455,'pause');
   pause.inputEnabled = true;
+     pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
   tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
-	pauseState = 1;
+	game.paused = true;
 	pauseAndPlay();
 	score = 0;
 	displayScore = 0;
@@ -368,7 +396,7 @@ function updateTimer()
 	if(startGame === 1)
 	{
 	//To find and display the elapsed time.
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		if(timeUpdateFlag === 0)
 		{
@@ -528,9 +556,9 @@ function displayNumbers()
 
 function pauseAndPlay()
 {
-  if(pauseState  === 0)
+  if(game.paused === false)
   {
-    pauseState = 1;
+    game.paused = true;
     tempText.setText('Game Paused');
     boxTwoText.setText('00');
     boxOneText.setText('00');
@@ -539,7 +567,7 @@ function pauseAndPlay()
   else
   {
     tempText.setText(' ');
-    pauseState = 0;
+    game.paused = false;
     displayNumbers();
   }
 }
