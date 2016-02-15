@@ -218,6 +218,7 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
+	document.getElementById("finishButtonArea").innerHTML = '';
           pauseState = 1;
         pause.inputEnabled = false;
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
@@ -546,7 +547,6 @@ function pauseAndPlay()
 function finishGame()
 {
 	gameOver();
-	document.getElementById("finishButtonArea").innerHTML = '';
 }
 /*
 * Tux4ME is developed under Google summer of code - 2015.
