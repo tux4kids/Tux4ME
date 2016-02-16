@@ -53,6 +53,9 @@ var myscore;
 var startScreen;
 var startButton;
 
+var inputcheck; 
+var inputcross; 
+var pause;
 
 // The predefined function to create the Gaming area
 function create()
@@ -86,6 +89,10 @@ function create()
 	info.setShadow(3,3, 'rgba(25,25,25,0.25)' , 8);
 	boxText = game.add.text(xTextPos, yTextPos , '' ,{ font : '50px Arial' , fill : "black"}  );
 	initialize();
+       inputcross = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
+
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -148,14 +155,25 @@ function renderBox()
 // The predefined function to be called at the rate of 10 frames per second.
 function update()
 {
-	updateTimer();
-	yes.events.onInputDown.add(removeTextYes);
+
+     updateTimer();
+       
+        game.input.enabled=true; 
+   	
+        inputcheck.onDown.add(removeTextYes,this);
+        inputcheck.onUp.add(updateBox);
+
+        inputcross.onDown.add(removeTextNo,this);
+        inputcross.onUp.add(updateBox);
+
+        yes.events.onInputDown.add(removeTextYes);
 	no.events.onInputDown.add(removeTextNo);
 
 	yes.events.onInputUp.add(updateBox);
 	no.events.onInputUp.add(updateBox);
 
 	playPause.events.onInputUp.add(pauseAndPlay);
+        pause.onUp.add(pauseAndPlay,this);
 }
 var timer;
 var totalSeconds = 0;
@@ -368,6 +386,7 @@ function gameOver()
 	document.getElementById("finishButtonArea").innerHTML = '';
 	pauseState = 1;
 	playPause.inputEnabled = false;
+          game.input.keyboard.removeKey(Phaser.Keyboard.P);
 	destroy = game.add.text(272, 325 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
@@ -390,6 +409,7 @@ function replayGame()
 	playPause.destroy();
 	playPause = game.add.sprite(255 , 475 , 'pp_button');
 	playPause.inputEnabled = true;
+        pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(275,488,'Click to Pause', {font : "15px Arial" , fill : "white"});
 
 	pauseState = 1;

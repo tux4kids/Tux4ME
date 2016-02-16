@@ -55,6 +55,13 @@ var minus;
 var multiply;
 var divide;
 
+
+var pluskey;
+var minuskey;
+var multiplykey;
+var dividekey;
+var pausekey;
+
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -81,6 +88,12 @@ function create()
   multiply.inputEnabled = true;
   divide.inputEnabled = true;
 
+  
+ minuskey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+ pluskey =  game.input.keyboard.addKey(Phaser.Keyboard.A);
+  dividekey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+  multiplykey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+  pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
   startScreen=game.add.sprite(0,0,'start_screen');
   startButton=game.add.sprite(560,465,'start_button');
@@ -127,6 +140,21 @@ function update()
 {
   	updateTimer();
 
+         game.input.enabled=true; 
+
+        pluskey.onDown.add(answeredPlus,this);
+        pluskey.onUp.add(updateBox);
+
+        minuskey.onDown.add(answeredMinus,this);
+        minuskey.onUp.add(updateBox);
+
+
+        dividekey.onDown.add(answeredDivide,this);
+        dividekey.onUp.add(updateBox);
+
+        multiplykey.onDown.add(answeredMultiply,this);
+        multiplykey.onUp.add(updateBox);
+ 
   	plus.events.onInputDown.add(answeredPlus);
 	plus.events.onInputUp.add(updateBox);
 
@@ -139,8 +167,8 @@ function update()
 	divide.events.onInputDown.add(answeredDivide);
 	divide.events.onInputUp.add(updateBox);
 
+        pausekey.onUp.add(pauseAndPlay,this);   
   	pause.events.onInputUp.add(pauseAndPlay);
-
 }
 var answer = null;
 function answeredPlus()
@@ -221,6 +249,7 @@ function gameOver()
 	document.getElementById("finishButtonArea").innerHTML = '';
           pauseState = 1;
         pause.inputEnabled = false;
+     game.input.keyboard.removeKey(Phaser.Keyboard.P); 
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
@@ -243,6 +272,7 @@ function replayGame()
   pause.destroy();
   pause = game.add.sprite(575,455,'pause');
   pause.inputEnabled = true;
+    pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
   tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 	pauseState = 1;
 	pauseAndPlay();

@@ -269,6 +269,7 @@ function gameOver()
 	 document.getElementById("finishButtonArea").innerHTML = '';
 	 pauseState = 1;
 	 playpause.inputEnabled = false;
+        game.input.keyboard.removeKey(Phaser.Keyboard.P); 
 	 destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	leaf.destroy();
@@ -293,6 +294,7 @@ function replayGame()
 	playpause.destroy();
 	playpause = game.add.sprite(585 , 465 , 'playPause');
 	playpause.inputEnabled = true;
+         pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
 	pauseState = 1;
