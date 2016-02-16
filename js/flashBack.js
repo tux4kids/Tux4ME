@@ -231,6 +231,7 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
+	document.getElementById("finishButtonArea").innerHTML = '';
 		        pauseState = 1;
 	        playpause.inputEnabled = false;
 	        //playpause.destroy();
@@ -420,5 +421,4 @@ function pauseAndPlay()
 function finishGame()
 {
 	gameOver();
-	document.getElementById("finishButtonArea").innerHTML = '';
 }

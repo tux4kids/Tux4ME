@@ -160,6 +160,7 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
+	document.getElementById("finishButtonArea").innerHTML = '';
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
 	if(cummulativeIndex > 100)
 		cummulativeIndex = 100;
@@ -268,6 +269,5 @@ function updateLife()
 function finishGame()
 {
 	gameOver();
-	document.getElementById("finishButtonArea").innerHTML = '';
 }
 */

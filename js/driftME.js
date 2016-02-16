@@ -365,6 +365,7 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
+	document.getElementById("finishButtonArea").innerHTML = '';
 	pauseState = 1;
 	playPause.inputEnabled = false;
 	destroy = game.add.text(272, 325 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
@@ -713,6 +714,5 @@ function updateLife()
 function finishGame()
 {
 	gameOver();
-	document.getElementById("finishButtonArea").innerHTML = '';
 }
 //If u find any bugs, please send us a pull request. Thankyou ! :)
