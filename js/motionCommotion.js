@@ -49,6 +49,10 @@ var startButton;
 var playpause;
 var ppText;
 
+var keyleft;
+var keyright;
+var pause; 
+
 function create()
 {
 	game.add.sprite(0,0,'background');
@@ -84,7 +88,9 @@ function create()
   	mylevel = game.add.text(311, 19 , '01' , {font : "18px Arial" , fill : "#00bfa5"});
 	
 	updateRotations();
-
+         keyleft = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+     keyright = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        pause    = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	startScreen = game.add.sprite(0,0,'start_screen');
     startButton = game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -124,12 +130,22 @@ function startingGame()
 
 function update()
 {
-	updateTimer();
+updateTimer();
+
+         keyleft.onDown.add(answeredAntiClockwise,this);
+        keyleft.onUp.add(updateBox);
+
+         keyright.onDown.add(answeredClockwise,this);
+        keyright.onUp.add(updateBox);
+
 	left.events.onInputDown.add(answeredAntiClockwise);
 	left.events.onInputUp.add(updateBox);
 
+
 	right.events.onInputDown.add(answeredClockwise);
 	right.events.onInputUp.add(updateBox);
+
+         pause.onUp.add(pauseAndPlay);
 	playpause.events.onInputUp.add(pauseAndPlay);
 
 
@@ -228,7 +244,7 @@ function updateTimer()
 {
 	if(startGame === 1)
 	{
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		if(timeUpdateFlag === 0)
 		{
@@ -274,8 +290,9 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-	 pauseState = 1;
+	 game.paused = true;
 	 playpause.inputEnabled = false;
+	    game.input.keyboard.removeKey(Phaser.Keyboard.P);
 	 destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	 for (var i = 0; i < 7; i++) 
@@ -305,9 +322,10 @@ function replayGame()
 	playpause.destroy();
 	playpause = game.add.sprite(585 , 465 , 'playPause');
 	playpause.inputEnabled = true;
+	  pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
-	pauseState = 1;
+	game.paused = true;
 	pauseAndPlay();
 	score = 0;
 	displayScore = 0;
@@ -341,7 +359,7 @@ function updateBox()
 {
 	
 
-	if(pauseState === 0)
+	if(game.paused === false)
 	{
 		getCorrectAnswer();
 	    updateScore();
@@ -417,8 +435,8 @@ function updateLife()
 
 function pauseAndPlay()
 {
-	if(pauseState  === 0) {
-		pauseState = 1;
+	if(game.paused === false) {
+		game.paused =true;
 		ppText.setText(' ');
 		ppText.setText('Game Paused');
 		for (var i = 0; i < 7; i++) {
@@ -429,7 +447,7 @@ function pauseAndPlay()
 	}
 
 	else {
-		pauseState = 0;
+		game.paused = false;
 		ppText.setText(' ');
 		ppText.setText('Pause game ');
 		for (var i = 0; i < 7; i++) {
