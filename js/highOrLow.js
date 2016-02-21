@@ -53,6 +53,11 @@ var previous = 0;
 var present;
 var start;
 
+
+var startkey;
+var keyup;
+var keydown;
+var pausekey;
 function create()
 {
   game.add.sprite(0 , 0 , 'background');
@@ -90,6 +95,11 @@ function create()
     timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
 
     start.events.onInputUp.add(initialize);
+    startkey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    keyup = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    keydown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+     startkey.onUp.add(initialize,this);
+    pausekey=game.input.keyboard.addKey(Phaser.Keyboard.P);
 
     startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
@@ -122,7 +132,15 @@ function createText()
 
 function update()
 {
-  updateTimer();
+ updateTimer();
+  
+   game.input.enabled=true; 
+
+   keyup.onDown.add(answeredUp,this);
+   keyup.onUp.add(updateBox);
+
+   keydown.onDown.add(answeredDown,this);
+   keydown.onUp.add(updateBox);
 
   greater.events.onInputDown.add(answeredUp);
   lesser.events.onInputDown.add(answeredDown);
@@ -130,6 +148,7 @@ function update()
   greater.events.onInputUp.add(updateBox);
   lesser.events.onInputUp.add(updateBox);
 
+   pausekey.onUp.add(pauseAndPlay,this);
   pause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
@@ -247,6 +266,7 @@ function gameOver()
 	document.getElementById("finishButtonArea").innerHTML = '';
         pauseState = 1;
         pause.inputEnabled = false;
+  game.input.keyboard.removeKey(Phaser.Keyboard.P); 
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
   var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
@@ -269,6 +289,7 @@ function replayGame()
   pause.destroy();
   pause = game.add.sprite(575,455,'pause');
   pause.inputEnabled = true;
+   pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
   tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
   pauseState = 1;
   pauseAndPlay();

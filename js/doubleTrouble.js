@@ -53,6 +53,10 @@ var questionTwo;
 var startScreen;
 var startButton;
 
+var inputlcheck; 
+var inputcross; 
+var pause;
+
 function create()
 {
   //Adding the background images
@@ -96,6 +100,10 @@ function create()
 	{
 		item = block.create(150 + i*200 , 135 , 'box' );
 	}
+
+      inputcross = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
     startButton.inputEnabled = true;
@@ -158,14 +166,24 @@ function updateTimer()
 var finishFlag = 0;
 function update()
 {
-    updateTimer();
-	yes.events.onInputDown.add(removeTextYes);
+     updateTimer();
+       
+        game.input.enabled=true; 
+   	
+        inputcheck.onDown.add(removeTextYes,this);
+        inputcheck.onUp.add(updateBox);
+
+        inputcross.onDown.add(removeTextNo,this);
+        inputcross.onUp.add(updateBox);
+
+        yes.events.onInputDown.add(removeTextYes);
 	no.events.onInputDown.add(removeTextNo);
 
 	yes.events.onInputUp.add(updateBox);
 	no.events.onInputUp.add(updateBox);
 
 	playPause.events.onInputUp.add(pauseAndPlay);
+        pause.onUp.add(pauseAndPlay,this);
 }
 
 //Helper functions : Refer update()
@@ -231,6 +249,7 @@ function gameOver()
 	document.getElementById("finishButtonArea").innerHTML = '';
 	pauseState = 1;
 	playPause.inputEnabled = false;
+        game.input.keyboard.removeKey(Phaser.Keyboard.P);
 	destroy = game.add.text(272, 325 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
@@ -253,6 +272,7 @@ function replayGame()
 	playPause = game.add.sprite(255 , 476 , 'pp_button');
 	playPause.inputEnabled = true;
 	playPause.inputEnabled = true;
+         pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	ppText = game.add.text(272,490,'Click to Pause', {font : "13px Arial" , fill : "white"});
 	pauseState = 1;
 	pauseAndPlay();
