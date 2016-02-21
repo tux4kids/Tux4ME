@@ -92,8 +92,8 @@ function create ()
   	updateQuestion();
   	var info = game.add.text(40,440,'Check the above statement and Click Yes or No', {font : "14px Arial" , fill : "#01579b"});
          
-    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    inputcross = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
    
   	startScreen=game.add.sprite(0,0,'start_screen');

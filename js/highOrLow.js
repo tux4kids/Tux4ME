@@ -54,9 +54,9 @@ var present;
 var start;
 
 
-var startkey;
-var keyup;
-var keydown;
+//var startkey;
+//var keyup;
+//var keydown;
 var pausekey;
 function create()
 {
@@ -95,10 +95,10 @@ function create()
     timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
 
     start.events.onInputUp.add(initialize);
-    startkey = game.input.keyboard.addKey(Phaser.Keyboard.S);
-    keyup = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    keydown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-     startkey.onUp.add(initialize,this);
+    //startkey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    //keyup = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    //keydown = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    //startkey.onUp.add(initialize,this);
     pausekey=game.input.keyboard.addKey(Phaser.Keyboard.P);
 
     startScreen=game.add.sprite(0,0,'start_screen');
@@ -136,11 +136,11 @@ function update()
   
    game.input.enabled=true; 
 
-   keyup.onDown.add(answeredUp,this);
-   keyup.onUp.add(updateBox);
+   //keyup.onDown.add(answeredUp,this);
+   //keyup.onUp.add(updateBox);
 
-   keydown.onDown.add(answeredDown,this);
-   keydown.onUp.add(updateBox);
+   //keydown.onDown.add(answeredDown,this);
+   //keydown.onUp.add(updateBox);
 
   greater.events.onInputDown.add(answeredUp);
   lesser.events.onInputDown.add(answeredDown);

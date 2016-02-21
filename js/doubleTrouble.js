@@ -101,8 +101,8 @@ function create()
 		item = block.create(150 + i*200 , 135 , 'box' );
 	}
 
-      inputcross = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+      inputcross = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    inputcheck = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
 	startScreen=game.add.sprite(0,0,'start_screen');
     startButton=game.add.sprite(560,465,'start_button');
