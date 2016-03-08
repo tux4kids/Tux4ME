@@ -22,18 +22,20 @@ function preload()
   game.load.image('minus' , 'assets/images/highClick/minus_50_50.png');
   game.load.image('multiply' , 'assets/images/highClick/multiply_50_50.png');
   game.load.image('divide' , 'assets/images/highClick/divide_50_50.png');
-
+  game.load.image('power' , 'assets/images/highClick/power_50_50.png');
   //game.load.image('happy' , 'assets/images/highClick/happy_75_75.png');
   //game.load.image('sad' , 'assets/images/highClick/sad_75_75.png');
   game.load.image('replay' , 'assets/images/replay_100_100.png');
 
   //Load the Google WebFont Loader script
   game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+  
+
 }
 var boxOneText;
 var boxTwoText;
 var boxThreeText;
-
+var flagforpowerandmultiply = 0;
 var pauseState = 0;
 var level = 1;
 var livingState; //create
@@ -54,12 +56,13 @@ var plus;
 var minus;
 var multiply;
 var divide;
-
+var power;
 
 var pluskey;
 var minuskey;
 var multiplykey;
 var dividekey;
+var powerkey;
 var pausekey;
 
 function create()
@@ -77,28 +80,76 @@ function create()
   myscore = game.add.text(80, 43 , '000' , {font : "15px Arial" , fill : "#eceff1"});
   mylevel = game.add.text(311, 43 , '01' , {font : "15px Arial" , fill : "#eceff1"});
   timer = game.add.text(515, 43, '00:00:00' ,{font : "15px Arial" , fill : "#eceff1"});
-
-  plus = game.add.sprite(150 , 350 , 'plus');
-  minus = game.add.sprite(250 , 350 , 'minus');
-  multiply = game.add.sprite(350 , 350 , 'multiply');
-  divide = game.add.sprite(450 , 350 , 'divide');
-
+  //if(level < 2)
+  //{
+   //plus = game.add.sprite(150 , 350 , 'plus');
+   //minus = game.add.sprite(250 , 350 , 'minus');
+   //multiply = game.add.sprite(350 , 350 , 'multiply');
+   //divide = game.add.sprite(450 , 350 , 'divide');
+   //power = game.add.sprite( 1000 , 1000 , 'power')
+  //} 
+  //else
+  //{ 
+  plus = game.add.sprite(50 , 350 , 'plus');
+  minus = game.add.sprite(150 , 350 , 'minus');
+  multiply = game.add.sprite(250 , 350 , 'multiply');
+  divide = game.add.sprite(350 , 350 , 'divide');
+  power = game.add.sprite(450 , 350 , 'power');
+  //}
   plus.inputEnabled = true;
   minus.inputEnabled = true;
   multiply.inputEnabled = true;
   divide.inputEnabled = true;
-
+  power.inputEnabled = true;
   
  minuskey = game.input.keyboard.addKey(Phaser.Keyboard.S);
  pluskey =  game.input.keyboard.addKey(Phaser.Keyboard.A);
-  dividekey = game.input.keyboard.addKey(Phaser.Keyboard.D);
-  multiplykey = game.input.keyboard.addKey(Phaser.Keyboard.M);
-  pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
+ dividekey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+ multiplykey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+ powerkey = game.input.keyboard.addKey(Phaser.Keyboard.F);
+ pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
   startScreen=game.add.sprite(0,0,'start_screen');
   startButton=game.add.sprite(560,465,'start_button');
   startButton.inputEnabled = true;
   startButton.events.onInputUp.add(startingGame);
+   
+ /*  pluskey.onDown.add(answeredPlus,this);
+  pluskey.onUp.add(updateBox);
+
+  minuskey.onDown.add(answeredMinus,this);
+  minuskey.onUp.add(updateBox);
+
+
+  dividekey.onDown.add(answeredDivide,this);
+  dividekey.onUp.add(updateBox);
+
+  multiplykey.onDown.add(answeredMultiply,this);
+  multiplykey.onUp.add(updateBox);
+  if(level > 1)
+     updatepower();      
+  //powerkey.onDown.add(answeredPower,this);
+  //powerkey.onUp.add(updateBox);   
+          
+  plus.events.onInputDown.add(answeredPlus);
+  plus.events.onInputUp.add(updateBox);
+
+  minus.events.onInputDown.add(answeredMinus);
+  minus.events.onInputUp.add(updateBox);
+
+  multiply.events.onInputDown.add(answeredMultiply);
+  multiply.events.onInputUp.add(updateBox);
+
+  divide.events.onInputDown.add(answeredDivide);
+  divide.events.onInputUp.add(updateBox);
+   
+  //power.events.onInputDown.add(answeredPower);
+  //power.events.onInputUp.add(updateBox);
+  
+  pausekey.onUp.add(pauseAndPlay,this);   
+  pause.events.onInputUp.add(pauseAndPlay);
+
+ */
 }
 function startingGame()
 {
@@ -138,67 +189,95 @@ function startingGame()
 
 function update()
 {
-  	updateTimer();
+    updateTimer();
 
-         game.input.enabled=true; 
+   game.input.enabled=true; 
 
-        pluskey.onDown.add(answeredPlus,this);
-        pluskey.onUp.add(updateBox);
+  pluskey.onDown.add(answeredPlus,this);
+  pluskey.onUp.add(updateBox);
 
-        minuskey.onDown.add(answeredMinus,this);
-        minuskey.onUp.add(updateBox);
+  minuskey.onDown.add(answeredMinus,this);
+  minuskey.onUp.add(updateBox);
 
 
-        dividekey.onDown.add(answeredDivide,this);
-        dividekey.onUp.add(updateBox);
+  dividekey.onDown.add(answeredDivide,this);
+  dividekey.onUp.add(updateBox);
 
-        multiplykey.onDown.add(answeredMultiply,this);
-        multiplykey.onUp.add(updateBox);
- 
-  	plus.events.onInputDown.add(answeredPlus);
-	plus.events.onInputUp.add(updateBox);
+  multiplykey.onDown.add(answeredMultiply,this);
+  multiplykey.onUp.add(updateBox);
+  
+  //updatepower();      
+  //powerkey.onDown.add(answeredPower,this);
+  //powerkey.onUp.add(updateBox);   
+  powerkey.onDown.add(answeredPower,this);
+  powerkey.onUp.add(updateBox);  
 
-	minus.events.onInputDown.add(answeredMinus);
-	minus.events.onInputUp.add(updateBox);
+  power.events.onInputDown.add(answeredPower);
+  power.events.onInputUp.add(updateBox);
 
-	multiply.events.onInputDown.add(answeredMultiply);
-	multiply.events.onInputUp.add(updateBox);
+  plus.events.onInputDown.add(answeredPlus);
+  plus.events.onInputUp.add(updateBox);
 
-	divide.events.onInputDown.add(answeredDivide);
-	divide.events.onInputUp.add(updateBox);
+  minus.events.onInputDown.add(answeredMinus);
+  minus.events.onInputUp.add(updateBox);
 
-        pausekey.onUp.add(pauseAndPlay,this);   
-  	pause.events.onInputUp.add(pauseAndPlay);
+  multiply.events.onInputDown.add(answeredMultiply);
+  multiply.events.onInputUp.add(updateBox);
+
+  divide.events.onInputDown.add(answeredDivide);
+  divide.events.onInputUp.add(updateBox);
+   
+  //power.events.onInputDown.add(answeredPower);
+  //power.events.onInputUp.add(updateBox);
+  
+  pausekey.onUp.add(pauseAndPlay,this);   
+  pause.events.onInputUp.add(pauseAndPlay);
+  
 }
+//function updatepower()
+/*{
+  powerkey.onDown.add(answeredPower,this);
+  powerkey.onUp.add(updateBox);  
+
+  power.events.onInputDown.add(answeredPower);
+  power.events.onInputUp.add(updateBox);
+}*/
 var answer = null;
 function answeredPlus()
 {
-	if(pauseState === 0)
-	{
-		answer = 0;
-	}
+  if(pauseState === 0)
+  {
+    answer = 0;
+  }
 }
 function answeredMinus()
 {
-	if(pauseState === 0)
-	{
-		answer = 1;
-	}
+  if(pauseState === 0)
+  {
+    answer = 1;
+  }
 }
 
 function answeredMultiply()
 {
-	if(pauseState === 0)
-	{
-		answer = 2;
-	}
+  if(pauseState === 0)
+  {
+    answer = 2;
+  }
 }
 function answeredDivide()
 {
-	if(pauseState === 0)
-	{
-		answer = 3;
-	}
+  if(pauseState === 0)
+  {
+    answer = 3;
+  }
+}
+function answeredPower()
+{
+  if(pauseState == 0)
+  {
+    answer = 4;
+  }
 }
 
 var deadOne;
@@ -222,7 +301,7 @@ function updateBox()
       {
         livingState.getAt(0).kill();
         deadOne = game.add.sprite(27,180,'dead');
-      }
+      } 
       else if (lifeline === 1)
       {
         livingState.getAt(1).kill();
@@ -246,25 +325,25 @@ var headingContent;
 var instructionContent;
 function gameOver()
 {
-	document.getElementById("finishButtonArea").innerHTML = '';
+  document.getElementById("finishButtonArea").innerHTML = '';
           pauseState = 1;
         pause.inputEnabled = false;
      game.input.keyboard.removeKey(Phaser.Keyboard.P); 
         destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
-	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
-	if(cummulativeIndex > 100)
-		cummulativeIndex = 100;
-	headingContent = document.getElementById("heading").innerHTML;
-	instructionContent = document.getElementById("scoreCard").innerHTML;
-	document.getElementById("heading").innerHTML = "<div flex><iron-icon style='color:white' icon='loyalty'></iron-icon><div flex>Score card</div></div>"
-	document.getElementById("scoreCard").innerHTML = "<paper-menu><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='flag'></iron-icon><span></span>Score<iron-icon icon='chevron-right'></iron-icon>" + displayScore + "</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='alarm-on'></iron-icon><span></span>Time Taken<iron-icon icon='chevron-right'></iron-icon>"+ timeText +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='thumb-up'></iron-icon><span></span>Game wise cummulative index<iron-icon icon='chevron-right'></iron-icon>"+ cummulativeIndex +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='redo'></iron-icon><span></span>Click on the Replay button to play again</paper-item><paper-item><img src='assets/images/penguin.jpg'></img><img src='assets/images/PenguinWords.png'></img></paper-item></paper-menu>" ;
+  var cummulativeIndex = Math.floor((score/gameSeconds) * (60/500) * 100);
+  if(cummulativeIndex > 100)
+    cummulativeIndex = 100;
+  headingContent = document.getElementById("heading").innerHTML;
+  instructionContent = document.getElementById("scoreCard").innerHTML;
+  document.getElementById("heading").innerHTML = "<div flex><iron-icon style='color:white' icon='loyalty'></iron-icon><div flex>Score card</div></div>"
+  document.getElementById("scoreCard").innerHTML = "<paper-menu><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='flag'></iron-icon><span></span>Score<iron-icon icon='chevron-right'></iron-icon>" + displayScore + "</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='alarm-on'></iron-icon><span></span>Time Taken<iron-icon icon='chevron-right'></iron-icon>"+ timeText +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='thumb-up'></iron-icon><span></span>Game wise cummulative index<iron-icon icon='chevron-right'></iron-icon>"+ cummulativeIndex +"</paper-item><paper-item flex style='position: relative'><paper-ripple style='color: #e91e63'></paper-ripple><iron-icon style='color:#d81b60' icon='redo'></iron-icon><span></span>Click on the Replay button to play again</paper-item><paper-item><img src='assets/images/penguin.jpg'></img><img src='assets/images/PenguinWords.png'></img></paper-item></paper-menu>" ;
 
-	replay = game.add.sprite(game.world.centerX, game.world.centerY, 'replay');
-	replay.anchor.set(0.5);
+  replay = game.add.sprite(game.world.centerX, game.world.centerY, 'replay');
+  replay.anchor.set(0.5);
     startGame = 0;
-	replay.inputEnabled = true;
-	replay.events.onInputUp.add(replayGame);
+  replay.inputEnabled = true;
+  replay.events.onInputUp.add(replayGame);
 }
 
 function replayGame()
@@ -272,30 +351,30 @@ function replayGame()
   pause.destroy();
   pause = game.add.sprite(575,455,'pause');
   pause.inputEnabled = true;
-    pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
+  pausekey = game.input.keyboard.addKey(Phaser.Keyboard.P);
   tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
-	pauseState = 1;
-	pauseAndPlay();
-	score = 0;
-	displayScore = 0;
-	myscore.setText('000');
-	timer.setText('00:00:00');
+  pauseState = 1;
+  pauseAndPlay();
+  score = 0;
+  displayScore = 0;
+  myscore.setText('000');
+  timer.setText('00:00:00');
   totalSeconds = 0;
   gameSeconds = 0;
   timePaused = 0;
-	//playpause.inputEnabled = true;
-	//timeText = null;
-	startGame = 1;
-	finishFlag = 0;
-	game.time.reset();
-	destroy.setText(" ");
+  //playpause.inputEnabled = true;
+  //timeText = null;
+  startGame = 1;
+  finishFlag = 0;
+  game.time.reset();
+  destroy.setText(" ");
 
-	replay.inputEnabled = false;
-	replay.destroy();
-	updateLife();
-	//displayBirds();
-	document.getElementById("heading").innerHTML = headingContent;
-	document.getElementById("scoreCard").innerHTML = instructionContent;
+  replay.inputEnabled = false;
+  replay.destroy();
+  updateLife();
+  //displayBirds();
+  document.getElementById("heading").innerHTML = headingContent;
+  document.getElementById("scoreCard").innerHTML = instructionContent;
 
 }
 
@@ -319,9 +398,14 @@ function updateScore()
       score+=25;
       isCorrect = 1;
     }
-    else if((answer === 3)&&(randomChoice === 3))
+    else if(((answer === 3)&&(randomChoice === 3)) || flagforpowerandmultiply === 1) 
     {
       score+=25;
+      isCorrect = 1;
+    }
+    else if(((answer === 4)&&(randomChoice === 4)) || flagforpowerandmultiply === 1)
+    {
+      score += 50;
       isCorrect = 1;
     }
     else
@@ -396,165 +480,198 @@ var timeText;
 // The userdefined function to update the timer.
 function updateTimer()
 {
-	if(startGame === 1)
-	{
-	//To find and display the elapsed time.
-	if(pauseState === 0)
-	{
-		if(timeUpdateFlag === 0)
-		{
-			timeUpdateFlag = 1;
-			timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
-		}
-		totalSeconds=Math.floor(game.time.totalElapsedSeconds());
-		gameSeconds = totalSeconds - timePaused;
-		var minutes = Math.floor(gameSeconds / 60);
-		var hours = Math.floor(minutes/60);
-		var modmin = minutes%60;
-		if (modmin < 10)
-		{
-			modmin = '0' + modmin;
-		}
-		var modsec = gameSeconds % 60;
-		if (modsec < 10)
-		{
-			modsec = '0' + modsec;
-		}
-		//Hour display in two digits ! will be like 002.
-		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
-		timer.setText(timeText);
-	}
-	else
-	{
-		timeUpdateFlag = 0
-	}
+  if(startGame === 1)
+  {
+  //To find and display the elapsed time.
+  if(pauseState === 0)
+  {
+    if(timeUpdateFlag === 0)
+    {
+      timeUpdateFlag = 1;
+      timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds())-totalSeconds);
+    }
+    totalSeconds=Math.floor(game.time.totalElapsedSeconds());
+    gameSeconds = totalSeconds - timePaused;
+    var minutes = Math.floor(gameSeconds / 60);
+    var hours = Math.floor(minutes/60);
+    var modmin = minutes%60;
+    if (modmin < 10)
+    {
+      modmin = '0' + modmin;
+    }
+    var modsec = gameSeconds % 60;
+    if (modsec < 10)
+    {
+      modsec = '0' + modsec;
+    }
+    //Hour display in two digits ! will be like 002.
+    timeText = '0'+hours+':'+modmin+ ':' + modsec ;
+    timer.setText(timeText);
+  }
+  else
+  {
+    timeUpdateFlag = 0
+  }
   if(gameSeconds > 59)
     {
-			if(finishFlag === 0)
-	    	{
-	    		document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="finishGame()">Click here to finish the game</paper-button>';
-	    		finishFlag = 1;
-	    	}
-  	}
-	}
+      if(finishFlag === 0)
+        {
+          document.getElementById("finishButtonArea").innerHTML = '<paper-ripple></paper-ripple><paper-button raised style="color:#e91e63" onclick="finishGame()">Click here to finish the game</paper-button>';
+          finishFlag = 1;
+        }
+    }
+  }
+}
+function getBaseLog(x, y) {
+  return Math.log(y) / Math.log(x);
 }
 var finishFlag = 0;
 var randomChoice;
 function displayNumbers()
 {
-	var num = (game.rnd.integerInRange(1,100)% (5*level)) + 5;
-	boxThreeText.setText(num);
-	randomChoice = game.rnd.integerInRange(1,100)% 4;
-	var tempOne;
-	var tempTwo;
-	//randomChoice = 3; //use this check individual operation
-	if(randomChoice === 0)
-	{
-		var randomAdd = game.rnd.integerInRange(1,100)% 4;
-		if(randomAdd === 0)
-		{
-			tempOne = Math.floor(num/2);
-	      	tempTwo = num - tempOne;
-	      	boxOneText.setText(tempOne);
-	      	boxTwoText.setText(tempTwo);
-		}
-		else if(randomAdd === 1) //in terms of num/3 + (num - num/3)
-    	{
-	      	tempOne = Math.floor(num/3);
-	      	tempTwo = num - tempOne;
-	     	boxOneText.setText(tempOne);
-	      	boxTwoText.setText(tempTwo);
-		}
-		else if(randomAdd === 2)
-    	{
-      		tempOne = Math.floor(num/4);
-      		tempTwo = num - tempOne;
-      		boxOneText.setText(tempOne);
-	      	boxTwoText.setText(tempTwo);
-  		}
-  		else
-    	{
-      		tempOne = Math.floor(num/5);
-      		tempTwo = num - tempOne;
-      		boxOneText.setText(tempOne);
-	      	boxTwoText.setText(tempTwo);
-  		}
+  var num = (game.rnd.integerInRange(1,100)% (5*level)) + 5;
+  boxThreeText.setText(num);
+  //if(level < 2)
+  // randomChoice = game.rnd.integerInRange(1,100)%4;
+  //else
+   randomChoice = game.rnd.integerInRange(1,100)% 5;
+  var tempOne;
+  var tempTwo;
+  var flagcheck = 0;
+  flagforpowerandmultiply = 0;
+  //randomChoice = 3; //use this check individual operation
+  if(randomChoice === 0)
+  {
+    var randomAdd = game.rnd.integerInRange(1,100)% 4;
+    if(randomAdd === 0)
+    {
+      tempOne = Math.floor(num/2);
+          tempTwo = num - tempOne;
+          boxOneText.setText(tempOne);
+          boxTwoText.setText(tempTwo);
+    }
+    else if(randomAdd === 1) //in terms of num/3 + (num - num/3)
+      {
+          tempOne = Math.floor(num/3);
+          tempTwo = num - tempOne;
+        boxOneText.setText(tempOne);
+          boxTwoText.setText(tempTwo);
+    }
+    else if(randomAdd === 2)
+      {
+          tempOne = Math.floor(num/4);
+          tempTwo = num - tempOne;
+          boxOneText.setText(tempOne);
+          boxTwoText.setText(tempTwo);
+      }
+      else
+      {
+          tempOne = Math.floor(num/5);
+          tempTwo = num - tempOne;
+          boxOneText.setText(tempOne);
+          boxTwoText.setText(tempTwo);
+      }
     }
     else if(randomChoice === 1)//subtraction
-	{
-	    var randomSub = game.rnd.integerInRange(1,100)% 3;
-	    if(randomSub === 0)
-	    {
-	      tempOne = num * 2;
-	      tempTwo = tempOne - num;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText(tempTwo);
-	    }
-	    else if(randomSub === 1)
-	    {
-	      tempOne = num * 3;
-	      tempTwo = tempOne - num;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText(tempTwo);
-	    }
-	    else
-	    {
-	      tempOne = num * 4;
-	      tempTwo = tempOne - num;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText(tempTwo);
-		}
-  	}
-  	else if(randomChoice === 2)//Multiplication
-	{
-	    //var randomMul = game.rnd.integerInRange(1,100)% 4;
-	    if(num % 7 === 0)
-	    {
-	      tempOne = num/7;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText('7');
-	    }
-	    else if(num % 5 === 0)
-	    {
-	      tempOne = num/5;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText('5');
-	    }
-	    else if(num % 3 === 0)
-	    {
-	      tempOne = num/3;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText('3');
-	    }
-	    else if(num % 2 === 0)
-	    {
-	      tempOne = num/2;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText('2');
-	    }
-	    else
-	    {
-	    	tempOne = num/1;
-	    	boxOneText.setText(tempOne);
-	      	boxTwoText.setText('1');
-	    }
-	}
-	else //Division
-	{
-	    var randomDiv = game.rnd.integerInRange(1,100)% 2 ;
-	    if(randomDiv === 0)
-	    {
-	      tempOne = num*2;
-	      boxOneText.setText(tempOne);
-	      boxTwoText.setText('2');
-	    }
-	    else
-	    {
-	      tempOne = num*5;
-	     boxOneText.setText(tempOne);
-	      boxTwoText.setText('5');
-	    }
-	}
+  {
+      var randomSub = game.rnd.integerInRange(1,100)% 3;
+      if(randomSub === 0)
+      {
+        tempOne = num * 2;
+        tempTwo = tempOne - num;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText(tempTwo);
+      }
+      else if(randomSub === 1)
+      {
+        tempOne = num * 3;
+        tempTwo = tempOne - num;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText(tempTwo);
+      }
+      else
+      {
+        tempOne = num * 4;
+        tempTwo = tempOne - num;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText(tempTwo);
+    }
+    }
+    else if(randomChoice === 2)//Multiplication
+  {
+      //var randomMul = game.rnd.integerInRange(1,100)% 4;
+      if(num % 7 === 0)
+      {
+        tempOne = num/7;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText('7');
+      }
+      else if(num % 5 === 0)
+      {
+        tempOne = num/5;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText('5');
+      }
+      else if(num % 3 === 0)
+      {
+        tempOne = num/3;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText('3');
+      }
+      else if(num % 2 === 0)
+      {
+        tempOne = num/2;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText('2');
+      }
+      else
+      {
+        tempOne = num/1;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText('1');
+        flagforpowerandmultiply = 1;
+      }
+  }
+  else if(randomChoice === 4)
+  {
+     for(var i =2 ; i <=10 ; i++)
+     {
+      var k = getBaseLog(i,num)
+      if (k === parseInt(k, 10))
+        {
+          tempOne = i;
+          tempTwo = k;
+          boxOneText.setText(tempOne);
+          boxTwoText.setText(tempTwo); 
+          flagcheck = 1;
+          break;
+        }  
+     }
+     if(flagcheck === 0)
+     {
+      tempOne = num;
+      tempTwo = 1;
+      boxOneText.setText(tempOne);
+      boxTwoText.setText(tempTwo);
+      flagforpowerandmultiply = 1;
+     } 
+  } 
+  else //Division
+  {
+      var randomDiv = game.rnd.integerInRange(1,100)% 2 ;
+      if(randomDiv === 0)
+      {
+        tempOne = num*2;
+        boxOneText.setText(tempOne);
+        boxTwoText.setText('2');
+      }
+      else
+      {
+        tempOne = num*5;
+       boxOneText.setText(tempOne);
+        boxTwoText.setText('5');
+      }
+  }
 }
 
 function pauseAndPlay()
@@ -576,7 +693,7 @@ function pauseAndPlay()
 }
 function finishGame()
 {
-	gameOver();
+  gameOver();
 }
 /*
 * Tux4ME is developed under Google summer of code - 2015.
