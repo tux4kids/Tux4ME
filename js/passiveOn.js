@@ -37,6 +37,8 @@ var life;
 var startScreen;
 var startButton;
 
+var complexityLevel = 1;
+
 var inputcheck;
 var inputcross;
 var pause;
@@ -358,39 +360,73 @@ function updateQuestion()
 				break;
 	}
 
-	var sentRandom = game.rnd.integerInRange(1,100) % 2 ;
+	var sentRandom = game.rnd.integerInRange(1,100) % complexityLevel*2 ;
 	var negateRandom;
 	var tempText;
-	if(sentRandom === 0)
+	switch(sentRandom)
 	{
-		negateRandom = game.rnd.integerInRange(1,100) % 2 ;
-		if(negateRandom === 0)
-		{
-			tempText = "The " + foregroundName + " is enclosed within the " + backgroundName;
-			isCorrectText = 1;
-		}
-		else
-		{
-			tempText = "The " + foregroundName + " is NOT enclosed within the " + backgroundName;
-			isCorrectText = 0;
+		case 0:
+			negateRandom = game.rnd.integerInRange(1,100) % 2 ;
+			if(negateRandom === 0)
+			{
+				tempText = "The " + foregroundName + " is enclosed within the " + backgroundName;
+				isCorrectText = 1;
+			}
+			else
+			{
+				tempText = "The " + foregroundName + " is NOT enclosed within the " + backgroundName;
+				isCorrectText = 0;
+			}
+			break;
+		case 1:
+			negateRandom = game.rnd.integerInRange(1,100) % 2 ;
+			if(negateRandom === 0)
+			{
+				tempText = "The " + backgroundName + " is enclosed within the " + foregroundName;
+				isCorrectText = 0;
 
-		}
+			}
+			else
+			{
+				tempText = "The " + backgroundName + " is NOT enclosed within the " + foregroundName;
+				isCorrectText = 1;
+			}
+			break;
+		case 2:
+			negateRandom = game.rnd.integerInRange(1,100) % 2 ;
+			if(negateRandom === 0)
+			{
+				tempText = "The " + backgroundName + " surrounds the " + foregroundName;
+				isCorrectText = 1;
+			}
+			else
+			{
+				tempText = "The " + backgroundName + " does NOT surround the " + foregroundName;
+				isCorrectText = 0;
+			}
+			break;
+		case 3:
+			negateRandom = game.rnd.integerInRange(1,100) % 2 ;
+			if(negateRandom === 0)
+			{
+				tempText = "The " + foregroundName + " surrounds the " + backgroundName;
+				isCorrectText = 0;
+			}
+			else
+			{
+				tempText = "The " + foregroundName + " does NOT surround the " + backgroundName;
+				isCorrectText = 1;
+			}
+			break;
+
+	}
+	if ((sentRandom===2 || sentRandom===3) && negateRandom===0)
+	{
+		questionText.x = 170;
 	}
 	else
 	{
-		negateRandom = game.rnd.integerInRange(1,100) % 2 ;
-		if(negateRandom === 0)
-		{
-			tempText = "The " + backgroundName + " is enclosed within the " + foregroundName;
-			isCorrectText = 0;
-
-		}
-		else
-		{
-			tempText = "The " + backgroundName + " is NOT enclosed within the " + foregroundName;
-			isCorrectText = 1;
-
-		}
+		questionText.x = 150;
 	}
 	questionText.setText(tempText);
 
@@ -398,21 +434,16 @@ function updateQuestion()
 var isCorrectText = null;
 function updateScore()
 {
-
-	if (answer && isCorrectText)
-	{
-		score += 25;
-		isCorrect = 1;
-	}
-	else if(!answer && !isCorrectText)
-	{
-		score += 25;
-		isCorrect = 1;
-	}
-	else
+	// js-version of XOR
+	if (answer ? !isCorrectText : isCorrectText) 
 	{
 		isCorrect = 0;
 		lifeline--;
+	}
+	else
+	{
+		score += 25;
+		isCorrect = 1;
 	}
 
 	if (score < 100)
@@ -434,6 +465,12 @@ function updateLevel()
 {
 	var levelFlag = level;
 	level = Math.floor(score/250) + 1;
+
+	if(level===6 && complexityLevel===1)
+	{
+		complexityLevel=2;
+	}
+
 	if(level < 10)
 	{
 		mylevel.setText('0'+level);
