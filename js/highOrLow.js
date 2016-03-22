@@ -311,6 +311,11 @@ function replayGame()
   replay.inputEnabled = false;
   replay.destroy();
   updateLife();
+  greater.alpha = 0;  
+  lesser.alpha = 0; 
+  start = game.add.sprite(295,360,'start');
+  start.inputEnabled = true;
+  start.events.onInputUp.add(initialize);
   //displayBirds();
   document.getElementById("heading").innerHTML = headingContent;
   document.getElementById("scoreCard").innerHTML = instructionContent;
