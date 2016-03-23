@@ -306,8 +306,12 @@ function replayGame()
 	updateLife();
 	listenYesNoEvent = 0;
 	yes.inputEnabled = false;
+	yes.destroy();
+	yes = game.add.sprite(235,350,'correct');
 	yes.alpha = 0;
 	no.inputEnabled = false;
+	no.destroy();
+	no = game.add.sprite(335,350,'wrong');
 	no.alpha = 0;
 	start = game.add.sprite(285,300,'start');
   	start.inputEnabled = true;
