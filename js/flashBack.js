@@ -36,6 +36,7 @@ var lifeline = 3;
 var sprite;
 var startScreen;
 var startButton;
+var listenYesNoEvent = 0;
 
 //var inputcheck; 
 //var inputcross; 
@@ -73,10 +74,10 @@ function create ()
 
 
 	yes = game.add.sprite(235,350,'correct');
-	yes.inputEnabled = true;
+	yes.inputEnabled = false;
 	yes.alpha = 0;
 	no = game.add.sprite(335,350,'wrong');
-	no.inputEnabled = true;
+	no.inputEnabled = false;
 	no.alpha = 0;
 
 	game.add.sprite(235,100,'box');
@@ -116,14 +117,16 @@ function update ()
 
        // inputcross.onDown.add(answeredNo,this);
        // inputcross.onUp.add(updateBox);
+	   
+	if(listenYesNoEvent === 1)
+	{
+		yes.events.onInputDown.add(answeredYes);
+		no.events.onInputDown.add(answeredNo);
+		yes.events.onInputUp.add(updateBox);
+		no.events.onInputUp.add(updateBox);		
+	}
 
-	yes.events.onInputDown.add(answeredYes);
-	no.events.onInputDown.add(answeredNo);
-
-	yes.events.onInputUp.add(updateBox);
-	no.events.onInputUp.add(updateBox);
-
-        pause.onDown.add(pauseAndPlay,this);
+    pause.onDown.add(pauseAndPlay,this);
 	playpause.events.onInputUp.add(pauseAndPlay);
 }
 var answer = null;
@@ -198,6 +201,10 @@ function initialize()
 {
 	if(pauseState === 0)
 	{
+		no.inputEnabled = true;
+		yes.inputEnabled = true;
+		listenYesNoEvent = 1;
+		
 	helpText.setText('Does this image match the previous one ?');
 	helpText.alpha = 0;
 	game.add.tween(helpText).to({ alpha : 1}, 1000, Phaser.Easing.Linear.easeInOut, true);
@@ -297,6 +304,15 @@ function replayGame()
 	replay.inputEnabled = false;
 	replay.destroy();
 	updateLife();
+	listenYesNoEvent = 0;
+	yes.inputEnabled = false;
+	yes.alpha = 0;
+	no.inputEnabled = false;
+	no.alpha = 0;
+	start = game.add.sprite(285,300,'start');
+  	start.inputEnabled = true;
+	helpText.setText("              Remember this image !");
+	start.events.onInputUp.add(initialize);
 	//displayBirds();
 	document.getElementById("heading").innerHTML = headingContent;
 	document.getElementById("scoreCard").innerHTML = instructionContent;
