@@ -52,6 +52,7 @@ var startButton;
 var previous = 0;
 var present;
 var start;
+var listenYesNoEvent = 0;
 
 
 //var startkey;
@@ -70,7 +71,7 @@ function create()
     block = game.add.sprite(255,165,'box');
 
     greater = game.add.sprite(220,360,'greater');
-    greater.inputEnabled = true;
+    greater.inputEnabled = false;
     greater.scale.setTo(0.5,0.5);
     greater.alpha = 0;
 
@@ -81,7 +82,7 @@ function create()
 
 
     lesser = game.add.sprite(360,360,'lesser');
-    lesser.inputEnabled = true;
+    lesser.inputEnabled = false;
     lesser.scale.setTo(0.5,0.5);
     lesser.alpha = 0;
 
@@ -115,11 +116,19 @@ function startingGame()
 }
 function initialize()
 {
-  displayNumber();
-  start.destroy();
-  game.add.tween(greater).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
+	if(pauseState === 0)
+	{
+	  greater.inputEnabled = true;
+	  lesser.inputEnabled = true;
+	  listenYesNoEvent = 1;
+	  displayNumber();
+	  start.inputEnabled = true;
+	  start.destroy();
+	  game.add.tween(greater).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
 
-  game.add.tween(lesser).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);
+	  game.add.tween(lesser).to({ alpha : 1}, 500, Phaser.Easing.Linear.easeInOut, true);	
+	}
+
 }
 function createText()
 {
@@ -141,12 +150,15 @@ function update()
 
    //keydown.onDown.add(answeredDown,this);
    //keydown.onUp.add(updateBox);
+   
+   if(listenYesNoEvent === 1)
+   {
+	greater.events.onInputDown.add(answeredUp);
+	lesser.events.onInputDown.add(answeredDown);
 
-  greater.events.onInputDown.add(answeredUp);
-  lesser.events.onInputDown.add(answeredDown);
-
-  greater.events.onInputUp.add(updateBox);
-  lesser.events.onInputUp.add(updateBox);
+	greater.events.onInputUp.add(updateBox);
+	lesser.events.onInputUp.add(updateBox);  
+   }
 
    pausekey.onUp.add(pauseAndPlay,this);
   pause.events.onInputUp.add(pauseAndPlay);
@@ -312,6 +324,20 @@ function replayGame()
   replay.destroy();
   updateLife();
   //displayBirds();
+  listenYesNoEvent = 0;
+  greater.inputEnabled = false;
+  greater.destroy();
+  greater = game.add.sprite(220,360,'greater');
+  greater.scale.setTo(0.5,0.5);
+  greater.alpha = 0;
+  lesser.inputEnabled = false;
+  lesser.destroy();
+  lesser = game.add.sprite(360,360,'lesser');
+  lesser.scale.setTo(0.5,0.5);
+  lesser.alpha = 0;
+  start = game.add.sprite(295,360,'start');
+  start.inputEnabled = true;  
+  start.events.onInputUp.add(initialize);
   document.getElementById("heading").innerHTML = headingContent;
   document.getElementById("scoreCard").innerHTML = instructionContent;
 
