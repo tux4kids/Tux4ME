@@ -296,10 +296,11 @@ function gameOver()
 function replayGame()
 {
 	playpause.destroy();
+	ppText.setText('');
 	playpause = game.add.sprite(595 , 475 , 'playPause');
 	playpause.inputEnabled = true;
           pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
-	ppText = game.add.text(460, 485 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
+
 
 	pauseState = 1;
 	pauseAndPlay();
