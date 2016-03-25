@@ -13,8 +13,9 @@ function preload() {
 	game.load.image('living', 'assets/images/highClick/living_30_30.png');
 	game.load.image('dead', 'assets/images/highClick/dead_30_30.png');
 	game.load.image('start_screen' , 'assets/images/startScreen_640_520.jpg');
-  	game.load.image('start_button' , 'assets/images/start_50_50.png');
-	game.load.image('pause', 'assets/images/highClick/pause_30_30.png');
+  	game.load.image('start_button' , 'assets/images/start.gif');
+    game.load.image('resume_button' , 'assets/images/resume.png');
+	game.load.image('pause', 'assets/images/pause.png');
 	game.load.image('questionBox', 'assets/images/mindMath/questionBox_100_100.png');
 	game.load.image('answerBox', 'assets/images/mindMath/answerBox_300_75.png');
 	game.load.image('replay' , 'assets/images/replay_100_100.png');
@@ -31,7 +32,6 @@ var score = 0;
 var lifeline = 3;
 var play;
 var pause;
-var tempText;
 var mylevel;
 var myscore;
 var questionBox;
@@ -47,12 +47,14 @@ var instructionText;
 function create() {
 	game.add.sprite(0, 0, 'background');
 	livingState = game.add.group();
+
 	for (var p = 0; p < 3; p++) {
 		life = livingState.create(27, 180 + p * 38, 'living');
 	}
-	tempText = game.add.text(470, 470, ' ', { font: "15px Arial", fill: "#eceff1" });
-	pause = game.add.sprite(575, 455, 'pause');
+	pause = game.add.sprite(556, 438, 'pause');
+    pause.scale.setTo(0.37,0.37);
 	pause.inputEnabled = true;
+
 	myscore = game.add.text(80, 43, '000', { font: "15px Arial", fill: "#eceff1" });
 	mylevel = game.add.text(311, 43, '01', { font: "15px Arial", fill: "#eceff1" });
 	timer = game.add.text(515, 43, '00:00:00', { font: "15px Arial", fill: "#eceff1" });
@@ -131,6 +133,7 @@ function update() {
 	updateTimer();
 	updateBox();
 	pause.events.onInputDown.add(pauseAndPlay);
+    game.input.onDown.add(unpause, self);
 
 	//console.log(questionBoxActive[0]);
 	//console.log(questionBox.getAt(questionBoxActive[0]).inputEnabled);
@@ -498,11 +501,18 @@ function gameOver()
 function replayGame()
 {
   pause.destroy();
-  pause = game.add.sprite(575,455,'pause');
+  pause = game.add.sprite(556, 438, 'pause');
+  pause.scale.setTo(0.37,0.37);
   pause.inputEnabled = true;
-  tempText = game.add.text(470, 470 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
-	pauseState = 1;
-	pauseAndPlay();
+  for (var i = 0; i < 9; i++) {
+  //questionBox.getAt(i).alpha = 1;
+  questionText[i].alpha = 1;
+  }
+  for(i = 0; i<4; i++)
+  {
+      answerText[i].alpha =1;
+  }
+  makeQuestion();
 	score = 0;
 	displayScore = 0;
 	myscore.setText('000');
@@ -587,7 +597,7 @@ var timeText;
 function updateTimer() {
 	if (startGame === 1) {
 		//To find and display the elapsed time.
-		if (pauseState === 0) {
+		if (!game.paused) {
 			if (timeUpdateFlag === 0) {
 				timeUpdateFlag = 1;
 				timePaused = timePaused + (Math.floor(game.time.totalElapsedSeconds()) - totalSeconds);
@@ -624,22 +634,35 @@ function updateTimer() {
   var finishFlag = 0;
 
 function pauseAndPlay() {
-	if (pauseState === 0) {
-		pauseState = 1;
-		tempText.setText('Game Paused');
-		for (var i = 0; i < 9; i++) {
-		//questionBox.getAt(i).alpha = 0;
-		questionText[i].alpha = 0;
-		}
-		for(i = 0; i<4; i++)
-		{
-			answerText[i].alpha =0;
-		}
-		gamePhase = 0;
-	}
-	else {
-		tempText.setText(' ');
-		for (var i = 0; i < 9; i++) {
+	game.paused=true;
+    resume = game.add.sprite(640/2, 520/2, 'resume_button');
+    resume.scale.setTo(0.4,0.4);
+    resume.anchor.setTo(0.5, 0.5);
+    pause.destroy();
+    for (var i = 0; i < 9; i++) {
+    //questionBox.getAt(i).alpha = 0;
+    questionText[i].alpha = 0;
+    }
+    for(i = 0; i<4; i++)
+    {
+        answerText[i].alpha =0;
+    }
+    gamePhase = 0;
+
+
+
+}
+
+function unpause(event) {
+    if (game.paused) {
+
+        var x1 = 640/2-resume.width/2, x2 = 640/2+resume.width/2,
+            y1 = 520/2-resume.height/2, y2 = 520/2+resume.height/2;
+
+        if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
+
+
+        for (var i = 0; i < 9; i++) {
 		//questionBox.getAt(i).alpha = 1;
 		questionText[i].alpha = 1;
 		}
@@ -648,9 +671,18 @@ function pauseAndPlay() {
 			answerText[i].alpha =1;
 		}
 		makeQuestion();
-		pauseState = 0;
-	}
+        game.paused=false;
+        resume.destroy();
+        pause = game.add.sprite(556, 438, 'pause');
+        pause.scale.setTo(0.37,0.37);
+    	pause.inputEnabled = true;
+
+        }
+
+    }
+
 }
+
 function finishGame()
 {
 	gameOver();
