@@ -269,6 +269,7 @@ function gameOver()
 
 function replayGame()
 {
+	ppText.destroy();
 	playPause = game.add.sprite(255 , 476 , 'pp_button');
 	playPause.inputEnabled = true;
 	playPause.inputEnabled = true;

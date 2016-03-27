@@ -71,7 +71,7 @@ function create()
 
 	playpause = game.add.sprite(585 , 465 , 'playPause');
 	playpause.inputEnabled = true;
-	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
+	ppText = game.add.text(480, 486 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 	ppText.setText('Pause game ');
 
 	livingState = game.add.group();
@@ -290,12 +290,12 @@ function gameOver()
 
 function replayGame()
 {
-	ppText.setText(' ');
+	ppText.setText('');
 	playpause.destroy();
 	playpause = game.add.sprite(585 , 465 , 'playPause');
 	playpause.inputEnabled = true;
          pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
-	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
+	//ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
 	pauseState = 1;
 	pauseAndPlay();
