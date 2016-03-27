@@ -2,6 +2,9 @@
 #### An application with a set of simple games to boost your mental ability by Tux4Kids organization developed under Google summer of Code - 2015
 
 ***
+We are always open to any new game ideas that are coming in. If you're interested to post any new ideas you may refer to the instructions here [(Issue #40)] (https://github.com/Vigneshsekar/Tux4ME/issues/40) .
+
+***
 
 ## :+1: Passive on
 ##### Improves your complex reasoning abilities.
