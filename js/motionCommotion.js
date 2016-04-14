@@ -21,6 +21,8 @@ var left;
 var right;
 var startGame = 0;
 
+var numOfFigures = 7;
+
 var figOne;
 var figTwo;
 var figThree;
@@ -28,6 +30,13 @@ var figFour;
 var figFive;
 var figSix;
 var figSeven;
+//Higher complexity
+var complexityLevel=0;
+var figEight;
+var figNine;
+var figTen;
+var figEleven;
+
 var decider=[];
 var sprites=[];
 var currSprite;
@@ -110,7 +119,7 @@ function spriteCreation()
 	sprites=[figOne, figTwo, figThree, figFour, figFive, figSix, figSeven];
 	
 
-	for (var i = 0; i < 7; i++) {
+	for (var i = 0; i < numOfFigures; i++) {
         currSprite = sprites[i];
         currSprite.scale.setTo(0.65,0.65);
         game.physics.p2.enable(currSprite);
@@ -148,7 +157,7 @@ function update()
 	playpause.events.onInputUp.add(pauseAndPlay);
 
 
-	for (var j = 0; j < 7; j++) {
+	for (var j = 0; j < numOfFigures; j++) {
         currSprite = sprites[j];
 		if (decider[j]===0) {
 			currSprite.body.rotateRight(150);
@@ -179,7 +188,7 @@ function updateRotations()
 	answer=10;
 	answered=19;
 
-	for (var i = 0; i < 7; i++) 
+	for (var i = 0; i < numOfFigures; i++) 
 	{
 		decider[i] = game.rnd.integerInRange(1,100) % 2 ;
 	}
@@ -400,8 +409,39 @@ function updateLevel()
 	{
 		mylevel.setText(level);
 	}
+	//check complexity level (0 - 7 figures, 1 - 9 figures, 2 - 11 figures)
+	if((level===4 && complexityLevel===0) || (level===8 && complexityLevel===1))
+	{
+		updateComplexity();	
+	}
 	if (levelFlag != level)
 	updateLife();
+}
+
+function updateComplexity()
+{
+	complexityLevel++;
+	if (complexityLevel===1)
+	{
+		figEight = game.add.sprite(155, 130, 'figure');
+		figNine = game.add.sprite(485, 130, 'figure');
+		sprites.push(figEight, figNine);
+		numOfFigures = 9;
+	}
+	else if (complexityLevel===2)
+	{
+		figTen = game.add.sprite(155, 290, 'figure');
+		figEleven = game.add.sprite(485, 290, 'figure');
+		sprites.push(figTen, figEleven);
+		numOfFigures = 11;
+	}
+	for (var i = numOfFigures-2; i < numOfFigures; i++)
+	{
+	    currSprite = sprites[i];
+	    currSprite.scale.setTo(0.65,0.65);
+	    game.physics.p2.enable(currSprite);
+		currSprite.anchor.setTo(.5, .5);
+	}	
 }
 
 function updateLife()
@@ -461,8 +501,3 @@ function finishGame()
 {
 	gameOver();
 }
-
-
-
-
-
