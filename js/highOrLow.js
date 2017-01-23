@@ -323,6 +323,11 @@ function replayGame()
   replay.inputEnabled = false;
   replay.destroy();
   updateLife();
+  greater.alpha = 0;  
+  lesser.alpha = 0; 
+  start = game.add.sprite(295,360,'start');
+  start.inputEnabled = true;
+  start.events.onInputUp.add(initialize);
   //displayBirds();
   listenYesNoEvent = 0;
   greater.inputEnabled = false;
