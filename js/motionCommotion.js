@@ -79,7 +79,7 @@ function create()
 	playpause.scale.setTo(0.7,0.7);
 	playpause.inputEnabled = true;
 
-	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#0097a7"});
+	ppText = game.add.text(480, 490 , ' ' , {font : "15px Arial" , fill : "#0097a7"});
 	ppText.setText('Pause game ');
 
 	timer = game.add.text(538, 19, '00:00:00' ,{font : "18px Arial" , fill : "#0097a7"});
@@ -318,12 +318,13 @@ function gameOver()
 
 function replayGame()
 {
-	ppText.setText(' ');
+	ppText.setText('');
 	playpause.destroy();
 	playpause = game.add.sprite(585 , 465 , 'playPause');
+	playpause.scale.setTo(0.7,0.7);
 	playpause.inputEnabled = true;
          pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
-	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
+	//ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
 	pauseState = 1;
 	pauseAndPlay();
