@@ -51,7 +51,7 @@ var ppText;
 
 var keyleft;
 var keyright;
-var pause; 
+var pause;
 function create()
 {
 	game.add.sprite(0,0,'background');
@@ -61,7 +61,7 @@ function create()
 	scrolling.autoScroll(Math.pow(-1,i)*5,0);
 	scrolling.alpha = 0.14;
 	}
-	
+
 	left = game.add.sprite(242 , 385 , 'left');
 	left.inputEnabled = true;
 	right = game.add.sprite(347, 385 , 'right');
@@ -79,13 +79,13 @@ function create()
 	playpause.scale.setTo(0.7,0.7);
 	playpause.inputEnabled = true;
 
-	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#0097a7"});
+	ppText = game.add.text(480, 490 , ' ' , {font : "15px Arial" , fill : "#0097a7"});
 	ppText.setText('Pause game ');
 
 	timer = game.add.text(538, 19, '00:00:00' ,{font : "18px Arial" , fill : "#0097a7"});
 	myscore = game.add.text(46, 19 , '000' , {font : "18px Arial" , fill : "#0097a7"});
   	mylevel = game.add.text(311, 19 , '01' , {font : "18px Arial" , fill : "#00bfa5"});
-	
+
 	updateRotations();
         keyleft = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
      keyright = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -108,13 +108,13 @@ function spriteCreation()
 	figSeven = game.add.sprite(375, 290, 'figure');
 
 	sprites=[figOne, figTwo, figThree, figFour, figFive, figSix, figSeven];
-	
+
 
 	for (var i = 0; i < 7; i++) {
         currSprite = sprites[i];
         currSprite.scale.setTo(0.65,0.65);
         game.physics.p2.enable(currSprite);
-		currSprite.anchor.setTo(.5, .5);		
+		currSprite.anchor.setTo(.5, .5);
 	}
 
 }
@@ -157,19 +157,19 @@ function update()
 		else {
 			currSprite.body.rotateLeft(150);
 			rotLeft += 1;
-		}		
-	}	
+		}
+	}
 }
 
 
 function answeredAntiClockwise()
-{	
-	answered = 0;	
+{
+	answered = 0;
 }
 
 function answeredClockwise()
 {
-	answered = 1;	
+	answered = 1;
 }
 
 function updateRotations()
@@ -179,7 +179,7 @@ function updateRotations()
 	answer=10;
 	answered=19;
 
-	for (var i = 0; i < 7; i++) 
+	for (var i = 0; i < 7; i++)
 	{
 		decider[i] = game.rnd.integerInRange(1,100) % 2 ;
 	}
@@ -188,11 +188,11 @@ function updateRotations()
 
 function getCorrectAnswer()
 {
-	if ( rotLeft > rotRight ) 
+	if ( rotLeft > rotRight )
 	{
 		answer = 0;
 	}
-	else 
+	else
 	{
 		answer = 1;
 	}
@@ -202,12 +202,12 @@ var displayScore;
 
 function updateScore()
 {
-	if (answered === answer) 
+	if (answered === answer)
 	{
 		score += 25;
 		isCorrect = 1;
 	}
-	else 
+	else
 	{
 
 		lifeline--;
@@ -264,7 +264,7 @@ function updateTimer()
 		{
 			modsec = '0' + modsec;
 		}
-		
+
 		timeText = '0'+hours+':'+modmin+ ':' + modsec ;
 		timer.setText(timeText);
 	}
@@ -295,10 +295,10 @@ function gameOver()
          game.input.keyboard.removeKey(Phaser.Keyboard.P);
 	 destroy = game.add.text(272, 305 , 'Game Over !' , {font : "17px Arial" , fill : "#ec407a"});
 
-	 for (var i = 0; i < 7; i++) 
+	 for (var i = 0; i < 7; i++)
 	 {
         currSprite = sprites[i];
-        currSprite.destroy();	
+        currSprite.destroy();
 	}
 
 	var cummulativeIndex = Math.floor((score/gameSeconds) * (60/750) * 100);
@@ -320,10 +320,12 @@ function replayGame()
 {
 	ppText.setText(' ');
 	playpause.destroy();
-	playpause = game.add.sprite(585 , 465 , 'playPause');
+	playpause = game.add.sprite(585 , 480 , 'playPause');
+	playpause.scale.setTo(0.7,0.7);
+
 	playpause.inputEnabled = true;
          pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
-	ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
+	//ppText = game.add.text(480, 495 , ' ' , {font : "15px Arial" , fill : "#eceff1"});
 
 	pauseState = 1;
 	pauseAndPlay();
@@ -357,7 +359,7 @@ var deadTwo;
 
 function updateBox()
 {
-	
+
 
 	if(pauseState === 0)
 	{
@@ -441,9 +443,9 @@ function pauseAndPlay()
 		ppText.setText('Game Paused');
 		for (var i = 0; i < 7; i++) {
         currSprite = sprites[i];
-        currSprite.alpha = 0;		
+        currSprite.alpha = 0;
 	    }
-		
+
 	}
 
 	else {
@@ -452,7 +454,7 @@ function pauseAndPlay()
 		ppText.setText('Pause game ');
 		for (var i = 0; i < 7; i++) {
         currSprite = sprites[i];
-        currSprite.alpha = 1;		
+        currSprite.alpha = 1;
 	    }
 	}
 }
@@ -461,8 +463,3 @@ function finishGame()
 {
 	gameOver();
 }
-
-
-
-
-

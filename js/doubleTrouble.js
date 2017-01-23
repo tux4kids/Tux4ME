@@ -53,8 +53,8 @@ var questionTwo;
 var startScreen;
 var startButton;
 
-var inputlcheck; 
-var inputcross; 
+var inputlcheck;
+var inputcross;
 var pause;
 
 function create()
@@ -167,9 +167,9 @@ var finishFlag = 0;
 function update()
 {
      updateTimer();
-       
-        game.input.enabled=true; 
-   	
+
+        game.input.enabled=true;
+
         inputcheck.onDown.add(removeTextYes,this);
         inputcheck.onUp.add(updateBox);
 
@@ -268,12 +268,12 @@ function gameOver()
 }
 
 function replayGame()
-{
+{   ppText.setText('');
 	playPause = game.add.sprite(255 , 476 , 'pp_button');
 	playPause.inputEnabled = true;
 	playPause.inputEnabled = true;
          pause = game.input.keyboard.addKey(Phaser.Keyboard.P);
-	ppText = game.add.text(272,490,'Click to Pause', {font : "13px Arial" , fill : "white"});
+
 	pauseState = 1;
 	pauseAndPlay();
 	score = 0;
